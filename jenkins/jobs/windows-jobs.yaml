@@ -29,15 +29,6 @@
           export CONTRAIL_CI_JOB_TYPE=unittest
           /usr/bin/ci_setup.sh
 
-- wrapper:
-    name: contrail-jobs-wrapper
-    wrappers:
-      - timeout:
-          timeout: 600
-          fail: true
-      - timestamps
-      - ansicolor
-
 - publisher:
     name: contrail-systest-job-publish
     publishers:
