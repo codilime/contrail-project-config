@@ -1,0 +1,10 @@
+providers:
+  - name: static-cl-os
+    driver: static
+    pools:
+      - name: 10.10.3.53
+        labels: ubuntu16-builder
+        host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYJh3h8irq9pEPNZbAC7P4jxb/MtqPb4sDUq06ukZ+RVQ+aqoDv0lNaTd17oXMD2xvyU5M7+YtkTkQ0naHizQWgPU+yIZuRfNqK/AQTEfHz1b4KOna9aD0ZLMpy28M+qQbiqlJQ/j/chSOhwFjuKVwoJuG6+beVOlvBUZRYeWOhM9O9JMcZSFCinCaFtM31opbMYSRLWvUjKbFqvaFZzpvfEC8Q9/SkkGHqg149rtiPc8Vf9UvGeuSHPRX2emGVMSjHQnp8+J6Ska0GvStQeWe/kwHfmnU8i9IGv7jFjNptRu/wkMFEIVfGWu8Lj/szm9zidERzu9s/YUjUkiAVusR
+        username: zuul
+        max-parallel-jobs: 1
+
