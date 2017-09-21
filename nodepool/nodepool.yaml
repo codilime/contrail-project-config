@@ -1,3 +1,7 @@
+zookeeper-servers:
+  - host: nodepool.opencontrail.org
+    chroot: /nodepool
+
 providers:
   - name: static-cl-os
     driver: static
