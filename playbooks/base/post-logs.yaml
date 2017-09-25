@@ -8,7 +8,8 @@
   gather_facts: False
   roles:
     - role: upload-logs
-      zuul_log_url: "http://logs.openstack.org"
+      zuul_log_url: "http://logs2.opencontrail.org"
+      zuul_logserver_root: "/var/www/logs"
 
 - hosts: localhost
   roles:
