@@ -10,8 +10,3 @@
     - role: upload-logs
       zuul_log_url: "http://logs2.opencontrail.org"
       zuul_logserver_root: "/var/www/logs"
-
-- hosts: localhost
-  roles:
-    - submit-logstash-jobs
-    - submit-subunit-jobs
