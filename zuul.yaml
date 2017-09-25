@@ -76,8 +76,47 @@
       ssh_known_hosts: |
         logs2.opencontrail.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUEfDbUc6EA8S7C0RJJxp1x+CrfviKzV2iiL7iWOkS6QwA1y4/uwnY/2w2aCOW+2xsHq++lrKp0yx/9C9weqrYAyz8v6C5FCv/5MT7lTUmKe4ti6d7/3ruodJqmA1qEiSFiR9r1XA+nJL4AfzMO0SN3cfRIzI/gDna2k+v1UASOLdp0FKklOTnq4Gp/5PBn3L5NbLPSS56x+sVJYOWtYmm4ZcStWOb8PLNklgXeAcU6c1lEyTZnKRwufcVlv24CQJi9GeRwJuE8aodVJyCUJJHHJahJddhweioAjS28+pMG+sFjb+tR7h8g4Dg8uLzEHLDMn4nU/kbJgYZzthoTxzj
       ssh_username: zuul
-      ssh_private_key: test
-
+      ssh_private_key: !encrypted/pkcs1-oaep
+        - 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
 - project:
     name: Juniper/contrail-controller
     check:
