@@ -61,9 +61,10 @@
       - zuul: openstack-infra/zuul-jobs
       - zuul: openstack-infra/openstack-zuul-jobs
     timeout: 1800
-    nodes:
-      - name: ubuntu-xenial
-        label: ubuntu-xenial
+    nodeset:
+      nodes:
+        - name: ubuntu-xenial
+          label: ubuntu-xenial
     secrets:
       - site_logs
 
