@@ -7,5 +7,4 @@
         untrusted-projects:
           - kklimonda/zuul-jobs:
               shadow: kklimonda/contrail-project-config
-        projects:
           - Juniper/contrail-controller
