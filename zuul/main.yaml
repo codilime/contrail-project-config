@@ -1,10 +1,12 @@
 - tenant:
     name: opencontrail
     source:
-      gerrit:
+      github:
         config-projects:
           - kklimonda/contrail-project-config
         untrusted-projects:
           - kklimonda/zuul-jobs:
               shadow: kklimonda/contrail-project-config
+      gerrit:
+        untrusted-projects:
           - Juniper/contrail-controller
