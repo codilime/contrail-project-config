@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+deb {{ package_mirror }} {{ ansible_distribution_release }} main universe
+deb {{ package_mirror }} {{ ansible_distribution_release }}-updates main universe
+deb {{ package_mirror }} {{ ansible_distribution_release }}-backports main universe
+deb {{ package_mirror }} {{ ansible_distribution_release }}-security main universe

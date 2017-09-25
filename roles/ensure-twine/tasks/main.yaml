@@ -1,0 +1,19 @@
+- name: Check for twine install
+  command: which twine
+  failed_when: false
+  register: register_twine
+
+- name: Set pypi_twine_executable
+  set_fact:
+    pypi_twine_executable: "{{ register_twine.stdout }}"
+  when: register_twine.rc == 0
+
+- name: Ensure twine is installed
+  block:
+    - name: Ensure twine is installed
+      command: pip install twine --user
+
+    - name: Set pypi_twine_executable
+      set_fact:
+        pypi_twine_executable: ~/.local/bin/twine
+  when: register_twine.rc != 0
