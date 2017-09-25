@@ -1,0 +1,4 @@
+- name: debug job.vars
+  debug: var=job.vars
+- name: Run a simple check
+  shell: /bin/true
