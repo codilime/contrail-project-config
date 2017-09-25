@@ -1,4 +1,4 @@
 - name: debug job.vars
-  debug: var=job.vars
+  debug: var=job
 - name: Run a simple check
   shell: /bin/true
