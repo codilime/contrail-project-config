@@ -79,7 +79,7 @@
 - secret:
     name: site_logs
     data:
-      fqdn: logs2.opencontrail.lorg
+      fqdn: logs2.opencontrail.org
       path: /var/www/logs/
       ssh_known_hosts: |
         logs2.opencontrail.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUEfDbUc6EA8S7C0RJJxp1x+CrfviKzV2iiL7iWOkS6QwA1y4/uwnY/2w2aCOW+2xsHq++lrKp0yx/9C9weqrYAyz8v6C5FCv/5MT7lTUmKe4ti6d7/3ruodJqmA1qEiSFiR9r1XA+nJL4AfzMO0SN3cfRIzI/gDna2k+v1UASOLdp0FKklOTnq4Gp/5PBn3L5NbLPSS56x+sVJYOWtYmm4ZcStWOb8PLNklgXeAcU6c1lEyTZnKRwufcVlv24CQJi9GeRwJuE8aodVJyCUJJHHJahJddhweioAjS28+pMG+sFjb+tR7h8g4Dg8uLzEHLDMn4nU/kbJgYZzthoTxzj
