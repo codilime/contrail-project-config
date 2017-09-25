@@ -67,6 +67,15 @@
     secrets:
       - site_logs
 
+- job:
+    name: simple-check
+    description: |
+      Perform a simple life check.
+
+      This performs basic host and general project setup tasks common
+      to all types of unit test jobs.
+    run: playbooks/checks/simple
+
 - secret:
     name: site_logs
     data:
