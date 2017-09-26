@@ -6,7 +6,5 @@
 - hosts: all
   roles:
     - add-build-sshkey
-    - start-zuul-console
     - validate-host
-    - use-cached-repos
-    - mirror-workspace-git-repos
+    - prepare-workspace
