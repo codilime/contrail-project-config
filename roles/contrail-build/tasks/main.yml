@@ -31,4 +31,5 @@
   synchronize: |
     src="{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian"
     dest="{{ ansible_env.HOME }}/tmp/"
+    rsync_opts="--no-motd --exclude=.git --quiet"
   delegate_to: "{{ ansible_default_ipv4.address }}"
