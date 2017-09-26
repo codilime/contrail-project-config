@@ -46,6 +46,9 @@
     recreate: true
     image: "1.1.1.41:5000/contrail-builder:5.0-xenial"
     command: "sleep infinity"
+    env:
+      USER: builder
+    user: 1002:1002
     volumes:
       - "{{ ansible_env.HOME }}/packages:/build"
       - "{{ ansible_env.HOME }}/tmp:/build/contrail"
