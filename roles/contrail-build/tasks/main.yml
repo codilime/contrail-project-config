@@ -12,8 +12,15 @@
 
 - name: Hard-link repositories into expected structure
   synchronize: |
-    src={{ item.src }}
+    src="src/review2.opencontrail.org/Juniper/{{ item.src }}"
     dest="tmp/{{ item.dest }}"
+  with_items:
+    - { src: 'contrail-controller', dest: 'controller' }
+    - { src: 'contrail-build', dest: 'controller' }
+    - { src: 'contrail-generateDS', dest: 'tools/generateDS' }
+    - { src: 'contrail-sandesh', dest: 'tools/sandesh' }
+    - { src: 'contrail-third-party', dest: 'third-party' }
+    - { src: 'contrail-vrouter', dest: 'vrouter' }
 
 - name: Copy debian/ to enable package building
   synchronize: |
