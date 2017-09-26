@@ -19,15 +19,16 @@
     src="{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
     dest="{{ ansible_env.HOME }}/tmp/{{ item.dest }}"
   with_items:
-    - { src: 'contrail-controller', dest: 'controller' }
-    - { src: 'contrail-build', dest: 'controller' }
-    - { src: 'contrail-generateDS', dest: 'tools/generateDS' }
-    - { src: 'contrail-sandesh', dest: 'tools/sandesh' }
-    - { src: 'contrail-third-party', dest: 'third-party' }
-    - { src: 'contrail-vrouter', dest: 'vrouter' }
+    - { src: 'contrail-controller/', dest: 'controller' }
+    - { src: 'contrail-build/', dest: 'controller' }
+    - { src: 'contrail-generateDS/', dest: 'tools/generateDS' }
+    - { src: 'contrail-sandesh/', dest: 'tools/sandesh' }
+    - { src: 'contrail-third-party/', dest: 'third-party' }
+    - { src: 'contrail-vrouter/', dest: 'vrouter' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
 - name: Copy debian/ to enable package building
   synchronize: |
-    src="src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian/"
-    dest="tmp/debian/"
+    src="{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian"
+    dest="{{ ansible_env.HOME }}/tmp/"
+  delegate_to: "{{ ansible_default_ipv4.address }}"
