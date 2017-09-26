@@ -2,6 +2,13 @@
 - name: Start zuul_console daemon.
   zuul_console:
 
+- name: Clean-up workspace directory
+  file: path="{{ ansible_env.HOME }}/{{ item }}" state=absent
+  with_items:
+    - src
+    - tmp
+    - packages
+
 - name: Synchronize src repos to workspace directory.
   synchronize:
     dest: "{{ zuul_workspace_root }}"
