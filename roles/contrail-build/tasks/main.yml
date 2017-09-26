@@ -13,9 +13,6 @@
 - name: Debug zuul variable
   debug: var=zuul
 
-- name: Debug zuul.executor variable
-  debug: var=zuul.executor
-
 - name: Hard-link repositories into expected structure
   synchronize: |
     src="src/review2.opencontrail.org/Juniper/{{ item.src }}"
@@ -27,6 +24,7 @@
     - { src: 'contrail-sandesh', dest: 'tools/sandesh' }
     - { src: 'contrail-third-party', dest: 'third-party' }
     - { src: 'contrail-vrouter', dest: 'vrouter' }
+  delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy debian/ to enable package building
   synchronize: |
