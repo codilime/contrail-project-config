@@ -1,3 +1,7 @@
 # TODO(pabelanger): Handle cleanup on static nodes
+- name: Ensure that there is no zuul console running on port
+  shell: |
+    pkill --signal TERM -f ansible_module_zuul_console.py
+
 - name: Start zuul_console daemon.
   zuul_console:
