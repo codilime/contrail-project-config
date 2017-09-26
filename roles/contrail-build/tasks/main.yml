@@ -10,6 +10,12 @@
     - tmp
     - packages
 
+- name: Debug zuul variable
+  debug: var=zuul
+
+- name: Debug zuul.executor variable
+  debug: var=zuul.executor
+
 - name: Hard-link repositories into expected structure
   synchronize: |
     src="src/review2.opencontrail.org/Juniper/{{ item.src }}"
