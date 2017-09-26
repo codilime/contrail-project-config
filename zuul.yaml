@@ -155,7 +155,6 @@
     name: Juniper/contrail-controller
     check:
       jobs:
-        - simple-check
         - contrail-build-ubuntu16
 
 - project:
