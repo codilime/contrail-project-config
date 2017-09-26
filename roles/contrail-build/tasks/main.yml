@@ -70,14 +70,14 @@
 
 - name: Update debian/changelog
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && builder dch -v {{ version.stdout }} -m ""'
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.stdout }}."'
+    docker exec -t builder sh -c \'cd /build/contrail/ && builder dch -v {{ version.stdout }} -m ""\'
+    docker exec -t builder sh -c \'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.stdout }}."\'
 
 - name: Create orig tarball
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && fakeroot debian/rules get-orig-source'
+    docker exec -t builder sh -c \'cd /build/contrail/ && fakeroot debian/rules get-orig-source\'
     mv {{ ansible_env.HOME }}/tmp/contrail_{{ version.stdout }}.orig.tar.gz {{ ansible_env.HOME }}/packages/
 
 - name: Create contrail source package
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && debuild -S -us -uc'
+    docker exec -t builder sh -c \'cd /build/contrail/ && debuild -S -us -uc\'

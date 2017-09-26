@@ -86,6 +86,12 @@
     run: playbooks/checks/simple
 
 - job:
+    name: contrail-containers-ubuntu16
+    description: |
+      Create docker containers from packages built in previous steps.
+    run: playbooks/checks/simple
+
+- job:
     name: contrail-build-ubuntu16
     description: |
       Build Contrail for the given system, and run a set of sanity checks.
@@ -156,6 +162,11 @@
     check:
       jobs:
         - contrail-build-ubuntu16
+        - simple-check
+        - contrail-containers-ubuntu16:
+            dependencies:
+              - simple-check
+              - contrail-build-ubuntu16
 
 - project:
     name: Juniper/contrail-build
