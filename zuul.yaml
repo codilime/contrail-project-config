@@ -85,6 +85,23 @@
       - Juniper/contrail-vrouter
     run: playbooks/checks/simple
 
+- job:
+    name: contrail-build-ubuntu16
+    description: |
+      Build Contrail for the given system, and run a set of sanity checks.
+
+      This job will build contrail packages for the requested system,
+      as well as perform a set of basic sanity tests for verification.
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
+    run: playbooks/contrail/build
+
 - secret:
     name: site_logs
     data:
@@ -139,6 +156,7 @@
     check:
       jobs:
         - simple-check
+        - contrail-build-ubuntu16
 
 - project:
     name: Juniper/contrail-build
