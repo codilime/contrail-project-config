@@ -8,6 +8,7 @@
   file: dest="{{ item }}" state=directory
   with_items:
     - tmp
+    - tmp/tools
     - packages
 
 - name: Debug zuul variable
