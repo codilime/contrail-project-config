@@ -20,11 +20,12 @@
     dest="{{ ansible_env.HOME }}/tmp/{{ item.dest }}"
   with_items:
     - { src: 'contrail-controller/', dest: 'controller' }
-    - { src: 'contrail-build/', dest: 'controller' }
-    - { src: 'contrail-generateDS/', dest: 'tools/generateDS' }
+    - { src: 'contrail-build/', dest: 'tools/build' }
+    - { src: 'contrail-generateDS/', dest: 'tools/generateds' }
     - { src: 'contrail-sandesh/', dest: 'tools/sandesh' }
-    - { src: 'contrail-third-party/', dest: 'third-party' }
+    - { src: 'contrail-third-party/', dest: 'third_party' }
     - { src: 'contrail-vrouter/', dest: 'vrouter' }
+    - { src: 'contrail-build/SConstruct', dest: '' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
 - name: Copy debian/ to enable package building
@@ -52,3 +53,28 @@
 
 - name: Debug builder variable
   debug: var=builder
+
+- name: Debug zuul variable
+  debug: var=zuul
+
+- name: Debug job variable
+  debug: var=job
+
+- name: Define contrail version
+  shell: |
+    echo -n 4.0-1~34341.1.$(date +%Y%m%d.%H%m%S)
+  register: version
+
+- name: Update debian/changelog
+  shell: |
+    docker exec -t builder sh -c 'cd /build/contrail/ && builder dch -v {{ version.stdout }} -m ""'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.stdout }}."'
+
+- name: Create orig tarball
+  shell: |
+    docker exec -t builder sh -c 'cd /build/contrail/ && fakeroot debian/rules get-orig-source'
+    mv {{ ansible_env.HOME }}/tmp/contrail_{{ version.stdout }}.orig.tar.gz {{ ansible_env.HOME }}/packages/
+
+- name: Create contrail source package
+  shell: |
+    docker exec -t builder sh -c 'cd /build/contrail/ && debuild -S -us -uc'
