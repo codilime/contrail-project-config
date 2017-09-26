@@ -9,4 +9,10 @@
               shadow: kklimonda/contrail-project-config
       gerrit:
         untrusted-projects:
+          - Juniper/contrail-build
           - Juniper/contrail-controller
+          - Juniper/contrail-generateDS
+          - Juniper/contrail-third-party
+          - Juniper/contrail-packages
+          - Juniper/contrail-sandesh
+          - Juniper/contrail-vrouter
