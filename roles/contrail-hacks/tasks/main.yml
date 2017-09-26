@@ -1,0 +1,50 @@
+- name: Add review.opencontrail.org remote
+  shell: git remote add gerrit https://review.opencontrail.org/Juniper/{{ item }}
+  args:
+    chdir: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item }}"
+  failed_when: False
+  with_items:
+    - contrail-controller
+    - contrail-build
+
+- name: Fetch all remotes
+  shell: git fetch --all
+  args:
+    chdir: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item }}"
+  with_items:
+    - contrail-controller
+    - contrail-build
+
+- name: Apply custom patchsets
+  shell: |
+    git config user.email "builder@localhost"
+    hash_ref=$(git ls-remote gerrit | egrep "refs/changes/.*{{ item.review }}.*/" | tail -1)
+    hash=$(echo $hash_ref |cut -d' ' -f1)
+    ref=$(echo $hash_ref |cut -d' ' -f2)
+    git fetch gerrit $ref
+    git cherry-pick $hash
+  args:
+    chdir: "{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/{{ item.repo }}"
+  with_items:
+    - { repo: contrail-build, review: 34915 }
+    - { repo: contrail-build, review: 34916 }
+    - { repo: contrail-controller, review: 34917 }
+    - { repo: contrail-controller, review: 34918 }
+    - { repo: contrail-controller, review: 34919 }
+    - { repo: contrail-controller, review: 34920 }
+    - { repo: contrail-controller, review: 34924 }
+    - { repo: contrail-controller, review: 34986 }
+    - { repo: contrail-controller, review: 35098 }
+    - { repo: contrail-controller, review: 35469 }
+    - { repo: contrail-controller, review: 35542 }
+    - { repo: contrail-controller, review: 35676 }
+    - { repo: contrail-controller, review: 35647 }
+    - { repo: contrail-controller, review: 35773 }
+
+- name: Change contrail-packages to custom repo
+  shell: |
+    git remote add kklimonda https://github.com/kklimonda/contrail-packages
+    git fetch --all
+    git checkout kklimonda/master
+  args:
+    chdir: "{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/"
