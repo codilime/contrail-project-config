@@ -75,6 +75,14 @@
 
       This performs basic host and general project setup tasks common
       to all types of unit test jobs.
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
     run: playbooks/checks/simple
 
 - secret:
@@ -128,6 +136,42 @@
           6ZGsSktlY1RNqSGXDwV5lSmNhP1uMV1TETNh5/CmHrx3fmXgkjWxpZVUBEGMFc=
 - project:
     name: Juniper/contrail-controller
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-build
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-generateDS
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-third-party
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-packages
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-sandesh
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-vrouter
     check:
       jobs:
         - simple-check
