@@ -1,0 +1,21 @@
+# when using docker, we need a number of directories
+# to bind mount between host and the container:
+#   - tmp/ where all source code is stored -- required
+#       so that the build does not suffer from the aufs
+#       performance penatly.
+#   - packages/ where the resulting packages will be stored.
+- name: Create working directory structure
+  file: dest="{{ item }}" state=directory
+  with_items:
+    - tmp
+    - packages
+
+- name: Hard-link repositories into expected structure
+  synchronize: |
+    src={{ item.src }}
+    dest="tmp/{{ item.dest }}"
+
+- name: Copy debian/ to enable package building
+  synchronize: |
+    src="src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian/"
+    dest="tmp/debian/"
