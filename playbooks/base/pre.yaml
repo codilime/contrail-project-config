@@ -5,6 +5,8 @@
 
 - hosts: all
   roles:
+    - prepare-static-host
     - add-build-sshkey
     - start-zuul-console
     - validate-host
+    - mirror-workspace-git-repos
