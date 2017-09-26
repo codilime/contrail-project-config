@@ -39,8 +39,15 @@
     name=1.1.1.41:5000/contrail-builder:5.0-xenial
 
 - name: Start the builder container
-  docker_container: |
-    name="builder"
-    state="present"
-    image="1.1.1.41:5000/contrail-builder:5.0-xenial"
-    command="sleep infinity"
+  docker_container:
+    name: "builder"
+    state: "started"
+    image: "1.1.1.41:5000/contrail-builder:5.0-xenial"
+    command: "sleep infinity"
+    volumes:
+      - "{{ ansible_env.HOME }}/packages:/build"
+      - "{{ ansible_env.HOME }}/tmp:/build/contrail"
+  register: builder
+
+- name: Debug builder variable
+  debug: var=builder
