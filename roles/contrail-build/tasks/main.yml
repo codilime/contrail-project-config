@@ -26,6 +26,7 @@
     - { src: 'contrail-sandesh/', dest: 'tools/sandesh' }
     - { src: 'contrail-third-party/', dest: 'third_party' }
     - { src: 'contrail-vrouter/', dest: 'vrouter' }
+    - { src: 'contrail-packages/', dest: 'tools/packages' }
     - { src: 'contrail-build/SConstruct', dest: '' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
