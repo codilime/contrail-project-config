@@ -26,11 +26,6 @@
     - { src: 'contrail-sandesh/', dest: 'tools/sandesh' }
     - { src: 'contrail-third-party/', dest: 'third_party' }
     - { src: 'contrail-vrouter/', dest: 'vrouter' }
-    - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
-    - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
-    - { src: 'contrail-neutron-plugin/', dest: 'openstack/neutron_plugin' }
-    - { src: 'contrail-ceilometer-plugin/', dest: 'openstack/ceilometer_plugin' }
-    - { src: 'contrail-heat/', dest: 'openstack/contrail-heat' }
     - { src: 'contrail-build/SConstruct', dest: '' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
