@@ -69,35 +69,32 @@
     version:
       upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
       packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
-      date: >-
+      # FIXME: Use strfime filter instead of calling replace later once we upgrade ansible to 2.4+
+      #date: "{{ '%Y%m%d%H%M%S' | strftime }}"
+      date: |-
          {{ ansible_date_time.year }}{{ ansible_date_time.month }}
          {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
          {{ ansible_date_time.minute }}
-      date_2: |
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
-      date_3: >
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
-      date_4: >+
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
-      date_5: |-
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
-      date_6: |+
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
+- name: Strip new lines from version.date
+  set_fact:
+    version_date: "{{ version.date | replace('\n', '') }}"
+
+- name: Debug 1
+  debug: msg="{{ version.date }}"
+
+- name: Debug 2
+  debug: msg="{{ version.date | replace('\n', '') }}"
+
+- name: Debug 3
+  debug: msg="{{ version.date | regex_replace('\n') }}"
+
+- name: Debug 3
+  debug: msg="{{ version_date }}"
 
 - name: Update debian/changelog
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }} -m ""'
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }}."'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version_date }} -m ""'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.upstream }}-1~{{version.packaging}}.{{ version_date }}."'
 
 - name: Create orig tarball
   shell: |
