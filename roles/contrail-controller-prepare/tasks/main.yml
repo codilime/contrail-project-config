@@ -36,10 +36,6 @@
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
-- name: Pull the latest Ubuntu 16.04 docker image from the registry
-  docker_image: |
-    name={{ docker_registry }}contrail-builder:5.0-xenial
-
 - name: Define contrail version
   set_fact:
     upstream_version: >-
@@ -48,6 +44,10 @@
       {% else %}
         {{- zuul.branch[1:] -}}
       {% endif %}
+
+- name: Pull the latest builder image from docker registry
+  docker_image: |
+    name="{{ docker_registry }}contrail-builder:{{ upstream_version }}-xenial"
 
 - name: Start the builder container
   docker_container:

@@ -5,26 +5,27 @@
     rsync_opts="--no-motd,--exclude=.git,--quiet"
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
- - name: Define contrail version
-   set_fact:
-     version:
-       upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
-       packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
-       # FIXME: Use strfime filter instead of calling replace later once we upgrade ansible to 2.4+
-       #date: "{{ '%Y%m%d%H%M%S' | strftime }}"
-       date: |-
-          {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-          {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-          {{ ansible_date_time.minute }}
-
-- name: Strip new lines from version.date
+- name: Define contrail version
   set_fact:
-    version_date: "{{ version.date | replace('\n', '') }}"
+    version:
+      upstream: >-
+        {% if zuul.branch == 'master' %}
+          {{- contrail_default_version -}}
+        {% else %}
+          {{- zuul.branch[1:] -}}
+        {% endif %}
+      packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
+      # FIXME: Use strfime filter instead of calling replace later once we upgrade ansible to 2.4+
+      #date: "{{ '%Y%m%d%H%M%S' | strftime }}"
+      date: >-
+         {{- ansible_date_time.year }}{{ ansible_date_time.month -}}
+         {{- ansible_date_time.day }}{{ ansible_date_time.hour -}}
+         {{- ansible_date_time.minute -}}
 
 - name: Update debian/changelog
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version_date }} -m ""'
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.upstream }}-1~{{version.packaging}}.{{ version_date }}."'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }} -m ""'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }}."'
 
 - name: Create orig tarball
   shell: |
