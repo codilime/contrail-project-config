@@ -49,6 +49,7 @@
     command: "sleep infinity"
     env:
       USER: builder
+      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
     user: 1002:1002
     volumes:
       - "{{ ansible_env.HOME }}/packages:/build"
@@ -104,3 +105,7 @@
 - name: Create contrail source package
   shell: |
     docker exec -t builder sh -c 'cd /build/contrail/ && debuild -S -us -uc'
+
+- name: Create contrail binary packages
+  shell: |
+    docker exec -t builder sh -c 'cd /build/contrail/ && debuild -i -us -uc'
