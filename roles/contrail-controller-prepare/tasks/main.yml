@@ -68,7 +68,7 @@
     name: "builder"
     state: "started"
     recreate: true
-    image: "{{ docker_registry }}/contrail-builder:{{ version.upstream }}-xenial"
+    image: "{{ docker_registry }}contrail-builder:{{ version.upstream }}-xenial"
     command: "sleep infinity"
     env:
       USER: builder
