@@ -69,7 +69,27 @@
     version:
       upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
       packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
-      date: >
+      date: >-
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
+      date_2: |
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
+      date_3: >
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
+      date_4: >+
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
+      date_5: |-
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
+      date_6: |+
          {{ ansible_date_time.year }}{{ ansible_date_time.month }}
          {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
          {{ ansible_date_time.minute }}
