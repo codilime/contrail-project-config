@@ -16,3 +16,8 @@
           - Juniper/contrail-packages
           - Juniper/contrail-sandesh
           - Juniper/contrail-vrouter
+          - Juniper/contrail-nova-vif-driver
+          - Juniper/contrail-nova-extensions
+          - Juniper/contrail-neutron-plugin
+          - Juniper/contrail-ceilometer-plugin
+          - Juniper/contrail-heat
