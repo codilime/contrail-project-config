@@ -86,7 +86,7 @@
 - job:
     name: contrail-controller-base
     vars:
-      docker_registry: "1.1.1.40:5000/"
+      docker_registry: "1.1.1.41:5000/"
       contrail_default_version: "5.0"
     parent: base
     description:
