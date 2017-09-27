@@ -20,7 +20,6 @@
           - Juniper/contrail-vrouter
           - Juniper/contrail-nova-vif-driver
           - Juniper/contrail-neutron-plugin
-          - Juniper/contrail-ceilometer-plugin
           - Juniper/contrail-heat
           - Juniper/contrail-web-core
           - Juniper/contrail-web-controller
