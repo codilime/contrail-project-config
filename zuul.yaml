@@ -6,6 +6,7 @@
     manager: independent
     trigger:
       gerrit:
+        - branch: master
         - event: patchset-created
         - event: change-restored
         - event: comment-added
@@ -17,6 +18,7 @@
           approval:
             - workflow: 1
       github:
+        - branch: master
         - event: pull_request
           action:
             - opened
