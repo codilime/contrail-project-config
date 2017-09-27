@@ -6,8 +6,8 @@
     manager: independent
     trigger:
       gerrit:
-        - branch: master
         - event: patchset-created
+          branch: master
         - event: change-restored
         - event: comment-added
           comment: (?i)recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))(\s+clean)?\s*$
@@ -18,7 +18,6 @@
           approval:
             - workflow: 1
       github:
-        - branch: master
         - event: pull_request
           action:
             - opened
