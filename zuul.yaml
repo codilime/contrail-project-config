@@ -85,6 +85,8 @@
 
 - job:
     name: contrail-build-ubuntu16
+    vars:
+      contrail_default_version: "5.0"
     description: |
       Build Contrail for the given system, and run a set of sanity checks.
 
