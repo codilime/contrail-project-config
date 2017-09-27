@@ -66,18 +66,31 @@
 
 - name: Define contrail version
   shell: |
-    echo -n 4.0-1~34341.1.$(date +%Y%m%d.%H%m%S)
+    if [ "{{ zuul.branch }}" == "master" ]; then
+      upstream_version={{ contrail_default_version }}
+    else
+      upstream_version=${{ '{' }}{{ zuul.branch }}:1{{ '}' }}
+    fi
+    packaging_version={{ zuul.change }}.{{ zuul.patchset }}
+    date=$(date +%Y%m%d.%H%m%s)
+    full_version="$upstream-1~$packaging_version.$date"
+    echo -n "{\"upstream\": \"$upstream_version\",
+              \"packaging\": \"$packaging_version\",
+              \"date\": \"$date\", \"full\": \"$full_version\" }"
   register: version
+
+- name: Convert packaging version into a JSON object
+  set_fact: version="{{ version.stdout | from_json }}"
 
 - name: Update debian/changelog
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.stdout }} -m ""'
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.stdout }}."'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.full }} -m ""'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.full }}."'
 
 - name: Create orig tarball
   shell: |
     docker exec -t builder sh -c 'cd /build/contrail/ && fakeroot debian/rules get-orig-source'
-    mv {{ ansible_env.HOME }}/tmp/contrail_{{ version.stdout }}.orig.tar.gz {{ ansible_env.HOME }}/packages/
+    mv {{ ansible_env.HOME }}/tmp/contrail_{{ version.upstream }}.orig.tar.gz {{ ansible_env.HOME }}/packages/
 
 - name: Create contrail source package
   shell: |
