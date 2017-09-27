@@ -83,14 +83,19 @@
     run: playbooks/checks/simple
 
 - job:
-    name: contrail-build-ubuntu16
+    name: contrail-controller-base
     vars:
+      docker_registry: "1.1.1.40:5000/"
       contrail_default_version: "5.0"
-    description: |
-      Build Contrail for the given system, and run a set of sanity checks.
+    parent: base
+    description:
+      This is a base job for all jobs building Contrail artifacts.
 
-      This job will build contrail packages for the requested system,
-      as well as perform a set of basic sanity tests for verification.
+      This job is a cornerstone for all the jobs that build Contrail
+      artifacts (packages, docker containers) based on the monolithic
+      build directory structure. It takes care of moving repositories
+      checked out by zuul into their expected locations, as well
+      as launching the build container.
     required-projects:
       - Juniper/contrail-build
       - Juniper/contrail-controller
@@ -101,7 +106,16 @@
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-extensions
       - Juniper/contrail-nova-vif-driver
-    run: playbooks/contrail/build
+    pre-run: playbooks/contrail-controller/pre
+
+- job:
+    name: contrail-controller-build-xenial
+    parent: contrail-controller-base
+    description: |
+      Build Contrail Ubuntu 16.04 LTS
+
+      This job will build contrail packages for Ubuntu 16.04 release.
+    run: playbooks/contrail-controller/build_ubuntu
 
 - secret:
     name: site_logs
@@ -156,12 +170,12 @@
     name: Juniper/contrail-controller
     check:
       jobs:
-        - contrail-build-ubuntu16
+        - contrail-controller-build-xenial
         - simple-check
         - contrail-containers-ubuntu16:
             dependencies:
               - simple-check
-              - contrail-build-ubuntu16
+              - contrail-controller-build-xenial
 
 - project:
     name: Juniper/contrail-build
