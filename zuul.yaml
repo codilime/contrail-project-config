@@ -26,9 +26,8 @@
           action: comment
           comment: (?i)^\s*recheck\s*$
     start:
-      github:
-        status: pending
-        comment: false
+      gerrit:
+        status: 'start'
     success:
       gerrit:
         # Note that gerrit keywords are case-sensitive.
