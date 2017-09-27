@@ -7,6 +7,7 @@
         untrusted-projects:
           - kklimonda/zuul-jobs:
               shadow: kklimonda/contrail-project-config
+          - kklimonda/neutron
       gerrit:
         untrusted-projects:
           - Juniper/contrail-build
@@ -21,3 +22,5 @@
           - Juniper/contrail-neutron-plugin
           - Juniper/contrail-ceilometer-plugin
           - Juniper/contrail-heat
+          - Juniper/contrail-web-core
+          - Juniper/contrail-web-controller
