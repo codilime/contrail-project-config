@@ -1,3 +1,26 @@
+- name: Copy debian/ to enable package building
+  synchronize: |
+    src="{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian"
+    dest="{{ ansible_env.HOME }}/tmp/"
+    rsync_opts="--no-motd,--exclude=.git,--quiet"
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+ - name: Define contrail version
+   set_fact:
+     version:
+       upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
+       packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
+       # FIXME: Use strfime filter instead of calling replace later once we upgrade ansible to 2.4+
+       #date: "{{ '%Y%m%d%H%M%S' | strftime }}"
+       date: |-
+          {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+          {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+          {{ ansible_date_time.minute }}
+
+- name: Strip new lines from version.date
+  set_fact:
+    version_date: "{{ version.date | replace('\n', '') }}"
+
 - name: Update debian/changelog
   shell: |
     docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version_date }} -m ""'

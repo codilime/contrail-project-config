@@ -36,39 +36,25 @@
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
-- name: Copy debian/ to enable package building
-  synchronize: |
-    src="{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/debian/contrail/debian"
-    dest="{{ ansible_env.HOME }}/tmp/"
-    rsync_opts="--no-motd,--exclude=.git,--quiet"
-  delegate_to: "{{ ansible_default_ipv4.address }}"
-
 - name: Pull the latest Ubuntu 16.04 docker image from the registry
   docker_image: |
     name={{ docker_registry }}contrail-builder:5.0-xenial
 
 - name: Define contrail version
   set_fact:
-    version:
-      upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
-      packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
-      # FIXME: Use strfime filter instead of calling replace later once we upgrade ansible to 2.4+
-      #date: "{{ '%Y%m%d%H%M%S' | strftime }}"
-      date: |-
-         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
-         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
-         {{ ansible_date_time.minute }}
-
-- name: Strip new lines from version.date
-  set_fact:
-    version_date: "{{ version.date | replace('\n', '') }}"
+    upstream_version: >-
+      {% if zuul.branch == 'master' %}
+        {{- contrail_default_version -}}
+      {% else %}
+        {{- zuul.branch[1:] -}}
+      {% endif %}
 
 - name: Start the builder container
   docker_container:
     name: "builder"
     state: "started"
     recreate: true
-    image: "{{ docker_registry }}contrail-builder:{{ version.upstream }}-xenial"
+    image: "{{ docker_registry }}contrail-builder:{{ upstream_version }}-xenial"
     command: "sleep infinity"
     env:
       USER: builder
