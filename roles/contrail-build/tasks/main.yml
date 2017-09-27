@@ -12,9 +12,6 @@
     - tmp/openstack
     - packages
 
-- name: Debug zuul variable
-  debug: var=zuul
-
 - name: Hard-link gerrit repositories into expected structure
   synchronize: |
     src="{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
@@ -66,15 +63,6 @@
       - "{{ ansible_env.HOME }}/tmp:/build/contrail"
   register: builder
 
-- name: Debug builder variable
-  debug: var=builder
-
-- name: Debug zuul variable
-  debug: var=zuul
-
-- name: Debug job variable
-  debug: var=job
-
 - name: Define contrail version
   set_fact:
     version:
@@ -86,21 +74,10 @@
          {{ ansible_date_time.year }}{{ ansible_date_time.month }}
          {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
          {{ ansible_date_time.minute }}
+
 - name: Strip new lines from version.date
   set_fact:
     version_date: "{{ version.date | replace('\n', '') }}"
-
-- name: Debug 1
-  debug: msg="{{ version.date }}"
-
-- name: Debug 2
-  debug: msg="{{ version.date | replace('\n', '') }}"
-
-- name: Debug 3
-  debug: msg="{{ version.date | regex_replace('\n') }}"
-
-- name: Debug 3
-  debug: msg="{{ version_date }}"
 
 - name: Update debian/changelog
   shell: |
