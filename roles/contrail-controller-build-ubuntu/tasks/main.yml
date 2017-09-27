@@ -32,6 +32,14 @@
     docker exec -t builder sh -c 'cd /build/contrail/ && fakeroot debian/rules get-orig-source'
     mv {{ ansible_env.HOME }}/tmp/contrail_{{ version.upstream }}.orig.tar.gz {{ ansible_env.HOME }}/packages/
 
+- name: Install the dependencies based on package manifest
+  shell: |
+    docker exec -t builder sh -c '
+      cd /build/contrail/
+      mk-build-deps -i -r debian/control \
+        --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
+      apt-get autoremove'
+
 - name: Create contrail source package
   shell: |
     docker exec -t builder sh -c 'cd /build/contrail/ && debuild -S -us -uc'
