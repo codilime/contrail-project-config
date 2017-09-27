@@ -65,27 +65,19 @@
   debug: var=job
 
 - name: Define contrail version
-  shell: |
-    if [ "{{ zuul.branch }}" == "master" ]; then
-      upstream_version={{ contrail_default_version }}
-    else
-      upstream_version=${{ '{' }}{{ zuul.branch }}:1{{ '}' }}
-    fi
-    packaging_version={{ zuul.change }}.{{ zuul.patchset }}
-    date=$(date +%Y%m%d.%H%m%s)
-    full_version="$upstream-1~$packaging_version.$date"
-    echo -n "{\"upstream\": \"$upstream_version\",
-              \"packaging\": \"$packaging_version\",
-              \"date\": \"$date\", \"full\": \"$full_version\" }"
-  register: version
-
-- name: Convert packaging version into a JSON object
-  set_fact: version="{{ version.stdout | from_json }}"
+  set_fact:
+    version:
+      upstream: "{% if zuul.branch == 'master' %}{{ contrail_default_version }}{% else %}{{ zuul.branch }}{% endif %}"
+      packaging: "{{ zuul.change }}.{{ zuul.patchset }}"
+      date: >
+         {{ ansible_date_time.year }}{{ ansible_date_time.month }}
+         {{ ansible_date_time.day }}{{ ansible_date_time.hour }}
+         {{ ansible_date_time.minute }}
 
 - name: Update debian/changelog
   shell: |
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.full }} -m ""'
-    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.full }}."'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch -v {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }} -m ""'
+    docker exec -t builder sh -c 'cd /build/contrail/ && dch --release --distribution xenial -m "Releasing version {{ version.upstream }}-1~{{version.packaging}}.{{ version.date }}."'
 
 - name: Create orig tarball
   shell: |
