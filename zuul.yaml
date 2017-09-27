@@ -100,6 +100,7 @@
       - Juniper/contrail-sandesh
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-extensions
+      - Juniper/contrail-nova-vif-driver
     run: playbooks/contrail/build
 
 - secret:
