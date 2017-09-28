@@ -48,3 +48,12 @@
     parent: base
     description:
       This is a base job for all jobs building Contrail artifacts.
+
+- job:
+    name: contrail-controller-build-xenial
+    parent: contrail-controller-base
+    description: |
+      Build Contrail Ubuntu 16.04 LTS
+
+      This job will build contrail packages for Ubuntu 16.04 release.
+    run: playbooks/contrail-controller/build_ubuntu
