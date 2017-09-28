@@ -44,3 +44,9 @@
     check:
       jobs:
         - simple-check
+
+- project:
+    name: Juniper/python-neutronclient
+    check:
+      jobs:
+        - tox-pep8
