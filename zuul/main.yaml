@@ -5,8 +5,6 @@
         config-projects:
           - kklimonda/contrail-project-config
         untrusted-projects:
-          - kklimonda/zuul-jobs:
-              shadow: kklimonda/contrail-project-config
           - kklimonda/neutron
           - Juniper/contrail-nova-extensions
       gerrit:
