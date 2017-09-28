@@ -49,6 +49,23 @@
     description:
       This is a base job for all jobs building Contrail artifacts.
 
+      This job is a cornerstone for all the jobs that build Contrail
+      artifacts (packages, docker containers) based on the monolithic
+      build directory structure. It takes care of moving repositories
+      checked out by zuul into their expected locations, as well
+      as launching the build container.
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
+      - Juniper/contrail-nova-extensions
+      - Juniper/contrail-nova-vif-driver
+    pre-run: playbooks/contrail-controller/pre
+
 - job:
     name: contrail-controller-build-xenial
     parent: contrail-controller-base
