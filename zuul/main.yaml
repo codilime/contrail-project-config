@@ -5,7 +5,7 @@
         config-projects:
           - kklimonda/contrail-project-config
         untrusted-projects:
-          - kklimonda/neutron
+          - Juniper/python-neutronclient
           - Juniper/contrail-nova-extensions
       gerrit:
         untrusted-projects:
