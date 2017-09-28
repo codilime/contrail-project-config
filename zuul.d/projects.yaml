@@ -1,0 +1,46 @@
+- project:
+    name: Juniper/contrail-controller
+    check:
+      jobs:
+        - contrail-controller-build-xenial
+        - simple-check
+        - contrail-containers-ubuntu16:
+            dependencies:
+              - simple-check
+              - contrail-controller-build-xenial
+
+- project:
+    name: Juniper/contrail-build
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-generateDS
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-third-party
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-packages
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-sandesh
+    check:
+      jobs:
+        - simple-check
+
+- project:
+    name: Juniper/contrail-vrouter
+    check:
+      jobs:
+        - simple-check

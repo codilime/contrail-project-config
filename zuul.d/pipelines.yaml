@@ -1,0 +1,43 @@
+- pipeline:
+    name: check
+    description: |
+      Newly uploaded patchsets enter this pipeline to receive an
+      initial +/-1 Verified vote.
+    manager: independent
+    trigger:
+      gerrit:
+        - event: patchset-created
+          branch: master
+        - event: change-restored
+        - event: comment-added
+          comment: (?i)recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))(\s+clean)?\s*$
+        - event: comment-added
+          require-approval:
+            - verified: [-1, -2]
+              username: zuul
+          approval:
+            - workflow: 1
+      github:
+        - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
+          action: comment
+          comment: (?i)^\s*recheck\s*$
+    start:
+      gerrit:
+        status: 'start'
+    success:
+      gerrit:
+        # Note that gerrit keywords are case-sensitive.
+        Verified: 1
+      github:
+        status: 'success'
+    failure:
+      gerrit:
+        Verified: -1
+      github:
+        status: 'failure'
+

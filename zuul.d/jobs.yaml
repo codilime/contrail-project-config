@@ -1,0 +1,50 @@
+- job:
+    name: base
+    parent: null
+    description: |
+      The base job for OpenStack's installation of Zuul.
+      All jobs ultimately inherit from this.  It runs a pre-playbook
+      which copies all of the job's prepared git repos on to all of
+      the nodes in the nodeset.  It runs a post-playbook which copies
+      all of the files in the logs/ subdirectory of the executor
+      work directory to the logserver.
+      It also sets default timeout and nodeset values (which may be
+      overidden).
+    pre-run: playbooks/base/pre
+    post-run:
+      - playbooks/base/post-ssh
+      - playbooks/base/post-logs
+    roles:
+      - zuul: openstack-infra/zuul-jobs
+      - zuul: openstack-infra/openstack-zuul-jobs
+    timeout: 5400
+    nodeset:
+      nodes:
+        - name: ubuntu-xenial
+          label: ubuntu-xenial
+    secrets:
+      - site_logs
+
+- job:
+    name: simple-check
+    description: |
+      Perform a simple life check.
+
+      This performs basic host and general project setup tasks common
+      to all types of unit test jobs.
+    run: playbooks/checks/simple
+
+- job:
+    name: contrail-containers-ubuntu16
+    description: |
+      Create docker containers from packages built in previous steps.
+    run: playbooks/checks/simple
+
+- job:
+    name: contrail-controller-base
+    vars:
+      docker_registry: "1.1.1.41:5000/"
+      contrail_default_version: "5.0"
+    parent: base
+    description:
+      This is a base job for all jobs building Contrail artifacts.
