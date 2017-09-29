@@ -1,3 +1,0 @@
-- name: Setup known_hosts for cross-node SSH'ing when we have more than 1 host
-  include: setup-multinode-known-hosts.yaml
-  when: hostvars|length > 1

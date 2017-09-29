@@ -1,3 +1,0 @@
----
-zuul_executor_dest: "{{ zuul.executor.log_root }}"
-sphinx_output_src: "src/{{ zuul.project.canonical_name }}/doc/build/html"

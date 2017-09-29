@@ -1,8 +1,0 @@
-- hosts: localhost
-  roles:
-    - add-fileserver
-
-- hosts: "{{ fileserver.fqdn }}"
-  gather_facts: False
-  roles:
-    - publish-artifacts-to-fileserver

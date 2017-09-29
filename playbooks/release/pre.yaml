@@ -1,5 +1,0 @@
-- hosts: all
-  roles:
-    - legacy-copy-project-config-scripts
-    - add-sshkey
-    - add-launchpadlib-credentials

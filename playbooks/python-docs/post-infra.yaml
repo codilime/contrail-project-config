@@ -1,7 +1,0 @@
-- hosts: all
-  roles:
-    - prepare-infra-docs-for-afs
-    - fetch-tox-output
-    - role: fetch-sphinx-output
-      sphinx_output_src: "src/{{ zuul.project.canonical_name }}/doc/build/html/"
-      zuul_executor_dest: "{{ zuul.executor.work_root }}/artifacts"

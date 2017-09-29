@@ -1,2 +1,0 @@
-- name: Kill all zuul user processes
-  command: /sbin/killall5

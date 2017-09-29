@@ -1,2 +1,0 @@
-- name: Start zuul_console daemon.
-  zuul_console:
