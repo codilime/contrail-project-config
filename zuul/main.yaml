@@ -23,3 +23,5 @@
           - Juniper/contrail-web-core
           - Juniper/contrail-web-controller
           - Juniper/python-neutronclient
+          - Juniper/nova
+          - Juniper/packaging-os-nova

@@ -53,4 +53,4 @@
     trigger:
       gerrit:
         - event: ref-updated
-          ref: ^ref/tags/contrail/[0-9]+(\.[0-9]+)*$
+          ref: ^refs/tags/contrail/[0-9]+(\.[0-9]+)*$
