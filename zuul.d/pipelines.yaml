@@ -41,3 +41,16 @@
       github:
         status: 'failure'
 
+- pipeline:
+    name: release-os-package
+    description: |
+      Build and upload a new version of the upstream OpenStack package
+
+      This pipeline is used to release a new version of a debian/rpm package
+      for the upstream OpenStack project.
+    manager: independent
+    precedence: high
+    trigger:
+      gerrit:
+        - event: ref-updated
+          ref: ^ref/tags/contrail/[0-9]+(\.[0-9]+)*$
