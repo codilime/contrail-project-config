@@ -7,6 +7,7 @@
         untrusted-projects:
           - codilime/zuul-jobs:
               shadow: codilime/contrail-project-config
+          - Juniper/contrail-nova-extensions
       gerrit:
         untrusted-projects:
           - Juniper/contrail-build
@@ -21,3 +22,4 @@
           - Juniper/contrail-heat
           - Juniper/contrail-web-core
           - Juniper/contrail-web-controller
+          - Juniper/python-neutronclient
