@@ -15,8 +15,7 @@
       - playbooks/base/post-ssh
       - playbooks/base/post-logs
     roles:
-      - zuul: openstack-infra/zuul-jobs
-      - zuul: openstack-infra/openstack-zuul-jobs
+      - zuul: codilime/zuul-jobs
     timeout: 5400
     nodeset:
       nodes:
