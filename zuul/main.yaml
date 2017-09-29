@@ -3,10 +3,10 @@
     source:
       github:
         config-projects:
-          - kklimonda/contrail-project-config
+          - codilime/contrail-project-config
         untrusted-projects:
-          - Juniper/python-neutronclient
-          - Juniper/contrail-nova-extensions
+          - codilime/zuul-jobs:
+              shadow: codilime/contrail-project-config
       gerrit:
         untrusted-projects:
           - Juniper/contrail-build
