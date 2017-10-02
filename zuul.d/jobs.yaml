@@ -24,3 +24,50 @@
     secrets:
       - site_logs
 
+- job:
+    name: contrail-base
+    description: |
+      A generic build & packaging job for OpenContrail components
+
+      This job can be used to package OpenContrail VNC componenets that don't
+      depend on on a "monolithic" build environment.
+    pre-run:
+      - playbooks/contrail/pre-spawn-build-container
+    post-run:
+      - playbooks/contrail/post-upload-packages
+      - playbooks/contrail/post-kill-build-container
+    vars:
+      docker_registry: "1.1.1.41:5000/"
+      contrail_default_version: "5.0"
+    secrets:
+      - aptly_params
+
+- job:
+    name: contrail-controller-base
+    parent: contrail-base
+    description:
+      This is a base job for all jobs building Contrail artifacts.
+
+      This job is a cornerstone for all the jobs that build Contrail
+      artifacts (packages, docker containers) based on the monolithic
+      build directory structure. It takes care of moving repositories
+      checked out by zuul into their expected locations, as well
+      as launching the build container.
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
+      - Juniper/contrail-nova-extensions
+      - Juniper/contrail-nova-vif-driver
+    pre-run: playbooks/contrail/pre-prepare-repos
+
+- job:
+    name: contrail-build-package-xenial
+    parent: contrail-base
+    description: |
+      Realized job for building and packaging simple Contrail components
+    run: playbooks/contrail/package.yaml
