@@ -71,3 +71,18 @@
     description: |
       Realized job for building and packaging simple Contrail components
     run: playbooks/contrail/package
+
+- job:
+    name: contrail-containers-ubuntu16
+    description: |
+      Create docker containers from packages built in previous steps.
+    run: playbooks/checks/simple
+
+- job:
+    name: contrail-controller-build-xenial
+    parent: contrail-controller-base
+    description: |
+      Build Contrail Ubuntu 16.04 LTS
+
+      This job will build contrail packages for Ubuntu 16.04 release.
+    run: playbooks/contrail-controller/build_ubuntu
