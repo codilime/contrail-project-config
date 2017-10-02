@@ -70,4 +70,4 @@
     parent: contrail-base
     description: |
       Realized job for building and packaging simple Contrail components
-    run: playbooks/contrail/package.yaml
+    run: playbooks/contrail/package
