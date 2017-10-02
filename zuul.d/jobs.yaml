@@ -63,7 +63,9 @@
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-extensions
       - Juniper/contrail-nova-vif-driver
-    pre-run: playbooks/contrail/pre-prepare-repos
+    pre-run:
+      - playbooks/contrail/pre-prepare-repos
+      - playbooks/contrail-controller/pre
 
 - job:
     name: contrail-build-package-xenial
