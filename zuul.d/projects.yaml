@@ -3,11 +3,6 @@
     check:
       jobs:
         - contrail-controller-build-xenial
-        - simple-check
-        - contrail-containers-ubuntu16:
-            dependencies:
-              - simple-check
-              - contrail-controller-build-xenial
 
 - project:
     name: Juniper/contrail-build
