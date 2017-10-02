@@ -35,7 +35,7 @@
       - playbooks/contrail/pre-spawn-build-container
     post-run:
       - playbooks/contrail/post-upload-packages
-      - playbooks/contrail/post-kill-build-container
+      - playbooks/contrail/post-cleanup
     vars:
       docker_registry: "1.1.1.41:5000/"
       contrail_default_version: "5.0"

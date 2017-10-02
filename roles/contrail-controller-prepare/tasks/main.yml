@@ -1,17 +1,3 @@
-# when using docker, we need a number of directories
-# to bind mount between host and the container:
-#   - tmp/ where all source code is stored -- required
-#       so that the build does not suffer from the aufs
-#       performance penatly.
-#   - packages/ where the resulting packages will be stored.
-- name: Create working directory structure
-  file: dest="{{ item }}" state=directory
-  with_items:
-    - tmp
-    - tmp/tools
-    - tmp/openstack
-    - packages
-
 - name: Hard-link gerrit repositories into expected structure
   synchronize: |
     src="{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
@@ -35,34 +21,4 @@
   with_items:
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
-
-- name: Define contrail version
-  set_fact:
-    upstream_version: >-
-      {% if zuul.branch == 'master' %}
-        {{- contrail_default_version -}}
-      {% else %}
-        {{- zuul.branch[1:] -}}
-      {% endif %}
-
-- name: Pull the latest builder image from docker registry
-  docker_image: |
-    name="{{ docker_registry }}contrail-builder:{{ upstream_version }}-xenial"
-
-- name: Start the builder container
-  docker_container:
-    name: "builder"
-    state: "started"
-    recreate: true
-    image: "{{ docker_registry }}contrail-builder:{{ upstream_version }}-xenial"
-    command: "sleep infinity"
-    env:
-      USER: builder
-      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
-    # FIXME: replace with host zuul user
-    user: 1002:1002
-    volumes:
-      - "{{ ansible_env.HOME }}/packages:/build"
-      - "{{ ansible_env.HOME }}/tmp:/build/contrail"
-  register: builder
 
