@@ -43,6 +43,6 @@
   shell: |
     git remote add kklimonda https://github.com/kklimonda/contrail-packages
     git fetch --all
-    git checkout kklimonda/feature/zuulv3
+    git reset --hard kklimonda/feature/zuulv3
   args:
     chdir: "{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/"
