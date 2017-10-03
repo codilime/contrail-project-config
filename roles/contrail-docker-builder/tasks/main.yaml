@@ -43,8 +43,7 @@
     env:
       USER: builder
       DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
-    # FIXME: replace with host zuul user
-    user: 1002:1002
+    user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
     volumes:
       - "{{ ansible_env.HOME }}/packages:/build"
       - "{{ ansible_env.HOME }}/tmp:/build/contrail"
