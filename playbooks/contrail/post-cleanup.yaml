@@ -1,3 +1,2 @@
 - hosts: all
-  roles:
-    - contrail-cleanup
+  roles: []
