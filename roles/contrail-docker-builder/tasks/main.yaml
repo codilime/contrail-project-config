@@ -4,6 +4,14 @@
 #       so that the build does not suffer from the aufs
 #       performance penatly.
 #   - packages/ where the resulting packages will be stored.
+- name: Clean-up after previous build
+  file: dest="{{ item }}" state=absent
+  with_items:
+    - tmp
+    - tmp/tools
+    - tmp/openstack
+    - packages
+
 - name: Create working directory structure
   file: dest="{{ item }}" state=directory
   with_items:
