@@ -52,9 +52,11 @@
       jobs:
         - contrail-build-package-xenial
 
-
 - project:
     name: Juniper/python-neutronclient
     check:
       jobs:
         - tox-pep8
+    release-os-package:
+      jobs:
+        - simple-check
