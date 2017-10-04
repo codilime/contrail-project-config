@@ -88,3 +88,12 @@
 
       This job will build contrail packages for Ubuntu 16.04 release.
     run: playbooks/contrail-controller/build_ubuntu
+
+- job:
+    name: package-build-publish-xenial
+    description: |
+      Build and publish various third-party (OpenStack etc.) packages
+
+      This job manages building and publishing packages for various third
+      party dependencies.
+    run: playbooks/packaging/build-publish

@@ -26,3 +26,4 @@
           - Juniper/python-neutronclient
           - Juniper/nova
           - Juniper/packaging-os-nova
+          - Juniper/packaging-python-neutronclient

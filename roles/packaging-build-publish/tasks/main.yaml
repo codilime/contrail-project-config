@@ -1,0 +1,84 @@
+- name: Get upstream version from debian/changelog for the given series
+  shell: |
+    CHANGELOG="{{ zuul.project.src_dir }}/ubuntu/{{ ansible_distribution_release }}/debian/changelog"
+    head -1 $CHANGELOG | awk -F'[()]' '{print $2}' |cut -d'-' -f 1 | cut -d':' -f 2
+  register: upstream_version
+  changed_when: false
+
+- name: Get package name from debian/changelog
+  shell: |
+    control="{{ zuul.project.src_dir }}/ubuntu/{{ ansible_distribution_release }}/debian/control"
+    cat $control | sed -rne 's/^Source: (.*)$/\1/p' | tr -d '\n'
+  register: upstream_name
+  changed_when: false
+
+# packaging branches follow the model of [packaging]-upstream-project,
+# e.g. packaging-python-neutronclient or packaging-cassandra-cpp-driver.
+- name: Check if upstream source has been provided
+  shell: |
+    if [[ {{ item.short_name }} =~ {{ zuul.project.short_name }} ]]; then
+        exit 1
+    fi
+    exit 0
+  args:
+    executable: /bin/bash
+  with_items: "{{ zuul.projects }}"
+  register: project_src_dirs
+  failed_when: false
+  changed_when: false
+
+- name: Debug project_src_dirs
+  debug: var=project_src_dirs
+
+- name: Debug upstream_name
+  debug: var=upstream_name
+
+- name: Debug upstream_version
+  debug: var=upstream_version
+
+- name: Create name-version for package
+  set_fact:
+    project_name_version: "{{ upstream_name.stdout }}-{{ upstream_version.stdout }}"
+
+- name: Copy upstream sources repository into workdir
+  synchronize:
+    src: "{{ item.item.src_dir }}/"
+    dest: "{{ project_name_version }}"
+    rsync_opts:
+       - --quiet
+       - --exclude='.git/'
+  with_items: "{{ project_src_dirs.results }}"
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+  when: "{{ item.rc == 0 }}"
+
+- name: Create orig tarball with sources
+  command: tar zcf {{ project_name_version }}.orig.tar.gz {{ project_name_version }}
+
+- name: Copy packaging into correct place
+  synchronize:
+    src: "{{ zuul.project.src_dir }}/ubuntu/{{ ansible_distribution_release }}/debian/"
+    dest: "{{ project_name_version }}"
+
+- name: Pull docker builder image from registry
+  docker_image:
+    name: ubuntu:{{ ansible_distribution_release }}
+
+- name: Spawn docker builder container
+  docker_container:
+    name: builder
+    image: ubuntu:{{ ansible_distribution_release }}
+    state: started
+    recreate: true
+    command: sleep infinity
+    user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
+    volumes:
+      - "{{ ansible_env.HOME }}/:/build/"
+
+- name: Install build depedencies
+  shell: |
+    docker exec --user root:root -t builder sh -c '
+      apt-get update
+      apt-get install --assume-yes --no-install-recommends equivs devscripts
+      cd /build/{{ project_name_version }}
+      mk-build-deps -i -r debian/control \
+        --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"'

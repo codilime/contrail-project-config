@@ -57,6 +57,11 @@
     check:
       jobs:
         - tox-pep8
-    release-os-package:
+
+- project:
+    name: Juniper/packaging-python-neutronclient
+    check:
       jobs:
-        - simple-check
+        - package-build-publish-xenial:
+            required-projects:
+              - Juniper/python-neutronclient
