@@ -49,6 +49,14 @@
     volumes:
       - "{{ ansible_env.HOME }}:/build"
 
+- name: Add Ubuntu Cloud archive for the given OpenStack release
+  shell: |
+    docker exec --user root:root builder sh -c '
+      apt-get update
+      apt-get install --assume-yes ubuntu-cloud-keyring
+      echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/ocata main" \
+        >> /etc/apt/sources.list'
+
 - name: Install build-related packages in the container
   shell: |
     docker exec --user root:root builder sh -c '
