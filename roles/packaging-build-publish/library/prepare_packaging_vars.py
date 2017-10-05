@@ -83,6 +83,33 @@ def get_package_name_versions(module):
         raise RuntimeError("Unsupported distribution: %s" % (distro,))
 
 
+def get_upstream_path(module):
+    packaging_repo, upstream_repo = module.params['packaging_repo'], module.params['source_repo']
+    package = get_package_name_versions(module)
+
+    if upstream_repo:
+        local_path = upstream_repo['src_dir']
+    else:
+        # deduce local_path based on packaging_repository
+        # XXX: This assumes that both packaging repository and upstream source are pulled from
+        #      the same zuul connection.
+        packaging_path = packaging_repo['src_dir']
+        packaging_short_name = packaging_repo['short_name']
+
+        upstream_repo_name = packaging_short_name.lstrip("packaging-")
+        packaging_org_dir = "/".join(packaging_path.split("/")[:-1])
+
+        local_path = os.path.join(packaging_org_dir, upstream_repo_name)
+        if not os.path.exists(upstream_path):
+            local_path = None
+    target_path = "%s-%s" % (package['name'], package['version']['upstream'])
+
+    if local_path is None:
+        return None
+
+    return {"source_dir": local_path, "target_path": target_path}
+
+
 result = dict(
     changed=False,
     original_message='',
@@ -101,6 +128,9 @@ def main(testing=False):
 
     try:
         result['package'] = get_package_name_versions(module)
+        upstream_source = get_upstream_path(module)
+        if upstream_source:
+            result['upstream'] = upstream_source
     except RuntimeError as e:
         module.fail_json(msg=e.message, **result)
 
