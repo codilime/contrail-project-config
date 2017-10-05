@@ -1,6 +1,5 @@
 - name: Populate ansible variables with packaging info
   prepare_packaging_vars:
-    packaging_repo: {{ zuul.project.short_name }}
-    source_repo: {{ packaging_source_repository }}
-    distribution: {{ ansible_distribution }}
-    release: {{ ansible_distribution_release }}
+    packaging_repo: "{{ zuul.project }}"
+    distribution: "{{ ansible_distribution }}"
+    release: "{{ ansible_distribution_release }}"
