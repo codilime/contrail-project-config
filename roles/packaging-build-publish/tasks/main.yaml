@@ -72,8 +72,8 @@
         --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
       apt-get autoremove --assume-yes --purge'
 
-- name: Create a source debian package
+- name: Create source and binary debian packages
   shell: |
     docker exec builder sh -c '
       cd /build/{{ package.upstream.target_path }}/
-      fakeroot debian/rules source'
+      debuild -us -uc'
