@@ -98,7 +98,7 @@ def get_upstream_path(module):
         packaging_short_name = packaging_repo['short_name']
         module.log("packaging_short_name: %s" % packaging_short_name)
 
-        upstream_repo_name = packaging_short_name.lstrip("packaging-")
+        upstream_repo_name = re.sub("^packaging-", "", packaging_short_name)
         module.log("upstream_repo_name: %s" % upstream_repo_name)
         packaging_org_dir = "/".join(packaging_path.split("/")[:-1])
         module.log("packaging_org_dir: %s" % packaging_org_dir)
