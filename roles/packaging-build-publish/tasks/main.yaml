@@ -5,3 +5,12 @@
     release: "{{ ansible_distribution_release }}"
   register: package
 
+- name: Copy upstream repository into the workdir
+  synchronize:
+    src: "{{ package.upstream.source_dir }}"
+    dest: "{{ package.upstream.target_path }}"
+    rsync_opts:
+      - --quiet
+      - --exclude='.git/'
+  when: package.upstream is defined
+  delegate_to: "{{ ansible_default_ipv4.address }}"
