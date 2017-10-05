@@ -94,17 +94,12 @@ def get_upstream_path(module):
         # XXX: This assumes that both packaging repository and upstream source are pulled from
         #      the same zuul connection.
         packaging_path = packaging_repo['src_dir']
-        module.log("packaging_path: %s" % packaging_path)
         packaging_short_name = packaging_repo['short_name']
-        module.log("packaging_short_name: %s" % packaging_short_name)
 
         upstream_repo_name = re.sub("^packaging-", "", packaging_short_name)
-        module.log("upstream_repo_name: %s" % upstream_repo_name)
         packaging_org_dir = "/".join(packaging_path.split("/")[:-1])
-        module.log("packaging_org_dir: %s" % packaging_org_dir)
 
         local_path = os.path.join(packaging_org_dir, upstream_repo_name)
-        module.log("local_path: %s" % local_path)
         if not os.path.exists(local_path):
             local_path = None
     target_path = "%s-%s" % (package['name'], package['version']['upstream'])
