@@ -55,7 +55,7 @@
     command: "sleep infinity"
     env:
       USER: builder
-      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
+      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }} nocheck"
     user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
     volumes:
       - "{{ ansible_env.HOME }}:/build"
