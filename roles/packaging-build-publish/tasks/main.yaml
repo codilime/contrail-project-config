@@ -53,7 +53,8 @@
   shell: |
     docker exec --user root:root builder sh -c '
       apt-get update
-      apt-get install --no-install-recommends --assume-yes devscripts equivs'
+      apt-get install --no-install-recommends --assume-yes \
+        devscripts equivs build-essential'
 
 - name: Install package dependencies for the build
   shell: |
