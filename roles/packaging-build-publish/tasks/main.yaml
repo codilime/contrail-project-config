@@ -14,3 +14,16 @@
       - --exclude='.git/'
   when: package.upstream is defined
   delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Create an orig tar.gz with upstream sources
+  command: tar zcf {{ package.name }}-{{ package.version.upstream }}.orig.tar.gz
+
+- name: Copy packaging from the packaging repo
+  synchronize:
+    src: "{{ ansible_env.HOME}}/{{ package.debian_dir }}"
+    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/debian/"
+    rsync_opts:
+      - --quiet
+      - --exclude='.git/'
+  when: package.upstream is defined
+  delegate_to: "{{ ansible_default_ipv4.address }}"

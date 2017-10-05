@@ -71,6 +71,7 @@ def get_package_name_versions(module):
 
         return {
             'name': package_name,
+            'debian_dir': debian_path,
             'full_version': version,
             'version': {
                 'epoch': epoch,
