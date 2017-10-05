@@ -30,7 +30,7 @@
   archive:
     path:
       - "{{ package.upstream.target_path }}"
-    dest: "{{ package.package.name }}-{{ package.package.version.upstream }}.orig.tar.gz"
+    dest: "{{ package.package.name }}_{{ package.package.version.upstream }}.orig.tar.gz"
 
 - name: Copy packaging from the packaging repo
   synchronize:
