@@ -3,3 +3,7 @@
     packaging_repo: "{{ zuul.project }}"
     distribution: "{{ ansible_distribution|lower() }}"
     release: "{{ ansible_distribution_release }}"
+  register: package
+
+- name: Debug package variable
+  debug: var=package
