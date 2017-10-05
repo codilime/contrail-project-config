@@ -30,3 +30,41 @@
       - --exclude='.git/'
   when: package.upstream is defined
   delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Fetch a generic ubuntu docker image for build
+  docker_image:
+    name: "ubuntu:{{ ansible_distribution_release }}"
+
+- name: Launch a build container
+  docker_container:
+    name: "builder"
+    state: "started"
+    recreate: true
+    image: "ubuntu:{{ ansible_distribution_release }}"
+    command: "sleep infinity"
+    env:
+      USER: builder
+      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
+    user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
+    volumes:
+      - "{{ ansible_env.HOME }}:/build"
+
+- name: Install build-related packages in the container
+  shell: |
+    docker exec --user root:root builder sh -c '
+      apt-get update
+      apt-get install --no-install-recommends --assume-yes devscripts equivs'
+
+- name: Install package dependencies for the build
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.upstream.target_path }}/
+            mk-build-deps -i -r debian/control \
+        --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
+      apt-get autoremove --assume-yes --purge'
+
+- name: Create a source debian package
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.upstream.target_path }}/
+      fakeroot debian/rules source'
