@@ -7,8 +7,8 @@
 
 - name: Copy upstream repository into the workdir
   synchronize:
-    src: "{{ package.upstream.source_dir }}"
-    dest: "{{ package.upstream.target_path }}"
+    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}"
+    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}"
     rsync_opts:
       - --quiet
       - --exclude='.git/'
