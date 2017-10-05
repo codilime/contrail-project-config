@@ -18,8 +18,8 @@
 
 - name: Copy upstream repository into the workdir
   synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}"
-    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}"
+    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}/"
+    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/"
     rsync_opts:
       - --quiet
       - --exclude='.git/'
@@ -34,7 +34,7 @@
 
 - name: Copy packaging from the packaging repo
   synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}"
+    src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}/"
     dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/debian/"
     rsync_opts:
       - --quiet
@@ -79,7 +79,7 @@
   shell: |
     docker exec --user root:root builder sh -c '
       cd /build/{{ package.upstream.target_path }}/
-            mk-build-deps -i -r debian/control \
+            mk-build-deps -i debian/control \
         --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
       apt-get autoremove --assume-yes --purge'
 
