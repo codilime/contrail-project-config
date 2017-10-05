@@ -5,5 +5,3 @@
     release: "{{ ansible_distribution_release }}"
   register: package
 
-- name: Debug package variable
-  debug: var=package
