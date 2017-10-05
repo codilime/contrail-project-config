@@ -100,7 +100,7 @@ def get_upstream_path(module):
         packaging_org_dir = "/".join(packaging_path.split("/")[:-1])
 
         local_path = os.path.join(packaging_org_dir, upstream_repo_name)
-        if not os.path.exists(upstream_path):
+        if not os.path.exists(local_path):
             local_path = None
     target_path = "%s-%s" % (package['name'], package['version']['upstream'])
 
