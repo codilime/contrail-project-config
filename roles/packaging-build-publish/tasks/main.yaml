@@ -16,7 +16,10 @@
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
 - name: Create an orig tar.gz with upstream sources
-  command: tar zcf {{ package.package.name }}-{{ package.package.version.upstream }}.orig.tar.gz
+  archive:
+    path:
+      - "{{ package.upstream.target_path }}"
+    dest: "{{ package.package.name }}-{{ package.package.version.upstream }}.orig.tar.gz"
 
 - name: Copy packaging from the packaging repo
   synchronize:
