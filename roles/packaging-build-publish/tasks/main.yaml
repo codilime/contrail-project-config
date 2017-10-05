@@ -23,7 +23,7 @@
 
 - name: Copy packaging from the packaging repo
   synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.debian_dir }}"
+    src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}"
     dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/debian/"
     rsync_opts:
       - --quiet
