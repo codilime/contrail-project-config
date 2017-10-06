@@ -2,6 +2,10 @@ zookeeper-servers:
   - host: nodepool.opencontrail.org
     chroot: /nodepool
 
+labels:
+  - name: ubuntu-xenial
+    min-ready: 1
+
 providers:
   - name: static-cl-os
     driver: static
