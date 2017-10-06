@@ -4,7 +4,7 @@ zookeeper-servers:
 
 labels:
   - name: ubuntu-xenial
-    min-ready: 1
+    min-ready: 0
 
 providers:
   - name: static-cl-os
