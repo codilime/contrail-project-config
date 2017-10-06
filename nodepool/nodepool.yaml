@@ -1,6 +1,5 @@
 zookeeper-servers:
   - host: nodepool.opencontrail.org
-    chroot: /nodepool
 
 labels:
   - name: ubuntu-xenial
