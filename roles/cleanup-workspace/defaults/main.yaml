@@ -1,0 +1,4 @@
+# a list of items not to deleta
+cleanup_blacklist:
+  - .ssh
+  - .ansible

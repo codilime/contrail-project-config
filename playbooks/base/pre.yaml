@@ -7,4 +7,5 @@
   roles:
     - add-build-sshkey
     - validate-host
+    - cleanup-workspace
     - prepare-workspace

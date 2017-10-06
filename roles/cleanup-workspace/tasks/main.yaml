@@ -1,0 +1,11 @@
+- name: Get a list of files and directories in workspace
+  shell: |
+    ls -1
+  register: files
+
+- name: Clean-up workspace after the previous build
+  file:
+    path: "{{ item }}"
+    state: absent
+  when: "item not in {{ cleanup_blacklist }}"
+  with_items: "{{ files.stdout_lines }}"
