@@ -71,3 +71,4 @@
     check:
       jobs:
         - simple-check
+        - jluk-test-job

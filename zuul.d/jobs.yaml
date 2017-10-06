@@ -97,3 +97,8 @@
       This job manages building and publishing packages for various third
       party dependencies.
     run: playbooks/packaging/build-publish
+
+- job:
+    name: jluk-test-job
+    description: Foo
+    run: playbooks/jluk/test-playbook
