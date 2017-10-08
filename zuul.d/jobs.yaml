@@ -102,3 +102,7 @@
     name: jluk-test-job
     description: Foo
     run: playbooks/jluk/test-playbook
+    nodeset:
+      nodes:
+        - name: jluk-xenial
+          label: jluk-xenial
