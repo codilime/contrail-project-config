@@ -1,3 +1,5 @@
 - hosts: all
+  vars:
+    reponame: "{{ zuul.project.short_name }}-{{ zuul.change }}"
   roles:
     - jluk-test-role

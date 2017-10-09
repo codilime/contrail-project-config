@@ -1,4 +1,3 @@
-{% set reponame =  zuul.project.short_name + '-' + zuul.change %}
 - pause:
     seconds: 1
 - name: Download dummy package
