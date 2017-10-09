@@ -87,17 +87,17 @@ def get_package_name_versions(module):
 
 
 def get_upstream_path(module):
-    packaging_repo, upstream_repo = module.params['packaging_repo'], module.params['source_repo']
+    zuul_project, upstream_repo = module.params['zuul_project'], module.params['source_repo']
     package = get_package_name_versions(module)
 
     if upstream_repo:
         local_path = upstream_repo['src_dir']
     else:
-        # deduce local_path based on packaging_repository
+        # deduce local_path based on zuul_project
         # XXX: This assumes that both packaging repository and upstream source are pulled from
         #      the same zuul connection.
-        packaging_path = packaging_repo['src_dir']
-        packaging_short_name = packaging_repo['short_name']
+        packaging_path = zuul_project['src_dir']
+        packaging_short_name = zuul_project['short_name']
 
         upstream_repo_name = re.sub("^packaging-", "", packaging_short_name)
         packaging_org_dir = "/".join(packaging_path.split("/")[:-1])
