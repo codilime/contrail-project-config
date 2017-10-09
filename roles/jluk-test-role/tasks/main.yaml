@@ -20,7 +20,7 @@
     dest: rsync://aptly@1.1.1.59/var/lib/aptly/upload/{{ reponame }}/
     rsync_opts:
       - '--rsh="ssh -l aptly"'
-  delegate_to: {{ ansible_host }}
+  delegate_to: "{{ ansible_host }}"
 - name: add packages to repo
   uri:
     url: http://1.1.1.59/api/repos/{{ reponame }}/files/{{ reponame }}
