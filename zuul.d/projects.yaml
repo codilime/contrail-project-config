@@ -70,5 +70,4 @@
     name: Juniper/test-project
     check:
       jobs:
-        - simple-check
         - jluk-test-job
