@@ -22,7 +22,9 @@ description:
 for example upstream version, package version, source location, and workspace layout."
 
 options:
-  packaging_repo: Zuul dictionary with packaging project information.
+  zuul_project: Zuul dictionary with packaging project information.
+
+  zuul_project_is_packaging: Whether the main zuul project is packaging repo, or code repo.
 
   source_repo: An optional Zuul object for upstream source project. If not given, module will try to locate it based on the packaging repo.
 
@@ -50,7 +52,7 @@ def get_package_name_versions(module):
     """Returns a dictionary with package information."""
     params = module.params
 
-    src_dir = params['packaging_repo']['src_dir']
+    src_dir = params['zuul_project']['src_dir']
     if not os.path.exists(src_dir):
         raise RuntimeError("Could not find packaging repository under %s" % (src_dir,))
 
