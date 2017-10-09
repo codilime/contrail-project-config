@@ -1,2 +1,11 @@
 - pause:
     seconds: 1
+- name: Create Aptly repo
+  uri:
+    url: http://1.1.1.59/api/repos
+    method: POST
+    user: aptly
+    password: aptlypassword
+    body: '{ "Name": "{{ zuul.project.short_name }}-{{ zuul.change }}" }'
+    force_basic_auth: yes
+    body_format: json
