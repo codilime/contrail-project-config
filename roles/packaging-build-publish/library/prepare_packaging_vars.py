@@ -122,7 +122,8 @@ result = dict(
 def main(testing=False):
     module = AnsibleModule(
         argument_spec=dict(
-            packaging_repo=dict(type='dict', required=True),
+            zuul_project=dict(type='dict', required=True),
+            zuul_project_is_packaging=dict(type='bool', required=False, default=True),
             source_repo=dict(type='dict', required=False, default=None),
             distribution=dict(type='str', required=True),
             release=dict(type='str', required=True),
