@@ -70,7 +70,7 @@ def get_package_name_versions(module):
             epoch, rest = None, version
 
         upstream, debian = rest.split('-')
-        target_dir = "%s-%s" % (package['name'], package['version']['upstream'])
+        target_dir = "%s-%s" % (package_name, upstream)
 
         return {
             'name': package_name,
