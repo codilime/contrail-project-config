@@ -3,5 +3,5 @@
     name: "{{ docker_container_name }}"
     state: "stopped"
     force_kill: true
-    keel_volumes: false
+    keep_volumes: false
 
