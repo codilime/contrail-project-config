@@ -65,7 +65,7 @@
   shell: |
     docker exec --user root:root builder sh -c '
       cd /build/{{ package.package.target_dir }}/
-            mk-build-deps -i debian/control \
+      mk-build-deps -r -i debian/control \
         --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
       apt-get autoremove --assume-yes --purge'
 
