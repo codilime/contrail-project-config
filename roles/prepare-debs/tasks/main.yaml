@@ -12,23 +12,3 @@
     force_basic_auth: yes
     body_format: json
     status_code: 201
-- name: add packages to repo
-  uri:
-    url: http://1.1.1.59/api/repos/{{ reponame }}/files/{{ reponame }}
-    method: POST
-    user: aptly
-    password: aptlypassword
-    body: '{ "Name": "{{ reponame }}" }'
-    force_basic_auth: yes
-    body_format: json
-    status_code: 201
-- name: publish repo
-  uri:
-    url: http://1.1.1.59/api/publish
-    method: POST
-    user: aptly
-    password: aptlypassword
-    body: '{ "SourceKind": "local", "Sources": [{"Name": "{{ reponame }}"}], "Architectures": ["amd64"] }'
-    force_basic_auth: yes
-    body_format: json
-    status_code: 201
