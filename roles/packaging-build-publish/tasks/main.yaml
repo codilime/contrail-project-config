@@ -19,7 +19,7 @@
     docker exec --user root:root builder sh -c '
       apt-get update
       apt-get install --no-install-recommends --assume-yes \
-        devscripts equivs build-essential'
+        devscripts equivs libwww-perl build-essential'
 
 - name: Copy upstream repository into the workdir
   synchronize:
