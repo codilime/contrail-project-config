@@ -1,14 +1,3 @@
-- name: Get a list of all files and directories in the workspace
-  command: ls -1 {{ ansible_env.HOME }}
-  register: files
-
-- name: Clean-up the workspace
-  file:
-    path: "{{ item }}"
-    state: absent
-  when: item != "src"
-  with_items: "{{ files.stdout_lines }}"
-
 - name: Populate ansible variables with packaging info
   prepare_packaging_vars:
     zuul_project: "{{ zuul.project }}"
