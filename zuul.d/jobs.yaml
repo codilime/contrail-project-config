@@ -39,7 +39,6 @@
     vars:
       docker_registry: "1.1.1.41:5000/"  # mind the trailing slash
       docker_container_name: "builder"
-      docker_command: "sleep infinity"
       docker_volumes:
         - "{{ ansible_var.HOME }}/:/build"
 
