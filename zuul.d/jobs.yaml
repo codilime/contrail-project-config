@@ -113,21 +113,25 @@
       This job manages building and publishing packages for various third
       party dependencies.
     run: playbooks/packaging/build-publish
+
+- job:
+    name: package-build-publish-ubuntu-base
+    parent: package-build-publish-base
     vars:
       docker_environment:
         DEB_BUILD_OPTIONS: "nocheck"
 
-# the final jobs should change the nodes we are running on, instead
+# the final job variants should change the nodes we are running on, instead
 # of the docker image used for building.
 - job:
-    name: package-build-publish-xenial
-    parent: package-build-publish-base
+    name: package-build-publish-ubuntu-xenial
+    parent: package-build-publish-ubuntu-base
     vars:
       docker_image: "ubuntu:xenial"
 
 - job:
-    name: package-build-publish-trusty
-    parent: package-build-publish-base
+    name: package-build-publish-ubuntu-trusty
+    parent: package-build-publish-ubuntu-base
     vars:
       docker_image: "ubuntu:trusty"
 
