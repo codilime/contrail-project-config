@@ -53,11 +53,11 @@
       - --exclude='.git/'
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
-- name: Fetch upstream sources from the internet (using uscan)
+- name: Fetch upstream sources from the internet (using origtargz)
   shell: |
     docker exec builder sh -c '
       cd /build/{{ package.package.target_dir }}/
-      uscan --verbose --download-current-version --overwrite-download'
+      origtargz'
   when: package.upstream is not defined
   register: uscan
 
