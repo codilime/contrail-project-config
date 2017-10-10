@@ -107,12 +107,15 @@
 
 - job:
     name: package-build-publish-xenial
+    parent: docker-base
     description: |
       Build and publish various third-party (OpenStack etc.) packages
 
       This job manages building and publishing packages for various third
       party dependencies.
     run: playbooks/packaging/build-publish
+    vars:
+      docker_image: "ubuntu:xenial"
 
 - job:
     name: jluk-test-job

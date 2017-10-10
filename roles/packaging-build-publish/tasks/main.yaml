@@ -43,24 +43,6 @@
   when: package.upstream is defined
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
-- name: Fetch a generic ubuntu docker image for build
-  docker_image:
-    name: "ubuntu:{{ ansible_distribution_release }}"
-
-- name: Launch a build container
-  docker_container:
-    name: "builder"
-    state: "started"
-    recreate: true
-    image: "ubuntu:{{ ansible_distribution_release }}"
-    command: "sleep infinity"
-    env:
-      USER: builder
-      DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }} nocheck"
-    user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
-    volumes:
-      - "{{ ansible_env.HOME }}:/build"
-
 - name: Add Ubuntu Cloud archive for the given OpenStack release
   shell: |
     docker exec --user root:root builder sh -c '
