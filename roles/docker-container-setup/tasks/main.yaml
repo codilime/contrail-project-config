@@ -5,6 +5,7 @@
 - name: Start the docker container
   docker_container:
     name: "{{ docker_container_name }}"
+    command: "{{ docker_command }}"
     state: "started"
     recreate: true
     image: "{{ docker_image }}"
