@@ -28,3 +28,4 @@
           - Juniper/packaging-nova
           - Juniper/packaging-python-neutronclient
           - Juniper/python-neutronclient
+          - Juniper/test-project
