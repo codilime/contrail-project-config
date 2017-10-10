@@ -68,6 +68,8 @@
       mk-build-deps -r -i debian/control \
         --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
       apt-get autoremove --assume-yes --purge'
+  register: deps
+  failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
 
 - name: Create source and binary debian packages
   shell: |
