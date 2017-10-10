@@ -1,0 +1,29 @@
+- tenant:
+    name: opencontrail
+    source:
+      github:
+        config-projects:
+          - Juniper/contrail-project-config
+        untrusted-projects:
+          - codilime/zuul-jobs:
+              shadow: Juniper/contrail-project-config
+          - codilime/contrail-zuul-jobs
+      gerrit:
+        untrusted-projects:
+          - Juniper/contrail-build
+          - Juniper/contrail-controller
+          - Juniper/contrail-generateDS
+          - Juniper/contrail-heat
+          - Juniper/contrail-neutron-plugin
+          - Juniper/contrail-nova-extensions
+          - Juniper/contrail-nova-vif-driver
+          - Juniper/contrail-packages
+          - Juniper/contrail-sandesh
+          - Juniper/contrail-third-party
+          - Juniper/contrail-vrouter
+          - Juniper/contrail-web-controller
+          - Juniper/contrail-web-core
+          - Juniper/nova
+          - Juniper/packaging-nova
+          - Juniper/packaging-python-neutronclient
+          - Juniper/python-neutronclient
