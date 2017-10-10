@@ -6,32 +6,6 @@
     release: "{{ ansible_distribution_release }}"
   register: package
 
-- name: Copy upstream repository into the workdir
-  synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}/"
-    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/"
-    rsync_opts:
-      - --quiet
-      - --exclude='.git/'
-  when: package.upstream is defined
-  delegate_to: "{{ ansible_default_ipv4.address }}"
-
-- name: Create an orig tar.gz with upstream sources
-  archive:
-    path:
-      - "{{ package.upstream.target_path }}"
-    dest: "{{ package.package.name }}_{{ package.package.version.upstream }}.orig.tar.gz"
-
-- name: Copy packaging from the packaging repo
-  synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}/"
-    dest: "{{ ansible_env.HOME}}/{{ package.upstream.target_path }}/debian/"
-    rsync_opts:
-      - --quiet
-      - --exclude='.git/'
-  when: package.upstream is defined
-  delegate_to: "{{ ansible_default_ipv4.address }}"
-
 - name: Add Ubuntu Cloud archive for the given OpenStack release
   shell: |
     docker exec --user root:root builder sh -c '
@@ -47,10 +21,50 @@
       apt-get install --no-install-recommends --assume-yes \
         devscripts equivs build-essential'
 
+- name: Copy upstream repository into the workdir
+  synchronize:
+    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}/"
+    dest: "{{ ansible_env.HOME}}/{{ package.package.target_dir }}/"
+    rsync_opts:
+      - --quiet
+      - --exclude='.git/'
+  when: package.upstream is defined
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Create an orig tar.gz with upstream sources
+  archive:
+    path:
+      - "{{ package.package.target_dir }}"
+    dest: "{{ package.package.name }}_{{ package.package.version.upstream }}.orig.tar.gz"
+  when: package.upstream is defined
+
+- name: Create a fake project directory
+  file:
+    path: "{{ ansible_env.HOME }}/{{ package.package.target_dir }}"
+    state: "directory"
+  when: package.upstream is not defined
+
+- name: Copy packaging from the packaging repo
+  synchronize:
+    src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}/"
+    dest: "{{ ansible_env.HOME}}/{{ package.package.target_dir }}/debian/"
+    rsync_opts:
+      - --quiet
+      - --exclude='.git/'
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Fetch upstream sources from the internet (using uscan)
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.package.target_dir }}/
+      uscan --verbose --download-current-version --overwrite-download'
+  when: package.upstream is not defined
+  register: uscan
+
 - name: Install package dependencies for the build
   shell: |
     docker exec --user root:root builder sh -c '
-      cd /build/{{ package.upstream.target_path }}/
+      cd /build/{{ package.package.target_dir }}/
             mk-build-deps -i debian/control \
         --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
       apt-get autoremove --assume-yes --purge'
@@ -58,5 +72,5 @@
 - name: Create source and binary debian packages
   shell: |
     docker exec builder sh -c '
-      cd /build/{{ package.upstream.target_path }}/
+      cd /build/{{ package.package.target_dir }}/
       debuild -us -uc'

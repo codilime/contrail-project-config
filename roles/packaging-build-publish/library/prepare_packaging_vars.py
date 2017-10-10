@@ -70,6 +70,7 @@ def get_package_name_versions(module):
             epoch, rest = None, version
 
         upstream, debian = rest.split('-')
+        target_dir = "%s-%s" % (package['name'], package['version']['upstream'])
 
         return {
             'name': package_name,
@@ -79,7 +80,8 @@ def get_package_name_versions(module):
                 'epoch': epoch,
                 'upstream': upstream,
                 'distro': debian
-            }
+            },
+            'target_dir': target_dir,
         }
 
     else:
@@ -105,12 +107,11 @@ def get_upstream_path(module):
         local_path = os.path.join(packaging_org_dir, upstream_repo_name)
         if not os.path.exists(local_path):
             local_path = None
-    target_path = "%s-%s" % (package['name'], package['version']['upstream'])
 
     if local_path is None:
         return None
 
-    return {"source_dir": local_path, "target_path": target_path}
+    return {"source_dir": local_path }
 
 
 result = dict(
