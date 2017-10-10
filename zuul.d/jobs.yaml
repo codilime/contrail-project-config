@@ -25,6 +25,25 @@
       - site_logs
 
 - job:
+    name: docker-base
+    parent: base
+    description: |
+      A base job for all projects that utilize docker for building
+
+      This job takes care of preparing docker container before all the other
+      tasks run.
+    pre-run:
+      - playbooks/docker/pre-docker-setup
+    post-run:
+      - playbooks/docker/post-docker-teardown
+    vars:
+      docker_registry: "1.1.1.41:5000/"  # mind the trailing slash
+      docker_container_name: "builder"
+      docker_command: "sleep infinity"
+      docker_volumes:
+        - "{{ ansible_var.HOME }}/:/build"
+
+- job:
     name: contrail-base
     description: |
       A generic build & packaging job for OpenContrail components
@@ -36,9 +55,6 @@
     post-run:
       - playbooks/contrail/post-upload-packages
       - playbooks/contrail/post-cleanup
-    vars:
-      docker_registry: "1.1.1.41:5000/"
-      contrail_default_version: "5.0"
     secrets:
       - aptly_params
 

@@ -1,0 +1,7 @@
+- name: Stop the container and delete its images
+  docker_container:
+    name: "{{ docker_container_name }}"
+    state: "stopped"
+    force_kill: true
+    keel_volumes: false
+

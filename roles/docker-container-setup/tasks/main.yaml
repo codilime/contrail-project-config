@@ -1,0 +1,13 @@
+- name: Pull the latest image from the docker registry
+  docker_image:
+    name: "{{ docker_image }}"
+
+- name: Start the docker container
+  docker_container:
+    name: "{{ docker_container_name }}"
+    state: "started"
+    recreate: true
+    image: "{{ docker_image }}"
+    env: "{{ docker_environment }}"
+    user: "{{ ansible_effective_user_id }}:{{ ansible_effective_group_id }}"
+    volumes: "{{ docker_volumes }}"
