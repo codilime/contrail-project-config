@@ -1,5 +1,15 @@
-- hosts: all
+- hosts: jluk-xenial
   vars:
-    reponame: "{{ zuul.project.short_name }}-{{ zuul.change }}"
+    reponame: "{{ zuul.build }}"
   roles:
-    - jluk-test-role
+    - prepare-debs
+- hosts: {{ site_deb.fqdn }}
+  vars:
+    reponame: "{{ zuul.build }}"
+  roles:
+    - upload-debs
+- hosts: jluk-xenial
+  vars:
+    reponame: "{{ zuul.build }}"
+  roles:
+    - publish-debs

@@ -1,5 +1,3 @@
-- pause:
-    seconds: 1
 - name: Download dummy package
   get_url:
     url: http://ftp.us.debian.org/debian/pool/main/t/tzdata/tzdata_2017b-1_all.deb
@@ -14,13 +12,6 @@
     force_basic_auth: yes
     body_format: json
     status_code: 201
-- name: upload packages
-  synchronize:
-    src: /tmp/tzdata.deb
-    dest: rsync://aptly@1.1.1.59/var/lib/aptly/upload/{{ reponame }}/
-    rsync_opts:
-      - '--rsh="ssh -l aptly"'
-  delegate_to: "{{ ansible_host }}"
 - name: add packages to repo
   uri:
     url: http://1.1.1.59/api/repos/{{ reponame }}/files/{{ reponame }}

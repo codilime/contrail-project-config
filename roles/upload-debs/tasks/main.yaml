@@ -1,0 +1,7 @@
+- name: upload packages
+  synchronize:
+    src: "{{ src_dir }}"
+    dest: /var/lib/aptly/upload/{{ reponame }}/
+    rsync_opts:
+      - '--rsh="ssh -l aptly"'
+  delegate_to: "jluk-xenial"

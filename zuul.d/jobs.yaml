@@ -106,3 +106,5 @@
       nodes:
         - name: jluk-xenial
           label: jluk-xenial
+    secrets:
+      - site_deb
