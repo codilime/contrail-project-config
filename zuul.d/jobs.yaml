@@ -105,7 +105,7 @@
     run: playbooks/contrail-controller/build_ubuntu
 
 - job:
-    name: package-build-publish-xenial
+    name: package-build-publish-base
     parent: docker-base
     description: |
       Build and publish various third-party (OpenStack etc.) packages
@@ -113,8 +113,20 @@
       This job manages building and publishing packages for various third
       party dependencies.
     run: playbooks/packaging/build-publish
+
+# the final jobs should change the nodes we are running on, instead
+# of the docker image used for building.
+- job:
+    name: package-build-publish-xenial
+    parent: package-build-publish-base
     vars:
       docker_image: "ubuntu:xenial"
+
+- job:
+    name: package-build-publish-trusty
+    parent: package-build-publish-base
+    vars:
+      docker_image: "ubuntu:trusty"
 
 - job:
     name: jluk-test-job
