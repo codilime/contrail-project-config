@@ -62,10 +62,7 @@
     name: Juniper/packaging-python-neutronclient
     check:
       jobs:
-        - package-build-publish-ubuntu-xenial:
-            required-projects:
-              - Juniper/python-neutronclient
-        - package-build-publish-ubuntu-trusty:
+        - package-build-publish-ubuntu-xenial-ocata:
             required-projects:
               - Juniper/python-neutronclient
 

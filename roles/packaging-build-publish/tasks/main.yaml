@@ -6,18 +6,28 @@
     release: "{{ ansible_distribution_release }}"
   register: package
 
-- name: Add Ubuntu Cloud archive for the given OpenStack release
+- name: Install ubuntu-cloud-keyring package
   shell: |
     docker exec --user root:root builder sh -c '
       apt-get update
-      apt-get install --assume-yes ubuntu-cloud-keyring
-      echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/ocata main" \
-        >> /etc/apt/sources.list'
+      apt-get install --assume-yes ubuntu-cloud-keyring'
+
+- name: Add additional repositories
+  shell: |
+    docker exec --user root:root builder sh -c '
+      echo "{{ item.entry }}" >> "/etc/apt/sources.list.d/{{ item.name }}.list"'
+  register: repos
+  with_items: "{{ extra_repositories }}"
+
+- name: Update a list of available packages
+  shell: |
+    docker exec --user root:root builder sh -c '
+      apt-get update'
+  when: "repos|changed"
 
 - name: Install build-related packages in the container
   shell: |
     docker exec --user root:root builder sh -c '
-      apt-get update
       apt-get install --no-install-recommends --assume-yes \
         devscripts equivs libwww-perl build-essential'
 
