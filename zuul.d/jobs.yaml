@@ -113,6 +113,9 @@
       This job manages building and publishing packages for various third
       party dependencies.
     run: playbooks/packaging/build-publish
+    vars:
+      docker_environment:
+        DEB_BUILD_OPTIONS: "nocheck"
 
 # the final jobs should change the nodes we are running on, instead
 # of the docker image used for building.
