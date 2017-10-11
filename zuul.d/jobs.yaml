@@ -43,25 +43,10 @@
         - "{{ ansible_env.HOME }}/:/build"
 
 - job:
-    name: contrail-base
-    description: |
-      A generic build & packaging job for OpenContrail components
-
-      This job can be used to package OpenContrail VNC componenets that don't
-      depend on on a "monolithic" build environment.
-    pre-run:
-      - playbooks/contrail/pre-spawn-build-container
-    post-run:
-      - playbooks/contrail/post-upload-packages
-      - playbooks/contrail/post-cleanup
-    secrets:
-      - aptly_params
-
-- job:
     name: contrail-controller-base
-    parent: contrail-base
+    parent: docker-base
     description:
-      This is a base job for all jobs building Contrail artifacts.
+      This is a base for all jobs building Contrail artifacts.
 
       This job is a cornerstone for all the jobs that build Contrail
       artifacts (packages, docker containers) based on the monolithic
@@ -78,31 +63,13 @@
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-extensions
       - Juniper/contrail-nova-vif-driver
-    pre-run:
-      - playbooks/contrail/pre-prepare-repos
-      - playbooks/contrail-controller/pre
+    run: playbooks/packaging/contrail
 
 - job:
-    name: contrail-build-package-xenial
-    parent: contrail-base
-    description: |
-      Realized job for building and packaging simple Contrail components
-    run: playbooks/contrail/package
-
-- job:
-    name: contrail-containers-ubuntu16
-    description: |
-      Create docker containers from packages built in previous steps.
-    run: playbooks/checks/simple
-
-- job:
-    name: contrail-controller-build-xenial
+    name: contrail-controller-build-ubuntu-base
     parent: contrail-controller-base
-    description: |
-      Build Contrail Ubuntu 16.04 LTS
-
-      This job will build contrail packages for Ubuntu 16.04 release.
-    run: playbooks/contrail-controller/build_ubuntu
+    vars:
+      docker_image: "{{ docker_registry }}contrail-builder:{{ contrail_version }}-{{ ansible_distribution_release }}"
 
 - job:
     name: package-build-publish-base

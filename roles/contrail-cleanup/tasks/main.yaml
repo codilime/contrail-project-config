@@ -1,6 +1,0 @@
-- name: Ensure that the contrail builder container is stopped
-  docker_container:
-    name: builder
-    state: stopped
-    command: /bin/true
-    force_kill: true
