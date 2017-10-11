@@ -1,3 +1,6 @@
 ---
 # a list of additional repositories to be added and enabled before the build
 extra_repositories: []
+# whether we've made local changes (which implies that debian/changelog has
+# already been updated prior to the run).
+packaging_changes: true

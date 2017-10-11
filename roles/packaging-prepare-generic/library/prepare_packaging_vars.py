@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import platform
 import re
 
 from ansible.module_utils.basic import AnsibleModule
@@ -68,6 +69,18 @@ def get_package_name_versions(module):
             epoch, rest = None, version
 
         upstream, debian = rest.split('-')
+        # this is not a pre-processed package release, as it's missing
+        # ~contrailX version, assume that it's a pristine distro packaging
+        # and append .1~contrailX~ubuntuY.
+        if not 'contrail' in debian:
+            # platform.dist() returns a tuple
+            # ('distro', 'version', 'codename')
+            ubuntu_version = platform.dist()[1]
+            contrail_version = ".1~contrail1~ubuntu{release}".format(
+                release=ubuntu_version
+            )
+            debian = debian + contrail_version
+
         target_dir = "%s-%s" % (package_name, upstream)
 
         return {

@@ -46,3 +46,12 @@
       - --exclude='.git/'
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
+- name: Update debian/changelog with the new package version
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.package.target_dir }}/
+      dch --newversion {{ package.package.full_version }} -m ""
+      dch --release --distro {{ ansible_distro_release }} -m \
+        "Releasing version {{ package.package.version.upstream }} for OpenContrail."'
+  when: packaging_changes is False
+
