@@ -1,7 +1,4 @@
-import os
-
 from ansible.module_utils.basic import AnsibleModule
-from datetime import datetime
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.1',
@@ -34,3 +31,6 @@ def main():
     contrail_version = {'contrail_version': version}
 
     module.exit_json(changed=True, ansible_facts=contrail_version)
+
+if __name__ == "__main__":
+    main()
