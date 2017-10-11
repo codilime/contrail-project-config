@@ -152,6 +152,22 @@
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main"
 
 - job:
+    name: package-build-publish-ubuntu-xenial
+    branches: ^contrail/mitaka$
+    vars:
+      extra_repositories:
+        - name: ubuntu-cloud-xenial-updates-mitaka
+          entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/mitaka main"
+
+- job:
+    name: package-build-publish-ubuntu-trusty
+    branches: ^contrail/mitaka$
+    vars:
+      extra_repositories:
+        - name: ubuntu-cloud-trusty-updates-mitaka
+          entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/mitaka main"
+
+- job:
     name: jluk-test-job
     description: Foo
     run: playbooks/jluk/test-playbook
