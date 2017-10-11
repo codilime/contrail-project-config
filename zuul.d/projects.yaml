@@ -59,17 +59,6 @@
         - tox-pep8
 
 - project:
-    name: Juniper/packaging-python-neutronclient
-    check:
-      jobs:
-        - package-build-publish-ubuntu-xenial-ocata:
-            required-projects:
-              - Juniper/python-neutronclient
-            branches: ^contrail/ocata$
-        - package-build-publish-ubuntu-xenial-newton:
-            branches: ^contrail/newton$
-
-- project:
     name: Juniper/test-project
     check:
       jobs:
