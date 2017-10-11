@@ -112,7 +112,7 @@
 
       This job manages building and publishing packages for various third
       party dependencies.
-    run: playbooks/packaging/build-publish
+    run: playbooks/packaging/prepare-build
 
 - job:
     name: package-build-publish-ubuntu-base

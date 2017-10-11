@@ -31,24 +31,7 @@
       apt-get install --no-install-recommends --assume-yes \
         devscripts equivs libwww-perl build-essential'
 
-- name: Copy upstream repository into the workdir
-  synchronize:
-    src: "{{ ansible_env.HOME}}/{{ package.upstream.source_dir }}/"
-    dest: "{{ ansible_env.HOME}}/{{ package.package.target_dir }}/"
-    rsync_opts:
-      - --quiet
-      - --exclude='.git/'
-  when: package.upstream is defined
-  delegate_to: "{{ ansible_default_ipv4.address }}"
-
-- name: Create an orig tar.gz with upstream sources
-  archive:
-    path:
-      - "{{ package.package.target_dir }}"
-    dest: "{{ package.package.name }}_{{ package.package.version.upstream }}.orig.tar.gz"
-  when: package.upstream is defined
-
-- name: Create a fake project directory
+- name: Create project directory in the workplace
   file:
     path: "{{ ansible_env.HOME }}/{{ package.package.target_dir }}"
     state: "directory"
@@ -64,26 +47,3 @@
       - --exclude='.git/'
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
-- name: Fetch upstream sources from the internet (using origtargz)
-  shell: |
-    docker exec builder sh -c '
-      cd /build/{{ package.package.target_dir }}/
-      origtargz'
-  when: package.upstream is not defined
-  register: uscan
-
-- name: Install package dependencies for the build
-  shell: |
-    docker exec --user root:root builder sh -c '
-      cd /build/{{ package.package.target_dir }}/
-      mk-build-deps -r -i debian/control \
-        --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
-      apt-get autoremove --assume-yes --purge'
-  register: deps
-  failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
-
-- name: Create source and binary debian packages
-  shell: |
-    docker exec builder sh -c '
-      cd /build/{{ package.package.target_dir }}/
-      debuild -us -uc'

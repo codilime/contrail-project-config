@@ -1,0 +1,23 @@
+- name: Ensure that the orig tarball is present
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.package.target_dir }}/
+      origtargz'
+  when: package.upstream is not defined
+  register: uscan
+
+- name: Install package dependencies for the build
+  shell: |
+    docker exec --user root:root builder sh -c '
+      cd /build/{{ package.package.target_dir }}/
+      mk-build-deps -r -i debian/control \
+        --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
+      apt-get autoremove --assume-yes --purge'
+  register: deps
+  failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
+
+- name: Create source and binary debian packages
+  shell: |
+    docker exec builder sh -c '
+      cd /build/{{ package.package.target_dir }}/
+      debuild -us -uc'
