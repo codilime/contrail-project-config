@@ -53,5 +53,5 @@
       dch --newversion {{ package.package.full_version }} -m ""
       dch --release --distro {{ ansible_distro_release }} -m \
         "Releasing version {{ package.package.version.upstream }} for OpenContrail."'
-  when: packaging_changes is False
+  when: packaging_changes|bool
 
