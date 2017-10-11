@@ -17,7 +17,7 @@
       Package: {{ item.package }}
       Pin: release a={{ ansible_distribution_release }}-backports
       Pin-Priority: 500
-    dest: /etc/apt/preferences.d/{{ item.package }}
+    dest: "{{ ansible_env.HOME }}/binds/apt_preferences_d/{{ item.package }}"
   with_items: "{{ enable_backports }}"
 
 - name: Add additional repositories

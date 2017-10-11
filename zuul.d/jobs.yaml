@@ -93,6 +93,9 @@
         DEBFULLNAME: "OpenContrail Developers"
         DEBEMAIL: "dev@lists.opencontrail.org"
         DEB_BUILD_OPTIONS: "nocheck"
+      docker_volumes:
+        - "{{ ansible_env.HOME }}/:/build"
+        - "{{ ansible_env.HOME }}/binds/apt_preferences_d/:/etc/apt/preferences.d/"
 
 # the final job variants should change the nodes we are running on, instead
 # of the docker image used for building.
