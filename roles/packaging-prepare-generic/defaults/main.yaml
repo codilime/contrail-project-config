@@ -4,3 +4,6 @@ extra_repositories: []
 # whether we've made local changes (which implies that debian/changelog has
 # already been updated prior to the run).
 packaging_changes: true
+# A list of packages to be installed from {release}-backports pocket. This
+# can be useful when backporting packages from new Ubuntu releases.
+enable_backports: []

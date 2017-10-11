@@ -11,6 +11,15 @@
       apt-get update
       apt-get install --assume-yes ubuntu-cloud-keyring'
 
+- name: Enable -backports repository for selected packages
+  copy:
+    content: |
+      Package: {{ item.package }}
+      Pin: release a={{ ansible_distribution_release }}-backports
+      Pin-Priority: 500
+    dest: /etc/apt/preferences.d/{{ item.package }}
+  with_items: "{{ enable_backports }}"
+
 - name: Add additional repositories
   shell: |
     docker exec --user root:root builder sh -c '
