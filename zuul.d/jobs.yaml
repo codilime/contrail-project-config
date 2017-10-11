@@ -72,6 +72,10 @@
       docker_image: "{{ docker_registry }}contrail-builder:{{ contrail_version }}-{{ ansible_distribution_release }}"
 
 - job:
+    name: contrail-controller-build-ubuntu-xenial
+    parent: contrail-controller-build-ubuntu-base
+
+- job:
     name: package-build-publish-base
     parent: docker-base
     description: |

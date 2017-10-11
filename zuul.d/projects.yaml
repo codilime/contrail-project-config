@@ -2,7 +2,7 @@
     name: Juniper/contrail-controller
     check:
       jobs:
-        - contrail-controller-build-xenial
+        - contrail-controller-build-ubuntu-xenial
 
 - project:
     name: Juniper/contrail-build
@@ -39,18 +39,6 @@
     check:
       jobs:
         - simple-check
-
-- project:
-    name: Juniper/contrail-web-controller
-    check:
-      jobs:
-        - contrail-build-package-xenial
-
-- project:
-    name: Juniper/contrail-web-core
-    check:
-      jobs:
-        - contrail-build-package-xenial
 
 - project:
     name: Juniper/test-project
