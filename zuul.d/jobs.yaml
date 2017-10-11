@@ -66,6 +66,18 @@
     run: playbooks/packaging/contrail
 
 - job:
+    name: contrail-controller-base
+    branches: R4.1
+    vars:
+      contrail_version: "4.1"
+
+- job:
+    name: contrail-controller-base
+    branches: master
+    vars:
+      contrail_version: "5.0"
+
+- job:
     name: contrail-controller-build-ubuntu-base
     parent: contrail-controller-base
     vars:

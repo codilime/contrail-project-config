@@ -68,7 +68,7 @@ def main():
     debian_dir = os.path.join(debian_dir, "debian/contrail/debian")
     target_dir = "contrail-%s" % (version['upstream'],)
 
-    result['packaging'] = {
+    packaging = {
         'name': 'contrail',
         'debian_dir': debian_dir,
         'full_version': full_version,
@@ -76,4 +76,4 @@ def main():
         'target_dir': target_dir,
     }
 
-    module.exit_json(**result)
+    module.exit_json(changed=True, ansible_facts=packaging)
