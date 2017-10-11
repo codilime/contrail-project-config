@@ -90,6 +90,8 @@
     parent: package-build-publish-base
     vars:
       docker_environment:
+        DEBFULLNAME: "OpenContrail Developers"
+        DEBEMAIL: "dev@lists.opencontrail.org"
         DEB_BUILD_OPTIONS: "nocheck"
 
 # the final job variants should change the nodes we are running on, instead
