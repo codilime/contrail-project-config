@@ -58,6 +58,7 @@
   synchronize:
     src: "{{ ansible_env.HOME}}/{{ package.package.debian_dir }}/"
     dest: "{{ ansible_env.HOME}}/{{ package.package.target_dir }}/debian/"
+    copy_links: yes
     rsync_opts:
       - --quiet
       - --exclude='.git/'
