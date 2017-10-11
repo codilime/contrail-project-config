@@ -152,14 +152,6 @@
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main"
 
 - job:
-    name: package-build-publish-ubuntu-xenial
-    branches: ^contrail/mitaka$
-    vars:
-      extra_repositories:
-        - name: ubuntu-cloud-xenial-updates-mitaka
-          entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/mitaka main"
-
-- job:
     name: package-build-publish-ubuntu-trusty
     branches: ^contrail/mitaka$
     vars:
