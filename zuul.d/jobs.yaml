@@ -140,7 +140,7 @@
     branches: ^contrail/ocata$
     vars:
       extra_repositories:
-        - name: ubuntu-cloud-xenial-updates-ocata
+        - name: ubuntu-cloud-archive
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/ocata main"
 
 - job:
@@ -148,15 +148,23 @@
     branches: ^contrail/newton$
     vars:
       extra_repositories:
-        - name: ubuntu-cloud-xenial-updates-newton
+        - name: ubuntu-cloud-archive
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main"
+
+- job:
+    name: package-build-publish-ubuntu-xenial
+    branches: ^contrail/pike$
+    vars:
+      extra_repositories:
+        - name: ubuntu-cloud-archive
+          entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/pike main"
 
 - job:
     name: package-build-publish-ubuntu-trusty
     branches: ^contrail/mitaka$
     vars:
       extra_repositories:
-        - name: ubuntu-cloud-trusty-updates-mitaka
+        - name: ubuntu-cloud-archive
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/mitaka main"
 
 - job:
