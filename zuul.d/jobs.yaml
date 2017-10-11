@@ -144,6 +144,14 @@
           entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/ocata main"
 
 - job:
+    name: package-build-publish-ubuntu-xenial-newton
+    parent: package-build-publish-ubuntu-xenial
+    vars:
+      extra_repositories:
+        - name: ubuntu-cloud-xenial-updates-newton
+          entry: "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main"
+
+- job:
     name: jluk-test-job
     description: Foo
     run: playbooks/jluk/test-playbook
