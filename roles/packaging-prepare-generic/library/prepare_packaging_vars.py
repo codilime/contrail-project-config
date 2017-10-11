@@ -24,8 +24,6 @@ for example upstream version, package version, source location, and workspace la
 options:
   zuul_project: Zuul dictionary with packaging project information.
 
-  zuul_project_is_packaging: Whether the main zuul project is packaging repo, or code repo.
-
   source_repo: An optional Zuul object for upstream source project. If not given, module will try to locate it based on the packaging repo.
 
 author:
@@ -124,7 +122,6 @@ def main(testing=False):
     module = AnsibleModule(
         argument_spec=dict(
             zuul_project=dict(type='dict', required=True),
-            zuul_project_is_packaging=dict(type='bool', required=False, default=True),
             source_repo=dict(type='dict', required=False, default=None),
             distribution=dict(type='str', required=True),
             release=dict(type='str', required=True),

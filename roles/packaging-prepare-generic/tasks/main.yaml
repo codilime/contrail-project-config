@@ -1,7 +1,6 @@
 - name: Populate ansible variables with packaging info
   prepare_packaging_vars:
     zuul_project: "{{ zuul.project }}"
-    zuul_project_is_packaging: "{{ contrail_project_is_packaging }}"
     distribution: "{{ ansible_distribution|lower() }}"
     release: "{{ ansible_distribution_release }}"
   register: package
