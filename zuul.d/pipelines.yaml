@@ -7,14 +7,19 @@
     trigger:
       gerrit:
         - event: patchset-created
-          branch: master
+          branch:
+            - ^master$
+            - ^contrail/.*$
         - event: change-restored
         - event: comment-added
           comment: (?i)recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))(\s+clean)?\s*$
+          branch:
+            - ^master$
+            - ^contrail/.*$
         - event: comment-added
           require-approval:
             - verified: [-1, -2]
-              username: zuul
+              username: zuulv3
           approval:
             - workflow: 1
       github:
