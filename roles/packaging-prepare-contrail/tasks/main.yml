@@ -54,3 +54,8 @@
       fakeroot debian/rules get-orig-source
       mv contrail_{{ packaging.version.upstream }}.orig.tar.gz ../'
 
+- name: Update apt repositories in the container
+  shell: |
+    docker exec -u root:root -t builder sh -c '
+      apt-get update'
+
