@@ -9,14 +9,14 @@
     path: "{{ ansible_env.HOME }}/{{ item }}"
     state: directory
   with_items:
-    - "contrail/"
-    - "contrail/tools/"
-    - "contrail/openstack/"
+    - "{{ packaging.target_dir }}/"
+    - "{{ packaging.target_dir }}/tools/"
+    - "{{ packaging.target_dir }}/openstack/"
 
 - name: Hard-link gerrit repositories into expected structure
   synchronize:
     src: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}/contrail/{{ item.dest }}"
+    dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.dest }}"
   with_items:
     - { src: 'contrail-controller/', dest: 'controller' }
     - { src: 'contrail-build/', dest: 'tools/build' }
@@ -33,7 +33,7 @@
 - name: Copy debian/ to enable package building
   synchronize:
     src: "{{ ansible_env.HOME}}/{{ packaging.debian_dir }}"
-    dest: "{{ ansible_env.HOME }}/contrail/"
+    dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/"
     rsync_opts:
       - --no-motd
       - --exclude=.git
@@ -43,14 +43,14 @@
 - name: Update debian/changelog
   shell: |
     docker exec -t builder sh -c '
-      cd /build/contrail/
+      cd /build/{{ packaging.target_dir }}
       dch -v "{{ packaging.full_version }}" -m ""
       dch --release --distribution {{ ansible_distribution_release }} -m "Releasing version {{ packaging.full_version }}."'
 
 - name: Create orig tarball
   shell: |
     docker exec -t builder sh -c '
-      cd /build/contrail/
+      cd /build/{{ packaging.target_dir }}
       fakeroot debian/rules get-orig-source
       mv contrail_{{ packaging.version.upstream }}.orig.tar.gz ../'
 
