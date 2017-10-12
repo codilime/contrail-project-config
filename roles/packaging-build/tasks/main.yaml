@@ -3,8 +3,6 @@
     docker exec builder sh -c '
       cd /build/{{ package.package.target_dir }}/
       origtargz'
-  when: package.upstream is not defined
-  register: uscan
 
 - name: Install package dependencies for the build
   shell: |
