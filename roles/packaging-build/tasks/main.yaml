@@ -1,7 +1,7 @@
 - name: Ensure that the orig tarball is present
   shell: |
     docker exec builder sh -c '
-      cd /build/{{ package.package.target_dir }}/
+      cd /build/{{ packaging.target_dir }}/
       origtargz'
 
 - name: Install package dependencies for the build
