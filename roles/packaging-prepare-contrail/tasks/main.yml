@@ -52,5 +52,5 @@
     docker exec -t builder sh -c '
       cd /build/contrail/
       fakeroot debian/rules get-orig-source
-      mv contrail_{{ packaging.full_version }}.orig.tar.gz ../'
+      mv contrail_{{ packaging.version.upstream }}.orig.tar.gz ../'
 
