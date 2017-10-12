@@ -68,6 +68,8 @@ def main():
     debian_dir = os.path.join(debian_dir, "debian/contrail/debian")
     target_dir = "contrail-%s" % (version['upstream'],)
 
+    full_version = "{upstream}-{debian}".format(**version)
+
     result['packaging'] = {
         'name': 'contrail',
         'debian_dir': debian_dir,
