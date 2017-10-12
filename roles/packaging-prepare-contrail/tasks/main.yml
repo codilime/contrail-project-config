@@ -32,7 +32,7 @@
 
 - name: Copy debian/ to enable package building
   synchronize:
-    src: "{{ ansible_env.HOME}}/{{ packaging.debian_dir }}/"
+    src: "{{ ansible_env.HOME}}/{{ packaging.debian_dir }}"
     dest: "{{ ansible_env.HOME }}/contrail/"
     rsync_opts:
       - --no-motd
