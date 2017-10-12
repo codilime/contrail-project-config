@@ -45,8 +45,8 @@ def main():
 
     if release_type == ReleaseType.CONTINUOUS_INTEGRATION:
         # Versioning in CI consists of change id, pachset and date
-        version['debian'] = "~{changeset}.{patchset}~{date}".format(
-            changetset=changeset, patchset=patchset, date=date
+        version['debian'] = "~{change}.{patchset}~{date}".format(
+            change=change, patchset=patchset, date=date
         )
     elif release_type == ReleaseType.NIGHTLY:
         version['debian'] = "~{date}".format(date=date)
