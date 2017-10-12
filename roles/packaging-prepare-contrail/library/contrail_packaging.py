@@ -43,12 +43,12 @@ def main():
     else:
         version['upstream'] = branch[1:]
 
-    if release_type == 'continous-integration':
+    if release_type == ReleaseType.CONTINUOUS_INTEGRATION:
         # Versioning in CI consists of change id, pachset and date
         version['debian'] = "~{changeset}.{patchset}~{date}".format(
             changetset=changeset, patchset=patchset, date=date
         )
-    elif release_type == 'nightly':
+    elif release_type == ReleaseType.NIGHTLY:
         version['debian'] = "~{date}".format(date=date)
     else:
         module.fail_json(
@@ -77,3 +77,6 @@ def main():
     }
 
     module.exit_json(**result)
+
+if __name__ == "__main__":
+    main()

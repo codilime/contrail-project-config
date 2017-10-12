@@ -1,0 +1,52 @@
+- name: Prepare packaging variables
+  contrail_packaging:
+    zuul: "{{ zuul }}"
+
+- name: Hard-link gerrit repositories into expected structure
+  synchronize:
+    src: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/contrail/{{ item.dest }}"
+  with_items:
+    - { src: 'contrail-controller/', dest: 'controller' }
+    - { src: 'contrail-build/', dest: 'tools/build' }
+    - { src: 'contrail-generateDS/', dest: 'tools/generateds' }
+    - { src: 'contrail-sandesh/', dest: 'tools/sandesh' }
+    - { src: 'contrail-third-party/', dest: 'third_party' }
+    - { src: 'contrail-vrouter/', dest: 'vrouter' }
+    - { src: 'contrail-packages/', dest: 'tools/packages' }
+    - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
+    - { src: 'contrail-build/SConstruct', dest: '' }
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Hard-link github repositories into expected structure
+  synchronize:
+    src: "{{ ansible_env.HOME }}/src/github.com/Juniper/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/contrail/{{ item.dest }}"
+  with_items:
+    - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Copy debian/ to enable package building
+  synchronize:
+    src: "{{ ansible_env.HOME}}/{{ packaging.debian_dir }}/"
+    dest: "{{ ansible_env.HOME }}/contrail/"
+    rsync_opts:
+      - --no-motd
+      - --exclude=.git
+      - --quiet
+  delegate_to: "{{ ansible_default_ipv4.address }}"
+
+- name: Update debian/changelog
+  shell: |
+    docker exec -t builder sh -c '
+      cd /build/contrail/
+      dch -v "{{ packaging.full_version }}" -m ""
+      dch --release --distribution {{ ansible_distribution_release }} -m "Releasing version {{ packaging.full_version }}."'
+
+- name: Create orig tarball
+  shell: |
+    docker exec -t builder sh -c '
+      cd /build/contrail/
+      fakeroot debian/rules get-orig-source
+      mv contrail_{{ packaging.full_version }}.orig.tar.gz ../'
+
