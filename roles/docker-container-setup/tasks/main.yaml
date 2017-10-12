@@ -5,6 +5,7 @@
 - name: Pull the latest image from the docker registry
   docker_image:
     name: "{{ docker_image }}"
+    force: true
 
 - name: Start the docker container
   docker_container:
