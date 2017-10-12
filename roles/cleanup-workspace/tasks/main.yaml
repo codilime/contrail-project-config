@@ -7,5 +7,5 @@
   file:
     path: "{{ item }}"
     state: absent
-  when: "item not in {{ cleanup_blacklist }}"
+  when: item not in cleanup_blacklist
   with_items: "{{ files.stdout_lines }}"
