@@ -25,16 +25,9 @@
     - { src: 'contrail-third-party/', dest: 'third_party' }
     - { src: 'contrail-vrouter/', dest: 'vrouter' }
     - { src: 'contrail-packages/', dest: 'tools/packages' }
+    - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
     - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
     - { src: 'contrail-build/SConstruct', dest: '' }
-  delegate_to: "{{ ansible_default_ipv4.address }}"
-
-- name: Hard-link github repositories into expected structure
-  synchronize:
-    src: "{{ ansible_env.HOME }}/src/github.com/Juniper/{{ item.src }}"
-    dest: "{{ ansible_env.HOME }}/contrail/{{ item.dest }}"
-  with_items:
-    - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
   delegate_to: "{{ ansible_default_ipv4.address }}"
 
 - name: Copy debian/ to enable package building
