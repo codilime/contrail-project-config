@@ -70,7 +70,7 @@ def main():
 
     full_version = "{upstream}-{debian}".format(**version)
 
-    result['packaging'] = {
+    packaging = {
         'name': 'contrail',
         'debian_dir': debian_dir,
         'full_version': full_version,
@@ -78,7 +78,7 @@ def main():
         'target_dir': target_dir,
     }
 
-    module.exit_json(**result)
+    module.exit_json(ansible_facts={'packaging': packaging}, **result)
 
 if __name__ == "__main__":
     main()
