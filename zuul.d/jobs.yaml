@@ -70,6 +70,11 @@
     parent: contrail-controller-base
     vars:
       docker_image: "{{ docker_registry }}contrail-builder:{{ contrail_version }}-{{ ansible_distribution_release }}"
+      docker_environment:
+        USER: 'builder'
+        DEBFULLNAME: "OpenContrail Developers"
+        DEBEMAIL: "dev@lists.opencontrail.org"
+        DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
 
 - job:
     name: contrail-controller-build-ubuntu-xenial
