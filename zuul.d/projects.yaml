@@ -39,6 +39,7 @@
     check:
       jobs:
         - simple-check
+        - pjr-test-job
 
 - project:
     name: Juniper/test-project

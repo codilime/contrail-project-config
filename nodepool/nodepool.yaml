@@ -6,6 +6,10 @@ labels:
     min-ready: 0
   - name: jluk-xenial
     min-ready: 0
+  - name: pjr-xenial
+    min-ready: 0
+    providers:
+      - name: static-cl-os
 
 providers:
   - name: static-cl-os
@@ -26,5 +30,10 @@ providers:
           - name: 1.1.1.57
             labels: jluk-xenial
             host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJduXcVHQiMdfj4oVeHKmG623cYIexHSPsYSGW/FjdOUFotdAUA3tJgv3/S+gsWxSbR1BLsDq+eqaoNmBsnWkN46H6o75fkQeoRJitRxlyPp79EqPF4qmFByVsiR8wf6G21BquVoDCArj0jlLWBsbvSyuz1OuxkAoaKdqDvGr2Kf8N1Yntbe+GgU5Oq40A0ED3do+Nok7PPg4+PdNYhpwOND4NMmmAR3cO0EIJBtePPMxK89/d/q1H2kNK3qhNqvFATiOZubwheuP1oLCfEQymzeGIz9Q3uGe/AEVGtDg3Qlyqw7OZD9MJz0jE2lvGngavtRxs52Ngq9xkSRBXhSeD
+            username: zuul
+            max-parallel-jobs: 1
+          - name: 1.1.1.60
+            labels: pjr-xenial
+            host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9/zVIcPaAruJBv0jfMlu+SqR5bLsHxsS9I1i4rfkqVEnAkP1FyrHxQIKOQA8FH2I/3PEuH8Yx8bhyoEQNgoD2takyySQUrRFYQyGZZARTOgp7KE1oLKNaH5nAaGF3rjY+CI3OBcXZ6fDh1Ufs9W1o00mF6bTLjbrywhTcUGI9lfDDA4FPU6aIPoCo52ipWhWRaILRbK8jL+rHrNRT9MmC4PBAGQIrRqmfZ2awMX1zw1w62X0uvfGnzoLG44Oo1jsQmq0UkriM6EeGyBuKwDLs7KokGgm3cT5vLbDV5l52uxi39X4AWkTySjDVc2XpGQQLDVuQ1Cbng0AyYdvWOIBR 
             username: zuul
             max-parallel-jobs: 1

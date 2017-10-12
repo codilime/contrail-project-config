@@ -153,3 +153,13 @@
           label: jluk-xenial
     secrets:
       - site_deb
+
+- job:
+    name: pjr-test-job
+    description: |
+      Simple hello job
+    run: playbooks/pjr/pjr-test-tasks
+    nodeset:
+      nodes:
+        - name: pjr-xenial
+          label: pjr-xenial

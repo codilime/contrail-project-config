@@ -1,0 +1,4 @@
+- hosts: pjr-xenial
+  tasks:
+    - name: Dummy task
+      shell: date >> now.txt
