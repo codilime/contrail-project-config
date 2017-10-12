@@ -1,8 +1,8 @@
-- name: Stop the container and delete its images
-  docker_container:
-    name: "{{ docker_container_name }}"
-    command: "sleep infity"  # Docker daemon expects command always
-    state: "stopped"
-    force_kill: true
-    keep_volumes: false
-
+#- name: Stop the container and delete its images
+#  docker_container:
+#    name: "{{ docker_container_name }}"
+#    command: "sleep infity"  # Docker daemon expects command always
+#    state: "stopped"
+#    force_kill: true
+#    keep_volumes: false
+#
