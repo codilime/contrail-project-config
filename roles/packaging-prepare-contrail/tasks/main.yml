@@ -2,6 +2,17 @@
   contrail_packaging:
     zuul: "{{ zuul }}"
 
+# rsync requires that target parent directories are already in place,
+# so create everything ahead of time.
+- name: Create directory structure for rsync
+  file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+  with_items:
+    - "contrail/"
+    - "contrail/tools/"
+    - "contrail/openstack/"
+
 - name: Hard-link gerrit repositories into expected structure
   synchronize:
     src: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item.src }}"
