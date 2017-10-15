@@ -34,6 +34,6 @@ providers:
             max-parallel-jobs: 1
           - name: 1.1.1.60
             labels: pjr-xenial
-            host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9/zVIcPaAruJBv0jfMlu+SqR5bLsHxsS9I1i4rfkqVEnAkP1FyrHxQIKOQA8FH2I/3PEuH8Yx8bhyoEQNgoD2takyySQUrRFYQyGZZARTOgp7KE1oLKNaH5nAaGF3rjY+CI3OBcXZ6fDh1Ufs9W1o00mF6bTLjbrywhTcUGI9lfDDA4FPU6aIPoCo52ipWhWRaILRbK8jL+rHrNRT9MmC4PBAGQIrRqmfZ2awMX1zw1w62X0uvfGnzoLG44Oo1jsQmq0UkriM6EeGyBuKwDLs7KokGgm3cT5vLbDV5l52uxi39X4AWkTySjDVc2XpGQQLDVuQ1Cbng0AyYdvWOIBR 
+            host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HNgoUnNuux0kwbET3uIavDXFh5YZ6ycJCcvus86LGKncI9k4mEXwACHXqAQIxQOKHYUGrEP3qUm1n+4zPuMwotfhUb9lkr523kvUUKvXmFNG3140LWPLZrrwldMRwcyMUSxCZMX2FI9/VofxzxldD12tDJQ1c2VSQZt4OAUc6CgTCMQ1ozRoOqYXt4wSCSIStwLmQTYrAcyVC1QVfrBBabj1wdWSPfQSbfiDIfZW1MfWcTlxoCuOWHAiyhLoKknWfSySyOWOoFyzEkqfOYuFalYzEPvNk4/I/lDDre52lNwFRkuqOwy3PKCdjB6SxSprk5YXxVUhBrtBO3m82Oyb
             username: zuul
             max-parallel-jobs: 1
