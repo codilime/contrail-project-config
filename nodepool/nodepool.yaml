@@ -8,8 +8,6 @@ labels:
     min-ready: 0
   - name: pjr-xenial
     min-ready: 0
-    providers:
-      - name: static-cl-os
 
 providers:
   - name: static-cl-os
