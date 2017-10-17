@@ -12,7 +12,7 @@ zookeeper-servers:
 labels:
   - name: ubuntu-xenial-builder
     image: ubuntu-xenial
-    min-ready: 0
+    min-ready: 1
     provides:
       - name: juniper-contrail-ci
 
@@ -22,23 +22,36 @@ providers:
     cloud: jnpr-contrail-ci
     api-timeout: 60
     boot-timeout: 120
-    max-servers: 8
     rate: 1.0
     ipv6-preferred: false
     image-type: 'qcow2'
-    hostname-format: '{image.name}-{provider.name}-{node.id}'
-    image-name-format: 'template={image_image}-{timestamp}'
+    image-name-format: 'template-{image_name}-{timestamp}'
+    hostname-format: '{label.name}-{provider.name}-{node.id}'
     diskimages:
       - name: ubuntu-xenial
+    pools:
+      - name: ci-zuulv3
+        max-servers: 8
+        availability-zones:
+          - opencontrail-ci-zone
+        networks:
+          - ci-zuulv3-net
+        labels:
+          - name: ubuntu-xenial-builder
+            min-ram: 8000
+            diskimage: ubuntu-xenial
+            console-log: True
+            key-name: cl-kklimonda-noise
 
 diskimages:
   - name: ubuntu-xenial
     elements:
       - ubuntu-minimal
       - vm
+      - simple-init
+      - initialize-urandom
+      - growroot
     release: xenial
-    formats:
-      - qcow2
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_CHECKSUM: '1'
@@ -49,4 +62,3 @@ diskimages:
       DIB_DISTRIBUTION_MIRROR: 'http://mirror.math.ucdavis.edu/ubuntu/'
       DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
       DIB_DEBIAN_COMPONENTS: 'main,universe'
-
