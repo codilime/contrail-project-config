@@ -26,14 +26,10 @@ providers:
     rate: 1.0
     ipv6-preferred: false
     image-type: 'qcow2'
-    template-hostname: '{image.name}-{timestamp}'
-    images:
+    hostname-format: '{image.name}-{provider.name}-{node.id}'
+    image-name-format: 'template={image_image}-{timestamp}'
+    diskimages:
       - name: ubuntu-xenial
-        min-ram: 8000
-        disk-iamge: ubuntu-xenial
-        private-key: '/home/nodepool/.ssh/id_rsa'
-        config-drive: false
-        key-name: 'cl-kklimonda-noise'
 
 diskimages:
   - name: ubuntu-xenial
