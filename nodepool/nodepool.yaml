@@ -49,6 +49,7 @@ diskimages:
       - ubuntu-minimal
       - vm
       - simple-init
+      - openssh-server
       - growroot
     release: xenial
     formats:
