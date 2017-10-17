@@ -7,7 +7,7 @@ cron:
 
 zookeeper-servers:
   - host: zuulv3.opencontrail.org
-    port: 2181
+    port: 3389
 
 labels:
   - name: ubuntu-xenial-builder
@@ -19,7 +19,7 @@ labels:
 providers:
   - name: juniper-contrail-ci
     region-name: "RegionOne"
-    cloud: juniper-contrail-ci
+    cloud: jnpr-contrail-ci
     api-timeout: 60
     boot-timeout: 120
     max-servers: 8
@@ -41,6 +41,8 @@ diskimages:
       - ubuntu-minimal
       - vm
     release: xenial
+    formats:
+      - qcow2
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_CHECKSUM: '1'
