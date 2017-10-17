@@ -49,7 +49,6 @@ diskimages:
       - ubuntu-minimal
       - vm
       - simple-init
-      - initialize-urandom
       - growroot
     release: xenial
     formats:
