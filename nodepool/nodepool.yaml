@@ -1,0 +1,54 @@
+elements-dir: /etc/nodepool/elements
+images-dir: /opt/nodepool_dib
+
+cron:
+  cleanup: '*/1 * * * *'
+  check:   '*/15 * * * *'
+
+zookeeper-servers:
+  - host: zuulv3.opencontrail.org
+    port: 2181
+
+labels:
+  - name: ubuntu-xenial-builder
+    image: ubuntu-xenial
+    min-ready: 0
+    provides:
+      - name: juniper-contrail-ci
+
+providers:
+  - name: juniper-contrail-ci
+    region-name: "RegionOne"
+    cloud: juniper-contrail-ci
+    api-timeout: 60
+    boot-timeout: 120
+    max-servers: 8
+    rate: 1.0
+    ipv6-preferred: false
+    image-type: 'qcow2'
+    template-hostname: '{image.name}-{timestamp}'
+    images:
+      - name: ubuntu-xenial
+        min-ram: 8000
+        disk-iamge: ubuntu-xenial
+        private-key: '/home/nodepool/.ssh/id_rsa'
+        config-drive: false
+        key-name: 'cl-kklimonda-noise'
+
+diskimages:
+  - name: ubuntu-xenial
+    elements:
+      - ubuntu-minimal
+      - vm
+    release: xenial
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.math.ucdavis.edu/ubuntu/'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_DEBIAN_COMPONENTS: 'main,universe'
+
