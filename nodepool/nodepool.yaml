@@ -1,5 +1,7 @@
 zookeeper-servers:
   - host: nodepool.opencontrail.org
+    port: 3389
+  - host: nodepool.opencontrail.org
 
 elements-dir: /etc/nodepool/elements
 images-dir: /opt/nodepool_dib
