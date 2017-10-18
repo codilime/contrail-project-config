@@ -1,0 +1,21 @@
+- job:
+    name: base
+    parent: null
+    description: |
+      The base job all other OpenContrail jobs inherit from.
+
+      Everything starts and ends with this base job. It runs pre-playbooks
+      which copy job's git repositories prepared by zuul merger to all
+      nodes that are part of the nodeset. It also runs post-playbooks
+      that upload logs/ to the logserver.
+    pre-run: playbooks/base/pre
+    post-run:
+      - playbooks/base/post-ssh
+      - playbooks/base/post-logs
+    roles:
+      - zuul: codilime/zuul-jobs
+    timeout: 3600
+    nodeset:
+      nodes:
+        - name: ubuntu-xenial
+          label: ubuntu-xenial
