@@ -46,11 +46,10 @@ providers:
 diskimages:
   - name: ubuntu-xenial
     elements:
-      - ubuntu-minimal
+      - ubuntu
       - vm
-      - simple-init
-      - openssh-server
       - growroot
+      - nodepool-base
     release: xenial
     formats:
       - qcow2
@@ -64,3 +63,4 @@ diskimages:
       DIB_DISTRIBUTION_MIRROR: 'http://mirror.math.ucdavis.edu/ubuntu/'
       DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
       DIB_DEBIAN_COMPONENTS: 'main,universe'
+

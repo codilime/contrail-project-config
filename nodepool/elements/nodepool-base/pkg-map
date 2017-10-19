@@ -1,0 +1,12 @@
+{
+  "release": {
+    "ubuntu": {
+      "trusty": {
+        "firewall-persistent": "iptables-persistent"
+      }
+    }
+  },
+  "default": {
+    "firewall-persistent": "netfilter-persistent"
+  }
+}

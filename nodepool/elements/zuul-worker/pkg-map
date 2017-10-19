@@ -1,0 +1,16 @@
+{
+  "family": {
+    "debian": {
+      "apt-transport-https": "apt-transport-https",
+      "python-apt": "python-apt"
+    },
+    "redhat": {
+      "libselinux-python": "libselinux-python"
+    }
+  },
+  "default": {
+    "apt-transport-https": "",
+    "libselinux-python": "",
+    "python-apt": ""
+  }
+}
