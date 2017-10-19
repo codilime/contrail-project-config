@@ -19,3 +19,9 @@
       nodes:
         - name: ubuntu-xenial
           label: ubuntu-xenial
+
+- job:
+    name: zuulv3-self-test
+    run: playbooks/zuulv3/self-test
+    voting: False
+

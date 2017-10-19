@@ -1,0 +1,6 @@
+- project:
+    name: Juniper/contrail-controller
+    check:
+      jobs:
+        - zuulv3-self-test
+
