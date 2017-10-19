@@ -35,7 +35,7 @@ providers:
         availability-zones:
           - opencontrail-ci-zone
         networks:
-          - ci-zuulv3-net
+          - ci-zuulv3-internal
         labels:
           - name: ubuntu-xenial-builder
             min-ram: 8000
