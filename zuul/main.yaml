@@ -25,6 +25,7 @@
           - Juniper/contrail-web-core
           - Juniper/nova
           - Juniper/packaging-cassandra-cpp-driver
+          - Juniper/packaging-libipfix
           - Juniper/packaging-librdkafka
           - Juniper/packaging-nova
           - Juniper/packaging-python-neutronclient
