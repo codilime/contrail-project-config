@@ -50,6 +50,7 @@ diskimages:
       - vm
       - growroot
       - nodepool-base
+      - contrail-builder
     release: xenial
     formats:
       - qcow2

@@ -1,0 +1,22 @@
+- name: Ensure that the orig tarball is present
+  command: origtargz
+  args:
+    chdir: "{{ packaging.target_dir }}"
+
+- name: Install package dependencies for the build
+  shell: |
+    mk-build-deps -r -i debian/control \
+      --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
+  args:
+    chdir: "{{ packaging.target_dir }}"
+  failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
+
+- name: Cleanup packages that are not being depended on
+  apt:
+    autoremove: yes
+    purge: purge
+
+- name: Create source and binary debian packages
+  command: debuild -us -uc
+  args:
+    chdir: "{{ packaging.target_dir }}"

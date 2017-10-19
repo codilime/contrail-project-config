@@ -1,0 +1,9 @@
+build-essential:
+devscripts:
+git:
+equivs:
+libtool-bin:
+wget:
+libglib2.0-dev:
+python-lxml:
+automake:
