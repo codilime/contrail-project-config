@@ -24,4 +24,8 @@
     name: zuulv3-self-test
     run: playbooks/zuulv3/self-test
     voting: False
+    nodeset:
+      nodes:
+        - name: builder
+          label: ubuntu-xenial-builder
 
