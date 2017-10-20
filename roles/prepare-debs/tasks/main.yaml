@@ -12,3 +12,7 @@
     force_basic_auth: yes
     body_format: json
     status_code: 201
+- name: test sync
+  synchronize:
+    src: /etc/hosts
+    dest: /tmp
