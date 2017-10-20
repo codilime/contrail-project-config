@@ -30,11 +30,11 @@ providers:
             host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCna6T410yBN5+zOj9pX/rlalpiUOxbACsf+gD9FdAB9FNyh5PfEM+F3j8I91HtJhrXuZs211WnCQaiLn/I1wEW7RV7RQbIVkJXyWjIn6yc3rj+jJG5Y+fp/wkJn68//gMAyKgR+5Y6a3p8HGLjIlxJvxHTNXjNtAv3PnHGlqKkDtZYFA26otnzYeGcQnDo6yBYfp+tCPe6GvTQ4T6yxvSqdAcxrrjn0CrpA3HWKvz/UMCGBQXfHJxR0EeTXerlVtMU7FRlt8ALcNG+BX3DVY1mj/gHDDfp6mWBeuj231YwxqNmdmq4mx/lLKBagJ1kiv/N6iJae8kOIwhAp2hkJyUB
             username: zuul
             max-parallel-jobs: 1
-          - name: 1.1.1.57
+          - name: 1.1.1.19
             labels: jluk-xenial
-            host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJduXcVHQiMdfj4oVeHKmG623cYIexHSPsYSGW/FjdOUFotdAUA3tJgv3/S+gsWxSbR1BLsDq+eqaoNmBsnWkN46H6o75fkQeoRJitRxlyPp79EqPF4qmFByVsiR8wf6G21BquVoDCArj0jlLWBsbvSyuz1OuxkAoaKdqDvGr2Kf8N1Yntbe+GgU5Oq40A0ED3do+Nok7PPg4+PdNYhpwOND4NMmmAR3cO0EIJBtePPMxK89/d/q1H2kNK3qhNqvFATiOZubwheuP1oLCfEQymzeGIz9Q3uGe/AEVGtDg3Qlyqw7OZD9MJz0jE2lvGngavtRxs52Ngq9xkSRBXhSeD
+            host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC+6OguZDpTWUjX7cTTzTNzI1/OGxOsF6lGsAITZhtdxQqzCEzhvUsKbX5Pwy8OcVbxtS6AIY51eRnlQ/WWP/uy+B4UmkbWkaVlXFg5DcFwmP+rOl56PKiaBd2NfkR9beeAtVspXmOCDdTUzlm/1E45bSScLOLSiHvuiOE57TKmVD6tg43ad4rkmQtnqI+bpUmvFpeJgsdGWfC18ujAI0KSbZcj3DGwfNq0GAyldckl5UN4aaBp4ou4QIn341+W9tH4xabk+pYhsJs1vvgLZyp8uvBwEQTgI+nbOiZ7zeaaRBejBmfYTvt7bKtx4hbj0Iztld6mFEq59NW7drzxp8H
             username: zuul
-            max-parallel-jobs: 1
+            max-parallel-jobs: 2
           - name: 1.1.1.60
             labels: pjr-xenial
             host-key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3HNgoUnNuux0kwbET3uIavDXFh5YZ6ycJCcvus86LGKncI9k4mEXwACHXqAQIxQOKHYUGrEP3qUm1n+4zPuMwotfhUb9lkr523kvUUKvXmFNG3140LWPLZrrwldMRwcyMUSxCZMX2FI9/VofxzxldD12tDJQ1c2VSQZt4OAUc6CgTCMQ1ozRoOqYXt4wSCSIStwLmQTYrAcyVC1QVfrBBabj1wdWSPfQSbfiDIfZW1MfWcTlxoCuOWHAiyhLoKknWfSySyOWOoFyzEkqfOYuFalYzEPvNk4/I/lDDre52lNwFRkuqOwy3PKCdjB6SxSprk5YXxVUhBrtBO3m82Oyb
