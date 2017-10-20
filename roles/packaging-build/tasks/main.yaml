@@ -11,11 +11,6 @@
     chdir: "{{ packaging.target_dir }}"
   failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
 
-- name: Cleanup packages that are not being depended on
-  apt:
-    autoremove: yes
-    purge: purge
-
 - name: Create source and binary debian packages
   command: debuild -us -uc
   args:
