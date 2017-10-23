@@ -7,4 +7,3 @@
     src: "/tmp/*.deb"
     dest: /tmp/jobs/{{ reponame }}/
     mode:  pull
-  delegate_to: "127.0.0.1"
