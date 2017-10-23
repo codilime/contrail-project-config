@@ -1,10 +1,10 @@
 - file:
-    path: /tmp/jobs/{{ reponame }}
+    path: mywork/{{ reponame }}
     state: directory
     mode: 0755
   delegate_to: '127.0.0.1'
 - name: upload packages
   synchronize:
     src: "/tmp/*.deb"
-    dest: /tmp/jobs/{{ reponame }}/
+    dest: mywork/{{ reponame }}/
     mode:  pull
