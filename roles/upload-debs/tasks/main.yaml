@@ -6,6 +6,4 @@
   synchronize:
     src: "/tmp/*.deb"
     dest: /tmp/jobs/{{ reponame }}/
-    rsync_opts:
-      - '--rsh="ssh -l aptly"'
   delegate_to: "127.0.0.1"
