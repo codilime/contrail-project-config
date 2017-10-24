@@ -3,5 +3,5 @@
     check:
       jobs:
         - contrail-vnc-build-unittest-ubuntu-xenial
-        - contrail-vnc-build-unittest-ubuntu-trusty
+#        - contrail-vnc-build-unittest-ubuntu-trusty
 
