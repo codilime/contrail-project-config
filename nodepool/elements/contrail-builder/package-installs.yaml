@@ -7,3 +7,4 @@ wget:
 libglib2.0-dev:
 python-lxml:
 automake:
+unzip:
