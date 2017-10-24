@@ -54,11 +54,13 @@ providers:
             console-log: True
           - name: ubuntu-xenial-builder
             min-ram: 16000
+            name-filter: m1.16g_40g_8vcpu
             diskimage: ubuntu-xenial
             console-log: True
             key-name: cl-kklimonda-noise
           - name: ubuntu-trusty-builder
             min-ram: 16000
+            name-filter: m1.16g_40g_8vcpu
             diskimage: ubuntu-trusty
             console-log: True
             key-name: cl-kklimonda-noise
