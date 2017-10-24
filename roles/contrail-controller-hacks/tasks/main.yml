@@ -1,7 +1,7 @@
 - name: Add review.opencontrail.org remote
   shell: git remote add gerrit https://review.opencontrail.org/Juniper/{{ item }}
   args:
-    chdir: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item }}"
+    chdir: "{{ ansible_env.HOME }}/src/review.opencontrail.org/Juniper/{{ item }}"
   failed_when: False
   with_items:
     - contrail-controller
@@ -10,7 +10,7 @@
 - name: Fetch all remotes
   shell: git fetch --all
   args:
-    chdir: "{{ ansible_env.HOME }}/src/review2.opencontrail.org/Juniper/{{ item }}"
+    chdir: "{{ ansible_env.HOME }}/src/review.opencontrail.org/Juniper/{{ item }}"
   with_items:
     - contrail-controller
     - contrail-build
@@ -24,7 +24,7 @@
     git fetch gerrit $ref
     git cherry-pick $hash
   args:
-    chdir: "{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/{{ item.repo }}"
+    chdir: "{{ ansible_env.HOME}}/src/review.opencontrail.org/Juniper/{{ item.repo }}"
   with_items:
     - { repo: contrail-build, review: 34915 }
     - { repo: contrail-build, review: 34916 }
@@ -45,4 +45,4 @@
     git fetch --all
     git reset --hard kklimonda/feature/zuulv3
   args:
-    chdir: "{{ ansible_env.HOME}}/src/review2.opencontrail.org/Juniper/contrail-packages/"
+    chdir: "{{ ansible_env.HOME}}/src/review.opencontrail.org/Juniper/contrail-packages/"
