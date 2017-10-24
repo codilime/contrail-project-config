@@ -49,7 +49,7 @@ providers:
           - ci-zuulv3-internal
         labels:
           - name: ubuntu-xenial-small
-            minram: 2000
+            min-ram: 2000
             diskimage: ubuntu-xenial
             console-log: True
           - name: ubuntu-xenial-builder
