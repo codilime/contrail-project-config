@@ -10,6 +10,11 @@ zookeeper-servers:
     port: 3389
 
 labels:
+  - name: ubuntu-xenial-small
+    image: ubuntu-xenial
+    min-ready: 0
+    provides:
+      - name: juniper-contrail-ci
   - name: ubuntu-xenial-builder
     image: ubuntu-xenial
     min-ready: 1
@@ -43,6 +48,10 @@ providers:
         networks:
           - ci-zuulv3-internal
         labels:
+          - name: ubuntu-xenial-small
+            minram: 2000
+            diskimage: ubuntu-xenial
+            console-log: True
           - name: ubuntu-xenial-builder
             min-ram: 16000
             diskimage: ubuntu-xenial

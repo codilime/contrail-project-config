@@ -29,7 +29,7 @@
     nodeset:
       nodes:
         - name: builder
-          label: ubuntu-xenial-builder
+          label: ubuntu-xenial-small
 
 - job:
     name: contrail-vnc-build-unittest-ubuntu-trusty
