@@ -33,7 +33,7 @@
           comment: (?i)^\s*recheck\s*$
     start:
       gerrit:
-        status: 'start'
+        Verified: 0
     success:
       gerrit:
         # Note that gerrit keywords are case-sensitive.
