@@ -52,6 +52,7 @@ providers:
             flavor-name: m1.small
             diskimage: ubuntu-xenial
             console-log: True
+            key-name: cl-kklimonda-noise
           - name: ubuntu-xenial-builder
             flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-xenial
