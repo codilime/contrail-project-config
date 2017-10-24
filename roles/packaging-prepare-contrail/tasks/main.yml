@@ -2,6 +2,18 @@
   contrail_packaging:
     zuul: "{{ zuul }}"
 
+- name: Add a Contrail signing key
+  apt_key:
+    url: http://107.170.203.108/public.gpg
+  become: True
+  become_user: root
+
+- name: Add a repository with Contrail dependencies
+  apt_repository:
+    repo: deb http://107.170.203.108/ testing extra
+  become: True
+  become_user: root
+
 # rsync requires that target parent directories are already in place,
 # so create everything ahead of time.
 - name: Create directory structure for rsync
