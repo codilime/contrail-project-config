@@ -49,18 +49,16 @@ providers:
           - ci-zuulv3-internal
         labels:
           - name: ubuntu-xenial-small
-            min-ram: 2000
+            flavor-name: m1.small
             diskimage: ubuntu-xenial
             console-log: True
           - name: ubuntu-xenial-builder
-            min-ram: 16000
-            name-filter: m1.16g_40g_8vcpu
+            flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-xenial
             console-log: True
             key-name: cl-kklimonda-noise
           - name: ubuntu-trusty-builder
-            min-ram: 16000
-            name-filter: m1.16g_40g_8vcpu
+            flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-trusty
             console-log: True
             key-name: cl-kklimonda-noise
