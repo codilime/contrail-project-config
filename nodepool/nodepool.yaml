@@ -15,6 +15,11 @@ labels:
     min-ready: 1
     provides:
       - name: juniper-contrail-ci
+  - name: ubuntu-trusty-builder
+    image: ubuntu-trusty
+    min-ready: 1
+    provides:
+      - name: juniper-contrail-ci
 
 providers:
   - name: juniper-contrail-ci
@@ -29,6 +34,7 @@ providers:
     hostname-format: '{label.name}-{provider.name}-{node.id}'
     diskimages:
       - name: ubuntu-xenial
+      - name: ubuntu-trusty
     pools:
       - name: ci-zuulv3
         max-servers: 8
@@ -38,8 +44,13 @@ providers:
           - ci-zuulv3-internal
         labels:
           - name: ubuntu-xenial-builder
-            min-ram: 8000
+            min-ram: 16000
             diskimage: ubuntu-xenial
+            console-log: True
+            key-name: cl-kklimonda-noise
+          - name: ubuntu-trusty-builder
+            min-ram: 16000
+            diskimage: ubuntu-trusty
             console-log: True
             key-name: cl-kklimonda-noise
 
@@ -52,6 +63,26 @@ diskimages:
       - nodepool-base
       - contrail-builder
     release: xenial
+    formats:
+      - qcow2
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
+      DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_DISTRIBUTION_MIRROR: 'http://mirror.math.ucdavis.edu/ubuntu/'
+      DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+      DIB_DEBIAN_COMPONENTS: 'main,universe'
+  - name: ubuntu-trusty
+    elements:
+      - ubuntu
+      - vm
+      - growroot
+      - nodepool-base
+      - contrail-builder
+    release: trusty
     formats:
       - qcow2
     env-vars:
