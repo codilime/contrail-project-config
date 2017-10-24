@@ -176,3 +176,15 @@
       nodes:
         - name: pjr-xenial
           label: pjr-xenial
+
+
+- job:
+    name: kklimonda-test-job
+    run: playbooks/kklimonda/test-playbook
+    nodeset:
+      nodes:
+        - name: ubuntu-xenial
+          label: ubuntu-xenial
+    secrets:
+      - site_deb
+
