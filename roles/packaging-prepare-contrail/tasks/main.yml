@@ -28,7 +28,7 @@
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
     - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
     - { src: 'contrail-build/SConstruct', dest: '' }
-  delegate_to: "{{ ansible_default_ipv4.address }}"
+  delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy debian/ to enable package building
   synchronize:
@@ -38,7 +38,7 @@
       - --no-motd
       - --exclude=.git
       - --quiet
-  delegate_to: "{{ ansible_default_ipv4.address }}"
+  delegate_to: "{{ inventory_hostname }}"
 
 - name: Update debian/changelog
   shell: |
