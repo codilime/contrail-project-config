@@ -8,3 +8,4 @@ libglib2.0-dev:
 python-lxml:
 automake:
 unzip:
+linux-image-generic:
