@@ -1,0 +1,12 @@
+{
+  "release": {
+    "ubuntu": {
+      "trusty": {
+        "libtool-bin": "libtool"
+      }
+    }
+  },
+  "default": {
+    "libtool-bin": "libtool-bin"
+  }
+}
