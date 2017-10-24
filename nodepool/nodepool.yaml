@@ -17,7 +17,7 @@ labels:
       - name: juniper-contrail-ci
   - name: ubuntu-trusty-builder
     image: ubuntu-trusty
-    min-ready: 1
+    min-ready: 0
     provides:
       - name: juniper-contrail-ci
 
