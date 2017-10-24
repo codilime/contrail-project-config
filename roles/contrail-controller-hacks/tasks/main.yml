@@ -39,6 +39,11 @@
     - { repo: contrail-controller, review: 35542 }
     - { repo: contrail-controller, review: 35773 }
 
+- name: Checkout Juniper/contrail-nova-extensions from github.com
+  git:
+    repo: "https://github.com/Juniper/contrail-nova-extensions.git"
+    dest: "{{ ansible_env.HOME }}/src/review.opencontrail.org/Juniper/contrail-nova-extensions/"
+
 - name: Change contrail-packages to custom repo
   shell: |
     git remote add kklimonda https://github.com/kklimonda/contrail-packages
