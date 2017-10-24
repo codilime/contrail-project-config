@@ -32,7 +32,21 @@
           label: ubuntu-xenial-small
 
 - job:
+    name: contrail-vnc-build-unittest-ubuntu-base
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
+      - Juniper/contrail-nova-vif-driver
+    run: playbooks/packaging/contrail
+
+- job:
     name: contrail-vnc-build-unittest-ubuntu-trusty
+    parent: contrail-vnc-build-unittest-ubuntu-base
     run: playbooks/packaging/contrail
     voting: False
     nodeset:
@@ -42,7 +56,7 @@
 
 - job:
     name: contrail-vnc-build-unittest-ubuntu-xenial
-    run: playbooks/packaging/contrail
+    parent: contrail-vnc-build-unittest-ubuntu-base
     voting: False
     nodeset:
       nodes:
