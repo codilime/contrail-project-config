@@ -28,3 +28,4 @@
     DEBFULLNAME: "OpenContrail Developers"
     DEBEMAIL: "dev@lists.opencontrail.org"
     DEB_BUILD_OPTIONS: "parallel={{ ansible_processor_vcpus }}"
+    LC_ALL: "C"
