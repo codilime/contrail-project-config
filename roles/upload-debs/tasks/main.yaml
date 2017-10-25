@@ -1,10 +1,7 @@
-- file:
-    path: mywork/{{ reponame }}
-    state: directory
-    mode: 0755
-  delegate_to: '127.0.0.1'
 - name: upload packages
   synchronize:
-    src: "/tmp/*.deb"
-    dest: mywork/{{ reponame }}/
-    mode:  pull
+    src: "{{ src_dir }}"
+    dest: /var/lib/aptly/upload/{{ reponame }}/
+    rsync_opts:
+      - '--rsh="ssh -l aptly"'
+  delegate_to: "jluk-xenial"
