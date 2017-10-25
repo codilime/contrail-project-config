@@ -1,3 +1,9 @@
+- name: Verify connectivity to review.opencontrail.org
+  wait_for:
+    host: review.opencontrail.org
+    port: 443
+    timeout: 10
+
 - name: upload packages
   synchronize:
     src: "{{ src_dir }}"
