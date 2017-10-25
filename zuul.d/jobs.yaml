@@ -14,7 +14,7 @@
       - playbooks/base/post-logs
     roles:
       - zuul: codilime/zuul-jobs
-    timeout: 3600
+    timeout: 7200
     nodeset:
       nodes:
         - name: ubuntu-xenial
