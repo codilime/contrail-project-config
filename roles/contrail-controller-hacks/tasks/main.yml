@@ -22,7 +22,7 @@
     hash=$(echo $hash_ref |cut -d' ' -f1)
     ref=$(echo $hash_ref |cut -d' ' -f2)
     git fetch gerrit $ref
-    git cherry-pick $hash
+    git cherry-pick $hash || git reset --hard HEAD
   args:
     chdir: "{{ ansible_env.HOME}}/src/review.opencontrail.org/Juniper/{{ item.repo }}"
   with_items:
