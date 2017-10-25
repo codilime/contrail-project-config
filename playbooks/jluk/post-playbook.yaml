@@ -6,6 +6,7 @@
 - hosts: "localhost"
   vars:
     reponame: "{{ zuul.build }}"
+    src_dir: "./debs"
   roles:
     - upload-debs
 - hosts: jluk-xenial
