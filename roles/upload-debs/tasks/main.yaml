@@ -8,6 +8,7 @@
   synchronize:
     src: "{{ src_dir }}"
     dest: /var/lib/aptly/upload/{{ reponame }}/
+    mode: pull
     rsync_opts:
       - '--rsh="ssh -l aptly"'
-  delegate_to: "jluk-xenial"
+  delegate_to: "logs2.opencontrail.org"

@@ -3,7 +3,7 @@
     reponame: "{{ zuul.build }}"
   roles:
     - prepare-debs
-- hosts: "{{ site_deb.fqdn }}"
+- hosts: "localhost"
   vars:
     reponame: "{{ zuul.build }}"
   roles:
