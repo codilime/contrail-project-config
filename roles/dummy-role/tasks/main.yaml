@@ -1,0 +1,5 @@
+- name: Verify connectivity to review.opencontrail.org (run-job)
+  wait_for:
+    host: review.opencontrail.org
+    port: 443
+    timeout: 10
