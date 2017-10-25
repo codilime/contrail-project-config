@@ -160,6 +160,8 @@
     name: jluk-test-job
     description: Foo
     run: playbooks/jluk/test-playbook
+    post-run:
+        - playbooks/jluk/post-playbook
     nodeset:
       nodes:
         - name: jluk-xenial

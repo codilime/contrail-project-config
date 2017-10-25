@@ -1,15 +1,5 @@
-- hosts: jluk-xenial
-  vars:
-    reponame: "{{ zuul.build }}"
-  roles:
-    - prepare-debs
-- hosts: "{{ site_deb.fqdn }}"
-  vars:
-    reponame: "{{ zuul.build }}"
-  roles:
-    - upload-debs
-- hosts: jluk-xenial
-  vars:
-    reponame: "{{ zuul.build }}"
-  roles:
-    - publish-debs
+- name: Verify connectivity to review.opencontrail.org (job)
+  wait_for:
+    host: review.opencontrail.org
+    port: 443
+    timeout: 10
