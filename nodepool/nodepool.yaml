@@ -1,5 +1,5 @@
 zookeeper-servers:
-  - host: nodepool.opencontrail.org
+  - host: zuulv3-dev.opencontrail.org
     port: 3389
   - host: nodepool.opencontrail.org
 
