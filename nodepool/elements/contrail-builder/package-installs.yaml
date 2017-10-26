@@ -9,3 +9,4 @@ python-lxml:
 automake:
 unzip:
 linux-image-generic:
+libfile-fcntllock-perl:
