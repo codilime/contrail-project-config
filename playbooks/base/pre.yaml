@@ -7,5 +7,6 @@
   roles:
     - add-build-sshkey
     - configure-hosts-entries
+    - configure-mirrors
     - validate-host
     - prepare-workspace

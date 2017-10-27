@@ -1,3 +1,3 @@
 hosts_entries:
-  - fqdn: mirror.sv01.juniper.opencontrail.org
-    address: 10.84.5.38
+  - fqdn: mirror.sj01.juniper.opencontrail.org
+    address: 10.84.56.27
