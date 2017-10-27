@@ -23,8 +23,16 @@
       - site_logs
 
 - job:
-    name: zuulv3-self-test
-    run: playbooks/zuulv3/self-test
+    name: contrail-vnc-base
+    parent: null
+    description: |
+      A base job that prepares Contrail VNC sandbox using Android repo
+    pre-run: playbooks/contrail/pre
+
+- job:
+    name: contrail-vnc-repo-build
+    description: |
+    run: playbooks/contrail/
     voting: False
     nodeset:
       nodes:
