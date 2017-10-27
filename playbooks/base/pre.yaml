@@ -6,5 +6,6 @@
 - hosts: all
   roles:
     - add-build-sshkey
+    - configure-hosts-entries
     - validate-host
     - prepare-workspace

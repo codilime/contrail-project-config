@@ -1,0 +1,9 @@
+- name: Prepare repo manifest for android repo
+
+- name: Initialize OpenContrail VNC sandbox
+
+- name: Synchronize sandbox to workspace directory
+  synchronize:
+    dest: "{{ zuul_workspace_root }}"
+    src: "{{ zuul.executor.work_root }}/contrail-{{ packaging.version.upstream }}"
+  no_log: true

@@ -1,0 +1,7 @@
+- name: Ensure that all the required entries in /etc/hosts are present
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item.address }} {{ item.fqdn }}"
+  with_items: "{{ hosts_entries }}"
+  become: True
+  become_user: root
