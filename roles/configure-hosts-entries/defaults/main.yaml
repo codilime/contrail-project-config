@@ -1,3 +1,3 @@
 hosts_entries:
-  - fqdn: mirror.sj01.juniper.opencontrail.org
+  - fqdn: mirror.regionone.jnpr-contrail-ci.opencontrail.org
     address: 10.84.56.27
