@@ -52,17 +52,17 @@ providers:
             flavor-name: m1.small
             diskimage: ubuntu-xenial
             console-log: True
-            key-name: cl-kklimonda-noise
+            key-name: ci-infra-shared-key
           - name: ubuntu-xenial-builder
             flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-xenial
             console-log: True
-            key-name: cl-kklimonda-noise
+            key-name: ci-infra-shared-key
           - name: ubuntu-trusty-builder
             flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-trusty
             console-log: True
-            key-name: cl-kklimonda-noise
+            key-name: ci-infra-shared-key
 
 diskimages:
   - name: ubuntu-xenial
