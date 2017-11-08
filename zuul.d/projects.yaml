@@ -4,3 +4,27 @@
       jobs:
         - contrail-vnc-build-unittest-ubuntu-xenial
 
+- project:
+    name: Juniper/contrail-vrouter
+    experimental:
+      jobs:
+        - contrail-vnc-build-unittest-ubuntu-xenial
+
+- project:
+    name: Juniper/contrail-sandesh
+    experimental:
+      jobs:
+        - contrail-vnc-build-unittest-ubuntu-xenial
+
+- project:
+    name: Juniper/contrail-build
+    experimental:
+      jobs:
+        - contrail-vnc-build-unittest-ubuntu-xenial
+
+- project:
+    name: Juniper/contrail-generateDS
+    experimental:
+      jobs:
+        - contrail-vnc-build-unittest-ubuntu-xenial
+

@@ -23,3 +23,16 @@
 
       This is a non-voting test pipeline from a new version of the OpenContrail CI stack. For more information, see:
       https://github.com/Juniper/contrail-infra/wiki/Zuul-v3-testing-in-OpenContrail-CI
+
+- pipeline:
+    name: experimental
+    description: On-demand pipeline for testing jobs.
+    manager: independent
+    precedence: normal
+    trigger:
+      gerrit:
+        - event: comment-added
+          comment: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*check experimental\s*$
+          branch:
+            - ^master$
+            - ^contrail/.*$
