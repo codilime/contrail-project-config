@@ -246,5 +246,5 @@ function main() {
 }
 
 # Note down environment
-env > $WORKSPACE/env.sh
+[ ! -f $WORKSPACE/env.sh ] && env > $WORKSPACE/env.sh
 main
