@@ -16,6 +16,8 @@
   apt:
     name: ruby
     state: present
+  become: True
+  become_user: root
 
 - name: Install package dependencies for the build
   shell: |
