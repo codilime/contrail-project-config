@@ -73,7 +73,7 @@
 
 
 - job:
-    name: staging-contrail-vnc-build-unittest-ubuntu-xenial
+    name: staging-contrail-vnc-build-unittest-ubuntu-trusty
     voting: False
     required-projects:
       - Juniper/contrail-build
@@ -88,4 +88,4 @@
     nodeset:
       nodes:
         - name: builder
-          label: ubuntu-xenial-builder
+          label: ubuntu-trusty-builder
