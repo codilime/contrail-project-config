@@ -5,6 +5,7 @@ require 'json'
 
 exit(0) if ENV["ZUUL_CHANGES"] !~ /refs\/changes\/([^^]*)$/
 change_set = $1
+
 contrail_sources = "#{ENV["WORKSPACE"]}/contrail-#{ENV["UPSTREAM_VERSION"]}"
 
 json_file = "#{contrail_sources}/controller/ci_unittests.json"

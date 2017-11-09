@@ -35,6 +35,8 @@
   environment:
     WORKSPACE: "{{ ansible_env.HOME }}"
     UPSTREAM_VERSION: "{{ packaging.version.upstream }}"
+    ZUUL_CHANGES: "{{ zuul.ref }}"
+    ZUUL_PROJECT: "{{ zuul.project.short_name }}"
     GIT_REFS: >-
       {% set git_refs = [] -%}
       {% for item in zuul['items'] -%}
