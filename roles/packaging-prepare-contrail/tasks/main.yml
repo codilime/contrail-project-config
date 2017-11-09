@@ -10,7 +10,7 @@
 
 - name: Add a repository with Contrail dependencies
   apt_repository:
-    repo: deb http://107.170.203.108/ testing extra
+    repo: "deb http://107.170.203.108/ {{ ansible_distribution_release }} extra"
   become: True
   become_user: root
 
