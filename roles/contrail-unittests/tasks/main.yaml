@@ -36,6 +36,7 @@
     chdir: "{{ packaging.target_dir }}"
   environment:
     BUILD_ONLY: 1
+    LC_ALL: "C"
 
 - name: Run unittest script
   script: contrail-unittests-job.sh
@@ -45,6 +46,7 @@
     ZUUL_CHANGES: "{{ zuul.ref }}"
     ZUUL_PROJECT: "{{ zuul.project.short_name }}"
     SCONS_JOBS: "1"
+    LC_ALL: "C"
     GIT_REFS: >-
       {% set git_refs = [] -%}
       {% for item in zuul['items'] -%}
