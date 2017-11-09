@@ -40,6 +40,8 @@
 
 - name: Run unittest script
   script: contrail-unittests-job.sh
+  become: yes
+  become_user: root
   environment:
     WORKSPACE: "{{ ansible_env.HOME }}"
     UPSTREAM_VERSION: "{{ packaging.version.upstream }}"
