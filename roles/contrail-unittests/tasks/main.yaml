@@ -30,6 +30,13 @@
   register: deps
   failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
 
+- name: Run a full Contrail VNC build
+  command: "scons -j {{ ansible_processor_vcpus }}"
+  args:
+    chdir: "{{ packaging.target_dir }}"
+  environment:
+    BUILD_ONLY: 1
+
 - name: Run unittest script
   script: contrail-unittests-job.sh
   environment:
@@ -37,7 +44,7 @@
     UPSTREAM_VERSION: "{{ packaging.version.upstream }}"
     ZUUL_CHANGES: "{{ zuul.ref }}"
     ZUUL_PROJECT: "{{ zuul.project.short_name }}"
-    SCONS_JOBS: "{{ ansible_processor_vcpus }}"
+    SCONS_JOBS: "1"
     GIT_REFS: >-
       {% set git_refs = [] -%}
       {% for item in zuul['items'] -%}
