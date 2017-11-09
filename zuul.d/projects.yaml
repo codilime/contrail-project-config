@@ -8,7 +8,7 @@
     name: Juniper/contrail-vrouter
     experimental:
       jobs:
-        - contrail-vnc-build-unittest-ubuntu-xenial
+        - staging-contrail-vnc-build-unittest-ubuntu-xenial
 
 - project:
     name: Juniper/contrail-sandesh

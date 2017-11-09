@@ -71,3 +71,21 @@
         - name: builder
           label: ubuntu-xenial-builder
 
+
+- job:
+    name: staging-contrail-vnc-build-unittest-ubuntu-xenial
+    voting: False
+    required-projects:
+      - Juniper/contrail-build
+      - Juniper/contrail-controller
+      - Juniper/contrail-generateDS
+      - Juniper/contrail-third-party
+      - Juniper/contrail-packages
+      - Juniper/contrail-sandesh
+      - Juniper/contrail-vrouter
+      - Juniper/contrail-nova-vif-driver
+    run: playbooks/unittest/contrail
+    nodeset:
+      nodes:
+        - name: builder
+          label: ubuntu-xenial-builder
