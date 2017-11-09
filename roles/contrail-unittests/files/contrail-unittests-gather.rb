@@ -5,8 +5,9 @@ require 'json'
 
 exit(0) if ENV["ZUUL_CHANGES"] !~ /refs\/changes\/([^^]*)$/
 change_set = $1
+contrail_sources = "#{ENV["WORKSPACE"]}/contrail-#{ENV["UPSTREAM_VERSION"]}"
 
-json_file = "#{ENV["WORKSPACE"]}/repo/controller/ci_unittests.json"
+json_file = "#{contrail_sources}/controller/ci_unittests.json"
 exit(0) unless File.file?(json_file)
 
 project = "controller"
@@ -14,7 +15,7 @@ project = "tools/sandesh" if ENV["ZUUL_PROJECT"] =~ /contrail-sandesh/
 project = "tools/generateds" if ENV["ZUUL_PROJECT"] =~ /contrail-generateDS/
 project = "vrouter" if ENV["ZUUL_PROJECT"] =~ /contrail-vrouter/
 
-Dir.chdir("#{ENV["WORKSPACE"]}/repo/#{project}")
+Dir.chdir("#{contrail_sources}/#{project}")
 
 # Get the files changes in this change-set.
 cmd = %{git ls-remote 2>/dev/null | \grep #{change_set} | \grep refs | awk '{print $1}' | xargs git show --pretty="format:" --name-only}

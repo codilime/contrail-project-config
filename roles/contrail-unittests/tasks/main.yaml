@@ -6,7 +6,37 @@
   with_fileglob:
     - "*"
 
+- name: Update apt repositories
+  apt:
+    update_cache: yes
+  become: True
+  become_user: root
+
+- name: Install ruby used by the unittest scripts
+  apt:
+    name: ruby
+    state: present
+
+- name: Install package dependencies for the build
+  shell: |
+    mk-build-deps -r -i debian/control \
+      --tool="apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes"
+  args:
+    chdir: "{{ packaging.target_dir }}"
+  become: True
+  become_user: root
+  register: deps
+  failed_when: "'mk-build-deps: Unable to install all build-dep packages' in deps.stdout"
+
 - name: Run unittest script
   script: contrail-unittests-job.sh
   environment:
     WORKSPACE: "{{ ansible_env.HOME }}"
+    UPSTREAM_VERSION: "{{ packaging.version.upstream }}"
+    GIT_REFS: |
+      {% git_refs = [] %}
+      {% for item in zuul.items %}
+      {% ref = "refs/changes/" + item.change[-2:] + "/" + item.change + "/" + item.patchset %}
+      {% git_ref = item.project.short_name + "^" + ref %}
+      {% git.refs.append(git_ref) %}
+      {{- git_refs|join(",") -}}
