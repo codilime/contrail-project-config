@@ -1,0 +1,12 @@
+- name: Copy over unittest scripts to the builder VM
+  copy:
+    src: "{{ item }}"
+    dest: "."
+    mode: 0755
+  with_fileglob:
+    - "*"
+
+- name: Run unittest script
+  script: contrail-unittests-job.sh
+  environment:
+    WORKSPACE: "{{ ansible_env.HOME }}"
