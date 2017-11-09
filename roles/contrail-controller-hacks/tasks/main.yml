@@ -17,6 +17,9 @@
   with_items:
     - contrail-controller
     - contrail-build
+    - contrail-vrouter
+    - contrail-sandesh
+    - contrail-generateDS
 
 - name: Apply custom patchsets
   shell: |
