@@ -84,6 +84,7 @@
       - Juniper/contrail-sandesh
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-vif-driver
+      - Juniper/contrail-common
     run: playbooks/unittest/contrail
     nodeset:
       nodes:

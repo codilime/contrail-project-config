@@ -22,6 +22,7 @@
     state: directory
   with_items:
     - "{{ packaging.target_dir }}/"
+    - "{{ packaging.target_dir }}/src/"
     - "{{ packaging.target_dir }}/tools/"
     - "{{ packaging.target_dir }}/openstack/"
 
@@ -29,6 +30,10 @@
   synchronize:
     src: "{{ ansible_env.HOME }}/src/review.opencontrail.org/Juniper/{{ item.src }}"
     dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.dest }}"
+    rsync_opts:
+      - --no-motd
+      - --exclude=.git
+      - --quiet
   with_items:
     - { src: 'contrail-controller/', dest: 'controller' }
     - { src: 'contrail-build/', dest: 'tools/build' }
@@ -40,6 +45,18 @@
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
     - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
     - { src: 'contrail-build/SConstruct', dest: '' }
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Hard-link gerrit repositories into expected structure
+  synchronize:
+    src: "{{ ansible_env.HOME }}/src/github.com/Juniper/{{ item.src }}"
+    dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.dest }}"
+    rsync_opts:
+      - --no-motd
+      - --exclude=.git
+      - --quiet
+  with_items:
+    - { src: 'contrail-common', dest: 'src' }
   delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy debian/ to enable package building
