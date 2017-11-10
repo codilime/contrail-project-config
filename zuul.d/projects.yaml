@@ -2,29 +2,28 @@
     name: Juniper/contrail-controller
     check:
       jobs:
-        - contrail-vnc-build-unittest-ubuntu-xenial
+        - contrail-vnc-build-unittest-ubuntu-trusty
 
 - project:
     name: Juniper/contrail-vrouter
-    experimental:
+    check:
       jobs:
-        - staging-contrail-vnc-build-unittest-ubuntu-trusty
+        - contrail-vnc-build-unittest-ubuntu-trusty
 
 - project:
     name: Juniper/contrail-sandesh
-    experimental:
+    check:
       jobs:
-        - contrail-vnc-build-unittest-ubuntu-xenial
+        - contrail-vnc-build-unittest-ubuntu-trusty
 
 - project:
     name: Juniper/contrail-build
-    experimental:
+    check:
       jobs:
-        - contrail-vnc-build-unittest-ubuntu-xenial
+        - contrail-vnc-build-unittest-ubuntu-trusty
 
 - project:
     name: Juniper/contrail-generateDS
-    experimental:
+    check:
       jobs:
-        - contrail-vnc-build-unittest-ubuntu-xenial
-
+        - contrail-vnc-build-unittest-ubuntu-trusty

@@ -54,16 +54,6 @@
     run: playbooks/packaging/contrail
 
 - job:
-    name: contrail-vnc-build-unittest-ubuntu-trusty
-    parent: contrail-vnc-build-unittest-ubuntu-base
-    run: playbooks/packaging/contrail
-    voting: False
-    nodeset:
-      nodes:
-        - name: builder
-          label: ubuntu-trusty-builder
-
-- job:
     name: contrail-vnc-build-unittest-ubuntu-xenial
     parent: contrail-vnc-build-unittest-ubuntu-base
     voting: False
@@ -72,9 +62,8 @@
         - name: builder
           label: ubuntu-xenial-builder
 
-
 - job:
-    name: staging-contrail-vnc-build-unittest-ubuntu-trusty
+    name: contrail-vnc-build-unittest-ubuntu-trusty
     voting: False
     required-projects:
       - Juniper/contrail-build
