@@ -15,11 +15,9 @@ function ci_exit() {
     if [ "$exit_code" == "0" ]; then
         #rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null
         echo Success
-        log_job_info_in_gerrit "Completed Jenkins job $JENKINS_JOB_N with SUCCESS"
     else
         # Leave the workspace intact.
         echo Exit with failed code $exit_code
-        log_job_info_in_gerrit "Completed Jenkins job $JENKINS_JOB_N with FAILURE exit_code $exit_code"
     fi
     exit $exit_code
 }
