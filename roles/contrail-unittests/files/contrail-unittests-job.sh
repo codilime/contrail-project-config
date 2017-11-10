@@ -10,7 +10,7 @@ function ci_exit() {
     if [ -z $exit_code ]; then
         exit_code=0
     fi
-
+    archive_failed_test_logs
     JENKINS_JOB_N=$(basename "$JOB_URL")
     if [ "$exit_code" == "0" ]; then
         #rm -rf $WORKSPACE/* $WORKSPACE/.* 2>/dev/null
@@ -35,10 +35,6 @@ function archive_failed_test_logs() {
     if [ ! -f "$WORKSPACE/$LOGFILE" ]; then
         return
     fi
-    if [ -z "$BUILD_NUMBER" ]; then
-        BUILD_NUMBER=0
-    fi
-    DST_DIR=/ci-admin/unit_test_logs/$JOB_NAME/$BUILD_NUMBER
 }
 
 function display_test_results() {
