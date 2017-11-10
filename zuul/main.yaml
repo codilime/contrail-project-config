@@ -1,5 +1,6 @@
 - tenant:
     name: opencontrail
+    max-job-timeout: -1
     source:
       github:
         config-projects:
