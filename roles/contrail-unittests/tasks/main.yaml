@@ -41,7 +41,7 @@
     LC_ALL: "C"
 
 - name: Run unittest script
-  script: contrail-unittests-job.sh
+  shell: "{{ ansible_env.HOME }}/contrail-unittests-job.sh"
   become: yes
   become_user: root
   environment:
