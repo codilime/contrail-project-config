@@ -19,6 +19,13 @@
   become: True
   become_user: root
 
+- name: Install libcmocka used by the unittests
+  apt:
+    name: libcmocka0
+    state: present
+  become: True
+  become_user: root
+
 - name: Install package dependencies for the build
   shell: |
     mk-build-deps -r -i debian/control \
