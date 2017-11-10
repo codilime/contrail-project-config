@@ -59,15 +59,3 @@
         {% set _ =  git_refs.append(git_ref) -%}
       {% endfor -%}
       {{- git_refs|join(",") -}}
-
-- name: send unittest logs to the executor
-  synchronize:
-    src: "{{ item }}"
-    dest: "{{ zuul.executor.log_root }}/"
-    mode: pull
-  with_items:
-    - retry_targets.txt
-    - retry_tests.txt
-    - scons_test-FAIL.log
-    - scons_test.log
-    - unit_test_logs.tgz
