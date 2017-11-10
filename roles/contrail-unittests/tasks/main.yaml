@@ -34,6 +34,8 @@
   command: "scons -j {{ ansible_processor_vcpus }}"
   args:
     chdir: "{{ packaging.target_dir }}"
+  become: yes
+  become_user: root
   environment:
     BUILD_ONLY: 1
     LC_ALL: "C"
