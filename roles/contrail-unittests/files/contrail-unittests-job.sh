@@ -196,7 +196,8 @@ function run_unittest() {
 
     logfile=$WORKSPACE/scons_test.log
     echo scons -k -j $SCONS_JOBS $UNIT_TESTS
-    scons -k -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee $logfile
+    echo "Check job-output.txt.gz/ARA for the full log." > $logfile
+    scons -k --debug=explain -j $SCONS_JOBS $UNIT_TESTS
     exit_status=$?
     analyze_test_results $logfile
 
