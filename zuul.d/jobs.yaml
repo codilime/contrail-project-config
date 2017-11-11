@@ -87,7 +87,7 @@
       - Juniper/contrail-nova-vif-driver
       - Juniper/contrail-common
     run: playbooks/unittest/contrail
-    post-run: playbooks/unittest/post.yaml
+    post-run: playbooks/unittest/post
     nodeset:
       nodes:
         - name: builder
