@@ -11,4 +11,4 @@
         - retry_tests.txt
         - scons_test-FAIL.log
         - scons_test.log
-        - unit_test_logs.tgz
+        - unittests-logs

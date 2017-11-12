@@ -28,11 +28,12 @@ if [ -f "$SKIP_JOBS" ]; then
 fi
 
 function archive_failed_test_logs() {
-    LOGFILE="unit_test_logs.tgz"
-    find $CONTRAIL_SOURCES/build -name "*.log" -o -name "*.err" |\grep test |  xargs tar --ignore-failed-read -zcf $WORKSPACE/$LOGFILE
-    if [ ! -f "$WORKSPACE/$LOGFILE" ]; then
-        return
-    fi
+    LOGDIR="$WORKSPACE/unittests-logs/"
+    BUILDROOT="$CONTRAIL_SOURCES/build"
+    cd "$BUILDROOT"
+    find . -name '*.log' | xargs gzip -S .txt.gz
+    mkdir "$LOGDIR"
+    find . -name '*.txt.gz' -exec cp --parents '{}' "$LOGDIR" \;
 }
 
 function display_test_results() {
