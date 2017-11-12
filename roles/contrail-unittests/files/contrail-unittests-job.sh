@@ -183,7 +183,6 @@ function run_unittest() {
     # Create CONTRAIL_REPO shortcut.
     export CONTRAIL_REPO=/home/$USER/contrail_repo
     rm -rf $CONTRAIL_REPO
-    ln -sf $CONTRAIL_SOURCES $CONTRAIL_REPO
 
     # Remove pip cache
     export PIP_CACHE=/home/$USER/.cache/pip
