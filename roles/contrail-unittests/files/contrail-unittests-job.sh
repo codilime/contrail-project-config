@@ -5,6 +5,14 @@ set -o pipefail
 CONTRAIL_SOURCES="$WORKSPACE/contrail-$UPSTREAM_VERSION"
 REPO_BIN="$WORKSPACE/repo"
 
+function precreate_files() {
+    touch scons_test-FAIL.log
+    touch retry_tests.txt
+    touch retry_targets.txt
+    touch unit_test_logs.tgz
+    touch scons_test.log
+}
+
 function ci_exit() {
     exit_code=$1
     if [ -z $exit_code ]; then
@@ -237,6 +245,7 @@ function run_unittest() {
 }
 
 function main() {
+    precreate_files
     run_unittest
     ci_exit
 }
