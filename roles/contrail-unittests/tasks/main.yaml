@@ -45,6 +45,7 @@
   become_user: root
   environment:
     BUILD_ONLY: 1
+    CONTRAIL_COMPILE_WITHOUT_SYMBOLS: yes
     LC_ALL: "C"
 
 - name: Run unittest script
