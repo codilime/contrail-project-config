@@ -1,14 +1,4 @@
 - name: send unittest logs to the executor
   hosts: all
-  tasks:
-    - name: send unittest logs to the executor
-      synchronize:
-        src: "{{ item }}"
-        dest: "{{ zuul.executor.log_root }}/"
-        mode: pull
-      with_items:
-        - retry_targets.txt
-        - retry_tests.txt
-        - scons_test-FAIL.log
-        - scons_test.log
-        - unittests-logs
+  roles:
+    - contrail-upload-logs-unittests

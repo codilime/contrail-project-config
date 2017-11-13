@@ -1,0 +1,20 @@
+- name: Get a list of existing log files
+  find:
+    paths: .
+    file_type: any
+    patterns:
+      - retry_targets.txt
+      - retry_tests.txt
+      - scons_test-FAIL.log
+      - scons_test.log
+      - unittests-logs
+  register: loglist
+- debug:
+    var: loglist
+- command: pwd
+- name: Send logs to the executor
+  synchronize:
+    mode: pull
+    src: "{{ item.path }}"
+    dest: "{{ zuul.executor.log_root }}/"
+  with_items: "{{ loglist.files }}"
