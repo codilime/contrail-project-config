@@ -32,7 +32,6 @@
     dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.dest }}"
     rsync_opts:
       - --no-motd
-      - --exclude=.git
       - --quiet
   with_items:
     - { src: 'contrail-controller/', dest: 'controller' }
@@ -53,7 +52,6 @@
     dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.dest }}"
     rsync_opts:
       - --no-motd
-      - --exclude=.git
       - --quiet
   with_items:
     - { src: 'contrail-common', dest: 'src' }
