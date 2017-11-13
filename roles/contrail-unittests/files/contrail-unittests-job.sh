@@ -181,11 +181,12 @@ function run_unittest() {
     export CONTRAIL_COMPILE_WITHOUT_SYMBOLS=yes
 
     # Create CONTRAIL_REPO shortcut.
-    export CONTRAIL_REPO=/home/$USER/contrail_repo
-    rm -rf $CONTRAIL_REPO
+    export CONTRAIL_REPO="$WORKSPACE/contrail_repo"
+    rm -rf "$CONTRAIL_REPO"
+    ln -sf "$CONTRAIL_SOURCES" "$CONTRAIL_REPO"
 
     # Remove pip cache
-    export PIP_CACHE=/home/$USER/.cache/pip
+    export PIP_CACHE=$HOME/.cache/pip
     [ -d $PIP_CACHE ] && rm -rf $PIP_CACHE
 
     # Find and run relevant tests.
