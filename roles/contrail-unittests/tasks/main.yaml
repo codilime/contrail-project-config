@@ -67,3 +67,9 @@
         {% set _ =  git_refs.append(git_ref) -%}
       {% endfor -%}
       {{- git_refs|join(",") -}}
+
+- name: Ensure that test logs are readable by the zuul user
+  shell: |
+    "find {{ packaging.target_dir }} -name '*.log' -type f -exec chmod 0644 {} \;"
+  become: yes
+  become_user: root
