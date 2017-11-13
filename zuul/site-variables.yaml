@@ -1,2 +1,3 @@
 ---
 zuul_site_mirror_fqdn: "mirror.{{ nodepool.region | lower }}.{{ nodepool.cloud | lower }}.opencontrail.org"
+pypi_mirror: https://pypi.python.org/simple
