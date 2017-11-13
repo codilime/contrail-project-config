@@ -21,19 +21,6 @@
     - contrail-sandesh
     - contrail-generateDS
 
-- name: Apply custom patchsets
-  shell: |
-    git config user.email "builder@localhost"
-    hash_ref=$(git ls-remote gerrit | egrep "refs/changes/.*{{ item.review }}.*/" | tail -1)
-    hash=$(echo $hash_ref |cut -d' ' -f1)
-    ref=$(echo $hash_ref |cut -d' ' -f2)
-    git fetch gerrit $ref
-    git cherry-pick $hash || git reset --hard HEAD
-  args:
-    chdir: "{{ ansible_env.HOME}}/src/review.opencontrail.org/Juniper/{{ item.repo }}"
-  with_items:
-    - { repo: contrail-controller, review: 35647 }
-
 - name: Checkout Juniper/contrail-nova-extensions from github.com
   git:
     repo: "https://github.com/Juniper/contrail-nova-extensions.git"
