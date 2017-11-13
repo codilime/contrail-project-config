@@ -17,7 +17,7 @@ labels:
       - name: juniper-contrail-ci
   - name: ubuntu-xenial-builder
     image: ubuntu-xenial
-    min-ready: 1
+    min-ready: 0
     provides:
       - name: juniper-contrail-ci
   - name: ubuntu-trusty-builder
