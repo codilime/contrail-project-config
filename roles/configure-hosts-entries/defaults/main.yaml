@@ -1,3 +1,6 @@
 hosts_entries:
   - fqdn: mirror.regionone.jnpr-contrail-ci.opencontrail.org
     address: 10.84.56.27
+  - fqdn: "{{ ansible_default_ipv4.address }}"
+    address: "{{ ansible_hostname }}"
+
