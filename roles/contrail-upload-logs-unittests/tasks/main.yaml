@@ -1,3 +1,9 @@
+- name: Ensure that test logs are readable by the zuul user
+  shell: |
+    find {{ ansible_env.HOME }} -name '*.log*' -type f -exec chmod 0644 {} \;
+  become: yes
+  become_user: root
+
 - name: Get a list of existing log files
   find:
     paths: .
@@ -9,6 +15,7 @@
       - scons_test.log
       - unittests-logs
   register: loglist
+
 - name: Send logs to the executor
   synchronize:
     mode: pull
