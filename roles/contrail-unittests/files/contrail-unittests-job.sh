@@ -14,6 +14,9 @@ function precreate_files() {
 }
 
 function pytest_to_file() {
+  _PYTEST_XTRACE=$(set +o | grep xtrace)
+  set -x
+
   local pattern=$1
   if [ -e $CONTRAIL_SOURCES/.repo ]; then
       $REPO_BIN grep -l $bare_name
@@ -22,6 +25,8 @@ function pytest_to_file() {
       # while excluding build/ .git/ and third_party/.
       (cd $CONTRAIL_SOURCES && ack-grep --ignore-dir={build/,third_party/,debian/} -l "$pattern")
   fi
+
+  $_PYTEST_XTRACE
 }
 
 function ci_exit() {
