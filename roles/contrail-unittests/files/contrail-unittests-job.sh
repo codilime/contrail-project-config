@@ -20,7 +20,7 @@ function pytest_to_file() {
   else
       # if we are not running under repo, run grep
       # while excluding build/ .git/ and third_party/.
-      (cd $CONTRAIL_SOURCES && grep --exclude-dir .git/ --exclude-dir build/ --exclude-dir third_party/ -l -R "$pattern")
+      (cd $CONTRAIL_SOURCES && ack-grep --ignore-dir={build/,third_party/,debian/} -l "$pattern")
   fi
 }
 

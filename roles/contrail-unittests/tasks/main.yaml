@@ -19,19 +19,15 @@
   become: True
   become_user: root
 
-- name: Install ruby used by the unittest scripts
+- name: Install additional packages used by unittest scripts
   apt:
-    name: ruby
+    name: "{{ item }}"
     state: present
   become: True
   become_user: root
-
-- name: Install libcmocka used by the unittests
-  apt:
-    name: libcmocka0
-    state: present
-  become: True
-  become_user: root
+  with_items:
+    - ruby
+    - ack-grep
 
 - name: Install package dependencies for the build
   shell: |
