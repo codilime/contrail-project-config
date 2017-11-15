@@ -13,6 +13,17 @@ function precreate_files() {
     touch scons_test.log
 }
 
+function pytest_to_file() {
+  local pattern=$1
+  if [ -e $CONTRAIL_SOURCES/.repo ]; then
+      $REPO_BIN grep -l $bare_name
+  else
+      # if we are not running under repo, run grep
+      # while excluding build/ .git/ and third_party/.
+      (cd $CONTRAIL_SOURCES && grep --exclude-dir .git/ --exclude-dir build/ --exclude-dir third_party/ -l -R "$pattern")
+  fi
+}
+
 function ci_exit() {
     exit_code=$1
     if [ -z $exit_code ]; then
@@ -127,7 +138,7 @@ function determine_retry_list() {
         fi
 
         # Let's see what repo grep shows us
-        py_file=$($REPO_BIN grep -l $bare_name)
+        py_file=$(pytest_to_file $bare_name)
         if [[ -n $py_file ]]; then
             py_file_count=$(echo $py_file | wc --words)
             if [[ $py_file_count -ge 1 ]]; then
