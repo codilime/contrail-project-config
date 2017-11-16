@@ -41,6 +41,7 @@
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
+    voting: False
     description: |
       Job that tests Contrail VNC (controller, analytics, etc.) packaging
 
