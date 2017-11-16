@@ -27,3 +27,10 @@
     check:
       jobs:
         - contrail-vnc-build-unittest-ubuntu-trusty
+
+- project:
+    name: Juniper/contrail-packages
+    experimental:
+      jobs:
+        - contrail-vnc-build-package-ubuntu-trusty
+        - contrail-vnc-build-package-ubuntu-xenial

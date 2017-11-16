@@ -40,18 +40,41 @@
           label: ubuntu-xenial-small
 
 - job:
-    name: contrail-vnc-build-unittest-ubuntu-base
+    name: contrail-vnc-build-package-ubuntu-base
+    description: |
+      Job that tests Contrail VNC (controller, analytics, etc.) packaging
+
+      This is a base job for testing packaging of Contrail VNC for Ubuntu-base
+      distributions. Release-based variants of this job are then added
+      to the Juniper/contrail-packages project.
+    files:
+      - ^debian/contrail/.*$
     required-projects:
       - Juniper/contrail-build
       - Juniper/contrail-controller
       - Juniper/contrail-generateDS
       - Juniper/contrail-third-party
-      - Juniper/contrail-packages
       - Juniper/contrail-sandesh
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-vif-driver
       - Juniper/contrail-common
-    run: playbooks/packaging/contrail
+    run: playbooks/packaging/contrail-vnc.yaml
+
+- job:
+    name: contrail-vnc-build-package-ubuntu-trusty
+    parent: contrail-vnc-build-package-ubuntu-base
+    nodeset:
+      nodes:
+        - name: builder
+          label: ubuntu-trusty-builder
+
+- job:
+    name: contrail-vnc-build-package-ubuntu-xenial
+    parent: contrail-vnc-build-package-ubuntu-base
+    nodeset:
+      nodes:
+        - name: builder
+          label: ubuntu-xenial-builder
 
 - job:
     name: contrail-vnc-build-unittest-ubuntu-xenial
