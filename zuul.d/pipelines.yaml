@@ -17,8 +17,10 @@
       gerrit: {}
     success:
       gerrit: {}
+      stats:
     failure:
       gerrit: {}
+      stats:
     footer-message: |
 
       This is a non-voting test pipeline from a new version of the OpenContrail CI stack. For more information, see:
