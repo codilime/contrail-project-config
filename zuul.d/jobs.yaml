@@ -77,15 +77,6 @@
           label: ubuntu-xenial-builder
 
 - job:
-    name: contrail-vnc-build-unittest-ubuntu-xenial
-    parent: contrail-vnc-build-unittest-ubuntu-base
-    voting: False
-    nodeset:
-      nodes:
-        - name: builder
-          label: ubuntu-xenial-builder
-
-- job:
     name: contrail-vnc-build-unittest-ubuntu-trusty
     voting: False
     required-projects:
