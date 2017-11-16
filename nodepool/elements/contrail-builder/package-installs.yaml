@@ -8,6 +8,6 @@ libglib2.0-dev:
 python-lxml:
 automake:
 unzip:
-linux-image-generic:
+linux-headers-generic:
 libfile-fcntllock-perl:
 default-jdk:
