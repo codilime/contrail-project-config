@@ -42,7 +42,7 @@ providers:
       - name: ubuntu-trusty
     pools:
       - name: ci-zuulv3
-        max-servers: 3
+        max-servers: 6
         availability-zones:
           - opencontrail-ci-zone
         networks:
