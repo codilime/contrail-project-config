@@ -243,7 +243,7 @@ function run_unittest() {
     # do retry without -k flag
     retrylogfile=$WORKSPACE/scons_test_retry.log
     echo scons -j $SCONS_JOBS $UNIT_TESTS
-    scons -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee $retrylogfile
+    scons -k -j $SCONS_JOBS $UNIT_TESTS 2>&1 | tee $retrylogfile
     exit_status=$?
     analyze_test_results $retrylogfile
 
