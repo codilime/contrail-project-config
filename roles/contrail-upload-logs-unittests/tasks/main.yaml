@@ -13,6 +13,7 @@
       - retry_tests.txt
       - scons_test-FAIL.log
       - scons_test.log
+      - scons_test_retry.log
       - unittests-logs
   register: loglist
 
