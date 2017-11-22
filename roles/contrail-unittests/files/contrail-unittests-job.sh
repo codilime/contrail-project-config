@@ -5,14 +5,6 @@ set -o pipefail
 CONTRAIL_SOURCES="$WORKSPACE/contrail-$UPSTREAM_VERSION"
 REPO_BIN="$WORKSPACE/repo"
 
-function precreate_files() {
-    touch scons_test-FAIL.log
-    touch retry_tests.txt
-    touch retry_targets.txt
-    touch unit_test_logs.tgz
-    touch scons_test.log
-}
-
 function pytest_to_file() {
   _PYTEST_XTRACE=$(set +o | grep xtrace)
   set -x
@@ -260,7 +252,6 @@ function run_unittest() {
 }
 
 function main() {
-    precreate_files
     run_unittest
     ci_exit
 }
