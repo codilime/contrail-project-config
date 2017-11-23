@@ -1,0 +1,15 @@
+- name: Gather dmesg output
+  command: dmesg
+  register: dmesg
+  no_log: true
+
+- name: Save dmesg output to a file
+  copy:
+    content: "{{ dmesg.stdout }}"
+    dest: "/tmp/dmesg.{{ inventory_hostname }}.log"
+
+- name: Send dmesg output to the executor
+  synchronize:
+    mode: pull
+    src: "/tmp/dmesg.{{ inventory_hostname }}.log"
+    dest: "{{ zuul.executor.log_root }}/zuul-info"
