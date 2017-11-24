@@ -9,10 +9,10 @@
           - codilime/zuul-jobs:
               shadow: Juniper/contrail-project-config
           - codilime/contrail-zuul-jobs
-          - Juniper/contrail-common
       gerrit:
         untrusted-projects:
           - Juniper/contrail-build
+          - Juniper/contrail-common
           - Juniper/contrail-controller
           - Juniper/contrail-generateDS
           - Juniper/contrail-heat
