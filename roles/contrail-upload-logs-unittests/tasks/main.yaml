@@ -17,9 +17,15 @@
       - unittests-logs
   register: loglist
 
+- name: Gzip log files
+  archive:
+    path: "{{ item.path }}"
+    remove: true
+  with_items: "{{ loglist.files }}"
+
 - name: Send logs to the executor
   synchronize:
     mode: pull
-    src: "{{ item.path }}"
+    src: "{{ item.path }}.gz"
     dest: "{{ zuul.executor.log_root }}/"
   with_items: "{{ loglist.files }}"
