@@ -90,6 +90,8 @@
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-vif-driver
       - Juniper/contrail-common
+    irrelevant-files:
+      - specs/.*
     run: playbooks/unittest/contrail
     post-run: playbooks/unittest/post
     nodeset:
