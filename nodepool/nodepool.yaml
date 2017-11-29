@@ -65,6 +65,20 @@ providers:
             key-name: ci-infra-shared-key
 
 diskimages:
+  - name: centos-7
+    elements:
+      - centos-minimal
+      - vm
+      - growroot
+      - nodepool-base
+      - epel
+      - contrail-builder
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_CHECKSUM: '1'
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_GRUB_TIMEOUT: '0'
+      DIB_EPEL_DISABLED: '0'
   - name: ubuntu-xenial
     elements:
       - ubuntu
