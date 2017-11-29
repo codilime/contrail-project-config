@@ -25,6 +25,11 @@ labels:
     min-ready: 2
     provides:
       - name: juniper-contrail-ci
+  - name: centos-7-small
+    image: centos-7
+    min-ready: 0
+    provides:
+      - name: juniper-contrail-ci
 
 providers:
   - name: juniper-contrail-ci
@@ -40,6 +45,7 @@ providers:
     diskimages:
       - name: ubuntu-xenial
       - name: ubuntu-trusty
+      - name: centos-7
     pools:
       - name: ci-zuulv3
         max-servers: 6
@@ -61,6 +67,11 @@ providers:
           - name: ubuntu-trusty-builder
             flavor-name: m1.16g_40g_8vcpu
             diskimage: ubuntu-trusty
+            console-log: True
+            key-name: ci-infra-shared-key
+          - name: centos-7-small
+            flavor-name: m1.small
+            diskimage: centos-7
             console-log: True
             key-name: ci-infra-shared-key
 
