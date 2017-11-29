@@ -9,7 +9,8 @@
     TZ: "UTC"
   with_dict: "{{ zuul._projects }}"
 
-- name: Save git log to a file
+- name: Write git log output
+  delegate_to: localhost
   copy:
     content: >-
       {% for result in gitlog['results'] -%}
@@ -18,10 +19,4 @@
       {{ result.stdout }}
 
       {% endfor -%}
-    dest: "/tmp/gitlog.{{ inventory_hostname }}.md"
-
-- name: Send git log output to the executor
-  synchronize:
-    mode: pull
-    src: "/tmp/gitlog.{{ inventory_hostname }}.md"
-    dest: "{{ zuul.executor.log_root }}/zuul-info"
+    dest: "{{ zuul.executor.log_root }}/zuul-info/gitlog.{{ inventory_hostname }}.md"
