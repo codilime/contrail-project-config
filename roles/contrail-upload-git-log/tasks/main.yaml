@@ -1,0 +1,22 @@
+- name: Get info on last commits for each repo
+  script: |
+    /usr/bin/git \
+    --git-dir={{ item.value.src_dir }}/.git/ \
+    log --pretty=format:"%h%x09%ad%x09%aE%x09%s" \
+    --date="format-local:%Y-%m-%d %H:%M:%S UTC" | head -n 10
+  register: gitlog
+  environment:
+    TZ: "UTC"
+  with_dict: "{{ zuul._projects }}"
+
+- name: Write git log output
+  delegate_to: localhost
+  copy:
+    content: >-
+      {% for result in gitlog['results'] -%}
+      # {{ result.item.value.short_name }}
+
+      {{ result.stdout }}
+
+      {% endfor -%}
+    dest: "{{ zuul.executor.log_root }}/zuul-info/gitlog.{{ inventory_hostname }}.md"
