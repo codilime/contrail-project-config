@@ -30,6 +30,9 @@
 
 - project:
     name: Juniper/contrail-packages
+    check:
+      jobs:
+        - noop
     experimental:
       jobs:
         - contrail-vnc-build-package-ubuntu-trusty
