@@ -24,3 +24,23 @@
           - Juniper/contrail-vrouter
           - Juniper/contrail-web-controller
           - Juniper/contrail-web-core
+          - Juniper/contrail-packaging
+          - Juniper/contrail-provisioning
+          - Juniper/contrail-test
+          - Juniper/contrail-fabric-utils
+          - Juniper/contrail-webui-third-party
+          - Juniper/horizon
+          - Juniper/nova
+          - Juniper/contrail-server-manager
+          - Juniper/contrail-puppet
+          - Juniper/contrail-web-server-manager
+          - Juniper/contrail-web-storage
+          - Juniper/contrail-third-party-cache
+          - Juniper/contrail-vcenter-plugin
+          - Juniper/contrail-horizon
+          - Juniper/contrail-test-ci
+          - Juniper/contrail-docker
+          - Juniper/contrail-ansible
+          - Juniper/contrail-ansible-internal
+          - Juniper/contrail-community-docs
+          - Juniper/puppet-contrail

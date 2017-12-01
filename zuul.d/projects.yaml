@@ -34,3 +34,161 @@
       jobs:
         - contrail-vnc-build-package-ubuntu-trusty
         - contrail-vnc-build-package-ubuntu-xenial
+
+
+
+- project:
+    name: Juniper/contrail-third-party
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-neutron-plugin
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-nova-vif-driver
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-packaging
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-provisioning
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-test
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-fabric-utils
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-web-core
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-web-controller
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-webui-third-party
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/horizon
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/nova
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-server-manager
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-puppet
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-heat
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-web-server-manager
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-web-storage
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-third-party-cache
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-vcenter-plugin
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-horizon
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-test-ci
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-docker
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-ansible
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-ansible-internal
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/contrail-community-docs
+    check:
+      jobs:
+        - noop
+
+- project:
+    name: Juniper/puppet-contrail
+    check:
+      jobs:
+        - noop
