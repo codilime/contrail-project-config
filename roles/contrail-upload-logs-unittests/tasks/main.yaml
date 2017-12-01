@@ -32,6 +32,8 @@
 - name: Send unittest logs to the executor
   synchronize:
     mode: pull
-    src: "unittests-logs"
+    src: "{{ item }}"
     dest: "{{ zuul.executor.log_root }}/"
+  with_fileglob:
+    - "unittests-logs"
 
