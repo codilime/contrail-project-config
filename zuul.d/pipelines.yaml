@@ -16,10 +16,12 @@
     start:
       gerrit: {}
     success:
-      gerrit: {}
+      gerrit:
+        verified: 1
       stats:
     failure:
-      gerrit: {}
+      gerrit:
+        verified: -1
       stats:
     footer-message: |
 
