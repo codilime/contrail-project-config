@@ -79,7 +79,6 @@
 
 - job:
     name: contrail-vnc-build-unittest-ubuntu-trusty
-    voting: False
     required-projects:
       - Juniper/contrail-build
       - Juniper/contrail-controller

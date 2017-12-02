@@ -25,7 +25,7 @@
       stats:
     footer-message: |
 
-      This is a non-voting test pipeline from a new version of the OpenContrail CI stack. For more information, see:
+      This is a test pipeline from a new version of the OpenContrail CI stack. For more information, see:
       https://github.com/Juniper/contrail-infra/wiki/Zuul-v3-testing-in-OpenContrail-CI
 
 - pipeline:
