@@ -14,7 +14,8 @@
             - ^master$
           comment: (?i)recheck(( (?:bug|lp)[\s#:]*(\d+))|( zuulv3)|( no bug))(\s+clean)?\s*$
     start:
-      gerrit: {}
+      gerrit:
+        verified: 0
     success:
       gerrit:
         verified: 1
