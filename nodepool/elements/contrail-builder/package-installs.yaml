@@ -1,14 +1,13 @@
-kernel_sources:
-packaging_tools:
-
 automake:
 build-essential:
 default-jdk:
+devscripts:
 equivs:
 git:
 libfile-fcntllock-perl:
 libglib2.0-dev:
 libtool-bin:
+linux-headers-generic:
 python-lxml:
 scons:
 unzip:
