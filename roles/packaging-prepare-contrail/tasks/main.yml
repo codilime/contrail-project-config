@@ -2,15 +2,9 @@
   contrail_packaging:
     zuul: "{{ zuul }}"
 
-- name: Add a Contrail signing key
-  apt_key:
-    url: http://107.170.203.108/public.gpg
-  become: True
-  become_user: root
-
 - name: Add a repository with Contrail dependencies
   apt_repository:
-    repo: "deb http://107.170.203.108/ {{ ansible_distribution_release }} extra"
+    repo: "deb http://repo01-jnpr.opencontrail.org/ubuntu {{ ansible_distribution_release }}-{{ zuul.branch }} main"
   become: True
   become_user: root
 
