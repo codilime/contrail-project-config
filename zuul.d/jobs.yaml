@@ -78,7 +78,7 @@
     nodeset:
       nodes:
         - name: builder
-          label: centos74-builder
+          label: centos-7.4-builder
 
 - job:
     name: contrail-vnc-build-package-ubuntu-trusty
