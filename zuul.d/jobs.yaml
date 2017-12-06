@@ -24,7 +24,6 @@
 
 - job:
     name: contrail-vnc-base
-    parent: null
     description: |
       A base job that prepares Contrail VNC sandbox using Android repo
     required-projects:
@@ -46,7 +45,6 @@
       - Juniper/contrail-web-core
       - Juniper/contrail-web-server-manager
       - Juniper/contrail-web-storage
-    pre-run: playbooks/contrail/pre.yaml
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
