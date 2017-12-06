@@ -81,8 +81,9 @@ diskimages:
       - centos-minimal
       - vm
       - growroot
-      - nodepool-base
       - epel
+      - openssh-server
+      - nodepool-base
       - contrail-builder
     env-vars:
       TMPDIR: /opt/dib_tmp
