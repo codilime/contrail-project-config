@@ -41,3 +41,8 @@
           branch:
             - ^master$
             - ^contrail/.*$
+    success:
+      gerrit: {}
+    failure:
+      gerrit: {}
+
