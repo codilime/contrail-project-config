@@ -1,0 +1,13 @@
+- hosts: localhost
+  roles:
+    - role: emit-job-header
+      zuul_log_url: "http://logs.openstack.org"
+
+- hosts: all
+  roles:
+    - contrail-common-libs
+    - add-build-sshkey
+    - configure-hosts-entries
+    - configure-mirrors
+    - validate-host
+    - repo-sandbox-prepare

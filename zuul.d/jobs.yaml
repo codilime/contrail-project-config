@@ -27,17 +27,7 @@
     parent: null
     description: |
       A base job that prepares Contrail VNC sandbox using Android repo
-    pre-run: playbooks/contrail/pre
-
-- job:
-    name: contrail-vnc-repo-build
-    description: |
-    run: playbooks/contrail/
-    voting: False
-    nodeset:
-      nodes:
-        - name: builder
-          label: ubuntu-xenial-small
+    pre-run: playbooks/contrail/pre.yaml
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
@@ -63,6 +53,7 @@
 
 - job:
     name: contrail-vnc-build-package-el-base
+    parent: contrail-vnc-base
     voting: False
     description: |
       Job that tests Contrail VNC (controller, analytics, etc.) packaging
