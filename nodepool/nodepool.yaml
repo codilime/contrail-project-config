@@ -27,7 +27,7 @@ labels:
       - name: juniper-contrail-ci
   - name: centos-7.4-builder
     image: centos-7.4
-    min-ready: 0
+    min-ready: 2
     provides:
       - name: juniper-contrail-ci
 
@@ -70,7 +70,7 @@ providers:
             console-log: True
             key-name: ci-infra-shared-key
           - name: centos-7.4-builder
-            flavor-name: m1.small
+            flavor-name: m1.16g_40g_8vcpu
             diskimage: centos-7.4
             console-log: True
             key-name: ci-infra-shared-key
