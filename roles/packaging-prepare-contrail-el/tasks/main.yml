@@ -1,0 +1,12 @@
+- name: Prepare packaging variables
+  contrail_packaging:
+    zuul: "{{ zuul }}"
+
+- name: Add a repository with Contrail dependencies
+  yum_repository:
+    name: contrail-tpc
+    baseurl: http://10.84.56.38/repos/centos/7/
+    gpgcheck: no
+  become: True
+  become_user: root
+
