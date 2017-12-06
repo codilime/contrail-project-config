@@ -45,6 +45,7 @@
       - Juniper/contrail-web-core
       - Juniper/contrail-web-server-manager
       - Juniper/contrail-web-storage
+    pre-run: playbooks/contrail/pre
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
