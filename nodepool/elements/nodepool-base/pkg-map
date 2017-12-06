@@ -6,7 +6,13 @@
       }
     }
   },
+  "distro": {
+    "centos": {
+      "iptables-services": "iptables-services"
+    }
+  },
   "default": {
-    "firewall-persistent": "netfilter-persistent"
+    "firewall-persistent": "netfilter-persistent",
+    "iptables-services": ""
   }
 }

@@ -6,6 +6,18 @@
       }
     }
   },
+  "family": {
+    "redhat": {
+      "build-essential": "make gcc glibc-devel",
+      "default-jdk": "java-1.8.0-openjdk",
+      "equivs": "",
+      "linux-headers-generic": "kernel-devel",
+      "libfile-fcntllock-perl": "",
+      "libglib2.0-dev": "glib2-devel",
+      "libtool-bin": "libtool",
+      "devscripts": "rpm-build"
+    }
+  },
   "default": {
     "libtool-bin": "libtool-bin"
   }
