@@ -82,6 +82,7 @@ diskimages:
       - vm
       - growroot
       - epel
+      - cloud-init
       - openssh-server
       - nodepool-base
       - contrail-builder
