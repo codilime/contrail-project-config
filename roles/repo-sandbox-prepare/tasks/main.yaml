@@ -28,6 +28,12 @@
     chdir: "{{ executor_sandbox_path }}"
   delegate_to: localhost
 
+- name: dump zuul variables to a file
+  copy:
+    content: "{{ zuul }}"
+    dest: "{{ executor_sandbox_path }}/zuul_var.yaml"
+  delegate_to: localhost
+
 - name: apply changes to the manifest.xml
   command: ./manifest_translator.py ./zuul_var.yaml {{ executor_sandbox_path }}/.repo/manifest.xml
   args:
