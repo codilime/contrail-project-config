@@ -15,10 +15,12 @@
       "libfile-fcntllock-perl": "",
       "libglib2.0-dev": "glib2-devel",
       "libtool-bin": "libtool",
-      "devscripts": "rpm-build"
+      "devscripts": "rpm-build",
+      "dhcp-client": "dhclient"
     }
   },
   "default": {
-    "libtool-bin": "libtool-bin"
+    "libtool-bin": "libtool-bin",
+    "dhcp-client": ""
   }
 }

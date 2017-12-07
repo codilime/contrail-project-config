@@ -12,3 +12,4 @@ python-lxml:
 scons:
 unzip:
 wget:
+dhcp-client:
