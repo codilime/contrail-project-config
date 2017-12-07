@@ -53,6 +53,8 @@
     roles:
       - zuul: codilime/zuul-jobs
     timeout: 28800
+    secrets:
+      - site_logs
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
