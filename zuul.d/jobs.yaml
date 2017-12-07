@@ -27,8 +27,6 @@
     parent: null
     description: |
       A base job that prepares Contrail VNC sandbox using Android repo
-    roles:
-      - zuul: codilime/zuul-jobs
     required-projects:
       - Juniper/contrail-api-client
       - Juniper/contrail-build
@@ -49,6 +47,12 @@
       - Juniper/contrail-web-server-manager
       - Juniper/contrail-web-storage
     pre-run: playbooks/contrail/pre
+    post-run:
+      - playbooks/base/post-ssh
+      - playbooks/base/post-logs
+    roles:
+      - zuul: codilime/zuul-jobs
+    timeout: 28800
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
