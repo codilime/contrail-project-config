@@ -5,6 +5,11 @@
   become: True
   become_user: root
 
+- name: Fetch third-party packages
+  shell: python fetch_packages.py
+  args:
+    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/third_party/"
+
 - name: Build binary & source packages for contrail-vnc
   shell: |
     rpmbuild --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
