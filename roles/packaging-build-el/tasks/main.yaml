@@ -5,14 +5,11 @@
   become: True
   become_user: root
 
-- name: Copy over the build script
-  copy:
-    src: build.sh
-    dest: "{{ ansible_env.HOME }}/build.sh"
-    mode: "0755"
-
-- name: Execute the build script
-  command: "bash {{ ansible_env.HOME }}/build.sh"
+- name: Build binary & source packages for contrail-vnc
+  shell: |
+    rpmbuild --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
+      --ba tools/packages/rpm/contrail/contrail.spec
   args:
-    chdir: "{{ packaging.target_dir }}"
-
+    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
+  environment:
+    SCONSFLAGS: "-j {{ ansible_processor_vcpus }} --opt=production"
