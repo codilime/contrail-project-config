@@ -30,7 +30,7 @@
     roles:
       - zuul: codilime/zuul-jobs
     required-projects:
-      - Juniper/contrail-api
+      - Juniper/contrail-api-client
       - Juniper/contrail-build
       - Juniper/contrail-common
       - Juniper/contrail-controller
