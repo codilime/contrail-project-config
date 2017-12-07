@@ -1,21 +1,10 @@
 #!/bin/bash
 set -exu
 
-git config --global user.email "test@example.com"
-git config --global user.name "Your Name"
-git config --global color.ui false 
-
-yum install -y kernel-devel
-
 export kver=3.10.0-693.11.1.el7.x86_64 #new kernel version
 
 mkdir -p /lib/modules/${kver}
 test -L /lib/modules/${kver}/build || ln -s /usr/src/kernels/${kver}/ /lib/modules/${kver}/build
-
-git apply $WORKDIR/contrail.spec.patch --directory=tools/packages/
-git apply $WORKDIR/vrouter.patch --directory=vrouter
-
-yum-builddep -y tools/packages/rpm/contrail/contrail.spec
 
 python $WORKDIR/contrail/third_party/fetch_packages.py
 
