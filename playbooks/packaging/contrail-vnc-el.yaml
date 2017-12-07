@@ -1,6 +1,5 @@
 - hosts: all
   roles:
     - contrail-common-libs
-    - contrail-controller-hacks
     - packaging-prepare-contrail-el
     - packaging-build-el
