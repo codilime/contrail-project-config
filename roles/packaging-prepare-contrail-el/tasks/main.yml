@@ -5,6 +5,7 @@
 - name: Add a repository with Contrail dependencies
   yum_repository:
     name: contrail-tpc
+    description: Contrail third-party dependencies
     baseurl: http://10.84.56.38/repos/centos/7/
     gpgcheck: no
   become: True
