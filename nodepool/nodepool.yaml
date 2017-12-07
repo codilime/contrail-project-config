@@ -91,6 +91,7 @@ diskimages:
       DIB_IMAGE_CACHE: /opt/dib_cache
       DIB_GRUB_TIMEOUT: '0'
       DIB_EPEL_DISABLED: '0'
+      DIB_YUM_MINIMAL_CREATE_INTERFACES: '0'
   - name: ubuntu-xenial
     elements:
       - ubuntu
