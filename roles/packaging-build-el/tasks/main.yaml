@@ -2,6 +2,8 @@
   shell: yum-builddep -y tools/packages/rpm/contrail/contrail.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
+  become: True
+  become_user: root
 
 - name: Copy over the build script
   copy:
