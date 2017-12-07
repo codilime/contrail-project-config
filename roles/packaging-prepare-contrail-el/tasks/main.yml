@@ -10,3 +10,12 @@
   become: True
   become_user: root
 
+# waiting for merge (38098, 38099)
+- name: Apply temporary patches for CentOS7.4
+  patch:
+    src: "{{ item.patch }}"
+    dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.path }}"
+  with_items:
+    - { patch: 'vrouter.patch', path: 'vrouter/' }
+    - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
+
