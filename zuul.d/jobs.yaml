@@ -73,7 +73,7 @@
       This is a base job for testing packaging of Contrail VNC for Enterprise
       Linux based distributions (CentOS, RHEL). Release-based variants of this
       job are then added to the Juniper/contrail-packages project.
-    run: playbooks/packaging/contrail-vnc
+    run: playbooks/packaging/contrail-vnc-el
 
 - job:
     name: contrail-vnc-build-package-centos74
