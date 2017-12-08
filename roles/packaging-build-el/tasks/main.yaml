@@ -43,3 +43,5 @@
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/contrail-web-core"
 
+- name: Get a list of packages
+  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
