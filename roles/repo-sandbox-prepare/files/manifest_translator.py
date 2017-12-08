@@ -52,12 +52,17 @@ for project in manifest.xpath('//project'):
     name = project.attrib['name']
     zuul_project = get_project(zuul_var, name)
     project.attrib['remote'] = zuul_project['canonical_hostname']
+    head = subprocess.check_output(['git', 'symbolic-ref', 'HEAD'], cwd=zuul_var['executor']['work_root'] + '/' + zuul_project['src_dir'])
+    project.attrib['revision'] = head[:-1]
 
 # XXX(kklimonda): Remove after contrail-packaging has been added to contrail-vnc
 if not manifest.find('//project[@name="contrail-packaging"]'):
     project = get_project(zuul_var, "contrail-packaging")
     contrail_packaging = etree.Element("project", name=project['short_name'], remote=project['canonical_hostname'], path='tools/packaging')
     contrail_packaging.tail = '\n'
+
+    head = subprocess.check_output(['git', 'symbolic-ref', 'HEAD'], cwd=zuul_var['executor']['work_root'] + '/' + project['src_dir'])
+    contrail_packaging.attrib['revision'] = head[:-1]
     manifest.getroot().append(contrail_packaging)
 
 with open(manifest_path, 'w') as manifest_file:
