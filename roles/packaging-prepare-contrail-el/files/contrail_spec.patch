@@ -1,5 +1,18 @@
+commit c89777a6a0cc60e92de695a4cfa67adb92a3ba21
+Author: Wojciech Urbański <wojciech.urbanski@codilime.com>
+Date:   Mon Dec 4 10:32:40 2017 +0100
+
+    Fixed spec file for rpmbuilds.
+    
+    - Moved BuildRequirements above %description to make it work.
+    - Added missing BuildRequirements (contains custom rpm packages)
+    - Fixed paths in certain build files.
+    
+    Change-Id: If5fffb52a6bfe6e40792f8f1c4751d407b6a893f
+    Closes-Bug: 1736103
+
 diff --git a/rpm/contrail/contrail.spec b/rpm/contrail/contrail.spec
-index adc7e8b..3e0ebbd 100644
+index adc7e8b..c856750 100644
 --- a/rpm/contrail/contrail.spec
 +++ b/rpm/contrail/contrail.spec
 @@ -1,7 +1,7 @@
@@ -7,20 +20,23 @@ index adc7e8b..3e0ebbd 100644
  %define         _contrailetc /etc/contrail
  %define         _contrailutils /opt/contrail/utils
 -%define         _distropkgdir tools/packaging/common/control_files
-+%define         _distropkgdir tools/packages/rpm/contrail
++%define         _distropkgdir tools/packaging/rpm/contrail
  %define         _contraildns /etc/contrail/dns
  %define         _distrorpmpkgdir tools/packages/rpm/contrail
  
-@@ -23,7 +23,7 @@
- %if 0%{?_kVers:1}
- %define         _kvers      %{_kVers}
+@@ -25,6 +25,11 @@
  %else
--%define         _kvers      3.10.0-327.10.1.el7.x86_64
-+%define         _kvers      3.10.0-693.11.1.el7.x86_64
+ %define         _kvers      3.10.0-693.11.1.el7.x86_64
  %endif
++%if 0%{?_opt:1}
++%define         _sconsOpt      %{_opt}
++%else
++%define         _sconsOpt      debug
++%endif
  
  %{echo: "Building release %{_relstr}\n"}
-@@ -38,40 +38,49 @@ License:            ASL 2.0
+ 
+@@ -38,45 +43,55 @@ License:            ASL 2.0
  URL:                www.opencontrail.org
  Vendor:             OpenContrail Project.
  
@@ -46,13 +62,14 @@ index adc7e8b..3e0ebbd 100644
 +BuildRequires: libzookeeper-devel
 +BuildRequires: lz4-devel
 +BuildRequires: make
-+BuildRequires: net-snmp-python
 +BuildRequires: openssl-devel
 +BuildRequires: protobuf
 +BuildRequires: protobuf-compiler
 +BuildRequires: protobuf-devel
 +BuildRequires: python-devel
++BuildRequires: python-fixtures
 +BuildRequires: python-lxml
++BuildRequires: python-requests
 +BuildRequires: python-setuptools
 +BuildRequires: python-sphinx
 +BuildRequires: scons
@@ -100,7 +117,46 @@ index adc7e8b..3e0ebbd 100644
  %prep
  
  %install
-@@ -137,10 +146,10 @@ pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_vrouter_cli; python setu
+ pushd %{_sbtop}
+-scons --root=%{buildroot} install
++scons --opt=%{_sconsOpt} --root=%{buildroot} install
+ for kver in %{_kvers}; do
+     echo "Kver = ${kver}"
+     set +e
+@@ -84,7 +99,7 @@ for kver in %{_kvers}; do
+     exit_code=$?
+     set -e
+     if [ $exit_code == 0 ]; then
+-        scons --kernel-dir=/lib/modules/${kver}/build build-kmodule --root=%{buildroot}
++        scons --opt=%{_sconsOpt} --kernel-dir=/lib/modules/${kver}/build build-kmodule --root=%{buildroot}
+     else
+         echo "WARNING: kernel-devel-$kver is not installed, Skipping building vrouter for $kver"
+     fi
+@@ -104,7 +119,7 @@ rm -rf %{buildroot}/_centos
+ popd
+ #Build nova-contrail-vif
+ pushd %{_sbtop}
+-scons -U nova-contrail-vif
++scons --opt=%{_sconsOpt} -U nova-contrail-vif
+ popd
+ pushd %{_sbtop}/build/noarch/nova_contrail_vif
+ python setup.py install --root=%{buildroot}
+@@ -128,19 +143,19 @@ done
+ python %{_sbtop}/tools/packages/utils/generate_doc_index.py %{buildroot}/usr/share/doc/contrail-docs/html/messages
+ # contrail-cli
+ install -d -m 0755 %{buildroot}/etc/bash_completion.d
+-python %{_sbtop}/tools/packages/utils/generate_cli_commands.py %{_sbtop}/build/debug/utils/contrail-cli %{buildroot}
+-pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_cli; python setup.py install --root=%{buildroot}; popd
+-pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_analytics_cli; python setup.py install --root=%{buildroot}; popd
+-pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_config_cli; python setup.py install --root=%{buildroot}; popd
+-pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_control_cli; python setup.py install --root=%{buildroot}; popd
+-pushd %{_sbtop}/build/debug/utils/contrail-cli/contrail_vrouter_cli; python setup.py install --root=%{buildroot}; popd
++python %{_sbtop}/tools/packages/utils/generate_cli_commands.py %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli %{buildroot}
++pushd %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli/contrail_cli; python setup.py install --root=%{buildroot}; popd
++pushd %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli/contrail_analytics_cli; python setup.py install --root=%{buildroot}; popd
++pushd %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli/contrail_config_cli; python setup.py install --root=%{buildroot}; popd
++pushd %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli/contrail_control_cli; python setup.py install --root=%{buildroot}; popd
++pushd %{_sbtop}/build/%{_sconsOpt}/utils/contrail-cli/contrail_vrouter_cli; python setup.py install --root=%{buildroot}; popd
  
  # Install supervisor files
  pushd %{_builddir}/..
