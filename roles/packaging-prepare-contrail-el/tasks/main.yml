@@ -21,8 +21,3 @@
     - { patch: 'vrouter.patch', path: 'vrouter/' }
     - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
 
-- name: Copy dkms.conf.in into location expected by the spec file
-  copy:
-    src: dkms.conf.in
-    dest: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/rpm/contrail/dkms.conf.in"
-
