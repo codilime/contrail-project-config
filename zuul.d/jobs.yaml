@@ -107,6 +107,17 @@
           label: ubuntu-xenial-builder
 
 - job:
+    name: contrail-vnc-specs-linter
+    voting: false
+    files:
+      - specs/.*
+    run: playbooks/contrail/specs
+    nodeset:
+      nodes:
+        - name: builder
+          label: ubuntu-trusty-builder
+
+- job:
     name: contrail-vnc-build-unittest-ubuntu-trusty
     required-projects:
       - Juniper/contrail-build
