@@ -10,11 +10,16 @@
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/third_party/"
 
+- name: Get the kernel-devel version
+  command: rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}" kernel-devel
+  register: kver
+
 - name: Build binary & source packages for contrail-vnc
   shell: |
     rpmbuild \
       --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
       --define "_opt production" \
+      --define "_kVers {{ kver.stdout }}" \
       --ba tools/packages/rpm/contrail/contrail.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
