@@ -16,7 +16,7 @@ index adc7e8b..3e0ebbd 100644
  %define         _kvers      %{_kVers}
  %else
 -%define         _kvers      3.10.0-327.10.1.el7.x86_64
-+%define         _kvers      3.10.0-693.5.2.el7.x86_64
++%define         _kvers      3.10.0-693.11.1.el7.x86_64
  %endif
  
  %{echo: "Building release %{_relstr}\n"}
