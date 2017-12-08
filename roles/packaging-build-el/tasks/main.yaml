@@ -20,6 +20,8 @@
       --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
       --define "_opt production" \
       --define "_kVers {{ kver.stdout }}" \
+      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
+      --define "_srcVer {{ packaging.version.upstream }}" \
       --ba tools/packages/rpm/contrail/contrail.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
