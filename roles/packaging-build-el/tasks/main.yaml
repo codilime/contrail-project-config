@@ -49,4 +49,4 @@
     - contrail-web-controller
 
 - name: Get a list of packages
-  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
+  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/x86_64/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
