@@ -1,4 +1,4 @@
-commit fc91e6771565f0c9fab8492aab3c1d1e9dc8fd93
+commit 5e9f992664c0e81c2b8d087ff0253a666771ce2c
 Author: Wojciech Urbański <wojciech.urbanski@codilime.com>
 Date:   Mon Dec 4 10:32:40 2017 +0100
 
@@ -12,7 +12,7 @@ Date:   Mon Dec 4 10:32:40 2017 +0100
     Closes-Bug: 1736103
 
 diff --git a/rpm/contrail/contrail.spec b/rpm/contrail/contrail.spec
-index adc7e8b..7a7688b 100644
+index adc7e8b..0f45db4 100644
 --- a/rpm/contrail/contrail.spec
 +++ b/rpm/contrail/contrail.spec
 @@ -25,6 +25,11 @@
@@ -162,3 +162,12 @@ index adc7e8b..7a7688b 100644
  popd
  
  #Needed for agent container env
+@@ -349,7 +364,7 @@ in the OpenContrail API server.
+ %{python_sitelib}/cfgm_common*
+ %{python_sitelib}/libpartition*
+ %{python_sitelib}/pysandesh*
+-%{python_sitelib}/sandesh-0.1dev*
++%{python_sitelib}/sandesh-0.1*dev*
+ %{python_sitelib}/sandesh_common*
+ %{python_sitelib}/vnc_api*
+ %{python_sitelib}/ContrailCli*
