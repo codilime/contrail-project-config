@@ -47,6 +47,8 @@
       - Juniper/contrail-web-core
       - Juniper/contrail-web-server-manager
       - Juniper/contrail-web-storage
+    irrelevant-files:
+      - specs/.*
     pre-run: playbooks/contrail/pre
     post-run:
       - playbooks/base/post-ssh
