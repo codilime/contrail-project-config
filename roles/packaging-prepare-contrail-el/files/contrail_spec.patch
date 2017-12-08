@@ -1,4 +1,4 @@
-commit c89777a6a0cc60e92de695a4cfa67adb92a3ba21
+commit fc91e6771565f0c9fab8492aab3c1d1e9dc8fd93
 Author: Wojciech Urbański <wojciech.urbanski@codilime.com>
 Date:   Mon Dec 4 10:32:40 2017 +0100
 
@@ -12,21 +12,12 @@ Date:   Mon Dec 4 10:32:40 2017 +0100
     Closes-Bug: 1736103
 
 diff --git a/rpm/contrail/contrail.spec b/rpm/contrail/contrail.spec
-index adc7e8b..c856750 100644
+index adc7e8b..7a7688b 100644
 --- a/rpm/contrail/contrail.spec
 +++ b/rpm/contrail/contrail.spec
-@@ -1,7 +1,7 @@
- %define         _unpackaged_files_terminate_build 0
- %define         _contrailetc /etc/contrail
- %define         _contrailutils /opt/contrail/utils
--%define         _distropkgdir tools/packaging/common/control_files
-+%define         _distropkgdir tools/packaging/rpm/contrail
- %define         _contraildns /etc/contrail/dns
- %define         _distrorpmpkgdir tools/packages/rpm/contrail
- 
 @@ -25,6 +25,11 @@
  %else
- %define         _kvers      3.10.0-693.11.1.el7.x86_64
+ %define         _kvers      3.10.0-327.10.1.el7.x86_64
  %endif
 +%if 0%{?_opt:1}
 +%define         _sconsOpt      %{_opt}
