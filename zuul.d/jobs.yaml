@@ -38,6 +38,7 @@
       - Juniper/contrail-nova-extensions
       - Juniper/contrail-nova-vif-driver
       - Juniper/contrail-packages
+      - Juniper/contrail-packaging
       - Juniper/contrail-sandesh
       - Juniper/contrail-third-party
       - Juniper/contrail-vrouter
