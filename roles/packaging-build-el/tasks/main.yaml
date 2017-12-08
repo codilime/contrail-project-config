@@ -38,7 +38,7 @@
   shell: |
     make package REPO=../{{ item }}
     rpmbuild \
-      --define "_builddir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/contrail/BUILD" \
+      --define "_builddir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/BUILD" \
       --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
       --define "_srcVer {{ packaging.version.upstream }}" \
       --bb {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/{{ item }}.spec
