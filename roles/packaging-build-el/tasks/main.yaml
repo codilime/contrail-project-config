@@ -44,6 +44,9 @@
       --bb {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/{{ item }}.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/contrail-web-core"
+  with_items:
+    - contrail-web-core
+    - contrail-web-controller
 
 - name: Get a list of packages
   shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
