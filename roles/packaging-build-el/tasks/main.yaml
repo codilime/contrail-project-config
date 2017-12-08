@@ -27,3 +27,19 @@
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
   environment:
     SCONSFLAGS: "-j {{ ansible_processor_vcpus }} --opt=production"
+
+- name: Install nodejs 0.10.35
+  yum:
+    name: nodejs-0.10.35-1contrail.el7
+
+- name: Build binary packages for Contrail WebUI
+  shell: |
+    make package REPO=../{{ item }}
+    rpmbuild \
+      --define "_builddir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/contrail/BUILD" \
+      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
+      --define "_srcVer {{ packaging.version.upstream }}" \
+      --bb {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/{{ item }}.spec
+  args:
+    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/contrail-web-core"
+
