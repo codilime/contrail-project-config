@@ -12,7 +12,9 @@
 
 - name: Build binary & source packages for contrail-vnc
   shell: |
-    rpmbuild --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
+    rpmbuild \
+      --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
+      --define "_opt production" \
       --ba tools/packages/rpm/contrail/contrail.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
