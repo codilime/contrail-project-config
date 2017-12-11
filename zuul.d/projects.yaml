@@ -3,10 +3,10 @@
     check:
       jobs:
         - contrail-vnc-build-unittest-ubuntu-trusty
+        - contrail-vnc-specs-linter
     experimental:
       jobs:
         - contrail-vnc-build-package-centos74
-        - contrail-vnc-specs-linter
 
 - project:
     name: Juniper/contrail-vrouter
