@@ -1,5 +1,5 @@
 diff --git a/common/rpm/contrail-nodemgr.spec b/common/rpm/contrail-nodemgr.spec
-index ab8b59c..24961a8 100644
+index ab8b59c..860861f 100644
 --- a/common/rpm/contrail-nodemgr.spec
 +++ b/common/rpm/contrail-nodemgr.spec
 @@ -94,7 +94,7 @@ popd
@@ -7,7 +7,7 @@ index ab8b59c..24961a8 100644
  pushd build/python_dist
  
 -tar zxf %{_build_dist}/control-node/dist/Control-Node-0.1dev.tar.gz
-+tar zxf %{_build_dist}/control-node/dist/Control-Node-0.1*dev.tar.gz
++tar zxf %{_build_dist}/control-node/dist/Control-Node-0.1*dev*.tar.gz
  pushd Control-Node-0.1dev
  %{__python} setup.py install --root=%{buildroot}
  install -d -m 755 %{buildroot}/usr/share/doc/python-Control-Node
