@@ -22,11 +22,16 @@
     - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
 
 # Needed while centos74 is not supported correctly 
+- name: Create missing directory
+  file:
+    state: directory
+    path: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller/build/"
+
 - name: Create links for centos 74 specs
   file:
     path: "{{ item.path }}"
     src: "{{ item.source }}"
-    state: hard
+    state: link
   with_items:
     - path: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux741708"
       source: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux71"
