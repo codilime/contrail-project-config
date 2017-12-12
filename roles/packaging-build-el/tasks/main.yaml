@@ -39,7 +39,7 @@
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller"
 
-- name: Build binary & source packages for contrail-openstack-{{ item }}
+- name: Build binary & source packages for contrail-openstack
   shell: |
     rpmbuild \
       --define "_topdir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/" \
@@ -57,7 +57,7 @@
     - vrouter
     - webui
 
-- name: Build binary & source packages for contrail-{{ item }}
+- name: Build binary & source packages for contrail components
   shell: |
     rpmbuild \
       --define "_topdir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/" \
@@ -68,7 +68,6 @@
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
   with_items:
-    - utils
     - vrouter-init
     - setup
 
