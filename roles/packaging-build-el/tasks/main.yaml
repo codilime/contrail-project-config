@@ -39,48 +39,29 @@
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller"
 
-- name: Build binary & source packages for contrail-openstack
+- name: "Build binary package for contrail-setup"
   shell: |
     rpmbuild \
       --define "_topdir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/" \
       --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
       --define "_srcVer {{ packaging.version.upstream }}" \
       --define "_skuTag mitaka" \
-      -ba {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/contrail-openstack-{{ item }}.spec
+      --define "_builddir {{ ansible_env.home }}/{{ packaging.target_dir }}/controller" \
+      -bb {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/contrail-setup.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller"
-  with_items:
-    - analytics
-    - control
-    - config-common
-    - config
-    - vrouter
-    - webui
 
-- name: Build binary & source packages for contrail components
-  shell: |
-    rpmbuild \
-      --define "_topdir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/" \
-      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
-      --define "_srcVer {{ packaging.version.upstream }}" \
-      --define "_skuTag mitaka" \
-      -ba {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/contrail-{{ item }}.spec
-  args:
-    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
+- name: Build additional packages
+  include: build_package.yaml
   with_items:
-    - vrouter-init
-    - setup
-
-- name: Build binary & source packages for neutron-plugin-contrail
-  shell: |
-    rpmbuild \
-      --define "_topdir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/" \
-      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
-      --define "_srcVer {{ packaging.version.upstream }}" \
-      --define "_skuTag mitaka" \
-      -ba {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/neutron-plugin-contrail.spec
-  args:
-    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
+    - { name: 'contrail-openstack-analytics', workdir: 'controller' }
+    - { name: 'contrail-openstack-control',   workdir: 'controller' }
+    - { name: 'contrail-openstack-config-common',   workdir: 'controller' }
+    - { name: 'contrail-openstack-config',   workdir: 'controller' }
+    - { name: 'contrail-openstack-vrouter',   workdir: 'controller' }
+    - { name: 'contrail-openstack-webui',   workdir: 'controller' }
+    - { name: 'contrail-vrouter-init' }
+    - { name: 'neutron-plugin-contrail' }
  
 - name: Install nodejs 0.10.35
   yum:
@@ -103,5 +84,5 @@
     - contrail-web-controller
 
 - name: Get a list of packages
-  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/x86_64/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
+  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/* {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
 
