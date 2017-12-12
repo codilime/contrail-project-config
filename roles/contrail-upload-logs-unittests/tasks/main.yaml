@@ -39,5 +39,7 @@
     recursive: yes
     src: "{{ ansible_env.HOME }}/unittests-logs"
     dest: "{{ zuul.executor.log_root }}/"
+    rsync_opts:
+      - "--exclude=third_party"
   when: logdir.stat.isdir is defined and logdir.stat.isdir
 
