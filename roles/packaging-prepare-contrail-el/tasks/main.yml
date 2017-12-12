@@ -20,7 +20,6 @@
   with_items:
     - { patch: 'vrouter.patch', path: 'vrouter/' }
     - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
-    - { patch: 'contrail_nodemgr.patch', path: 'tools/packaging/' }
 
 # Needed while centos74 is not supported correctly 
 - name: Create missing directory

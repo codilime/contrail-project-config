@@ -93,6 +93,7 @@ diskimages:
       DIB_GRUB_TIMEOUT: '0'
       DIB_EPEL_DISABLED: '0'
       DIB_YUM_MINIMAL_CREATE_INTERFACES: '0'
+      DIB_INSTALLTYPE_pip_and_virtualenv: package
   - name: ubuntu-xenial
     elements:
       - ubuntu
