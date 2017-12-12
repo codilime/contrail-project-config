@@ -29,11 +29,15 @@
     dest: "{{ zuul.executor.log_root }}/"
   with_items: "{{ loglist.files }}"
 
+- stat:
+    path: "{{ ansible_env.HOME }}/unittests-logs"
+  register: logdir
+
 - name: Send unittest logs to the executor
   synchronize:
     mode: pull
-    src: "{{ item }}"
+    recursive: yes
+    src: "{{ ansible_env.HOME }}/unittests-logs"
     dest: "{{ zuul.executor.log_root }}/"
-  with_fileglob:
-    - "unittests-logs"
+  when: logdir.stat.isdir is defined and logdir.stat.isdir
 
