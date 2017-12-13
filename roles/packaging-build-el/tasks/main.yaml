@@ -84,5 +84,5 @@
     - contrail-web-controller
 
 - name: Get a list of packages
-  shell: ls -l {{ansible_env.HOME }}/rpmbuild/RPMS/* {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
+  shell: ls -lR {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
 
