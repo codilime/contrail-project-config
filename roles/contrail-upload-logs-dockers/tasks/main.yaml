@@ -1,0 +1,18 @@
+- name: Get a list of logs
+  find:
+    paths: "{{ ansible_env.HOME }}/docker-logs"
+    patterns: '*.log'
+  register: loglist
+
+- name: Gzip the log files
+  archive:
+    path: "{{ item.path }}"
+    remove: true
+  with_items: "{{ loglist.files }}"
+
+- name: Send logs to the executor
+  synchronize:
+    mode: pull
+    src: "{{ item.path }}.gz"
+    dest: "{{ zuul.executor.log_root }}/docker/"
+  with_items: "{{ loglist.files }}"

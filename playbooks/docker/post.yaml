@@ -1,0 +1,4 @@
+- name: Send docker logs to the executor
+  hosts: all
+  roles:
+    - contrail-upload-logs-dockers
