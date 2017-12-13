@@ -37,7 +37,7 @@
     - test/base
 
 - name: Build microservices
-  include_tasks: build_container.yaml
+  include: build_container.yaml
   with_items:
     - agent/vrouter/
     - analytics/alarm-gen/
