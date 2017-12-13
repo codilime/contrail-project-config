@@ -90,7 +90,8 @@
     rsync_opts:
       - --no-motd
       - --quiet
+  delegate_to: "{{ inventory_hostname }}"
 
 - name: Get a list of packages
-  shell: ls -lR {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
+  shell: ls -lR {{ansible_env.HOME }}/rpmbuild/RPMS/* {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
 
