@@ -84,6 +84,8 @@
       Linux based distributions (CentOS, RHEL). Release-based variants of this
       job are then added to the Juniper/contrail-packages project.
     run: playbooks/packaging/contrail-vnc-el
+    secrets:
+      - site_pulp
 
 - job:
     name: contrail-vnc-build-package-centos74

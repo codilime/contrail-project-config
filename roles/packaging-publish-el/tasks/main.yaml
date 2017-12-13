@@ -1,0 +1,21 @@
+- name: upload packages to pulp server
+  synchronize:
+    src: "{{ executor_package_dir }}"
+    dest: /root/{{ reponame }}
+
+- name: delete repo
+  command: pulp-admin rpm repo delete --repo-id {{ reponame }}
+
+- name: create repo
+  command: pulp-admin rpm repo create --repo-id {{ reponame }}
+
+- name: add packages to pulp
+  command: pulp-admin rpm repo uploads rpm --repo-id {{ reponame }} --dir /root/{{ reponame }}/packages
+
+- name: publish repo
+  command: pulp-admin rpm repo publish run --repo-id {{ reponame }}
+
+- name: remove package directory from pulp server
+  file:
+    path: /root/{{ reponame }}
+    state: absent
