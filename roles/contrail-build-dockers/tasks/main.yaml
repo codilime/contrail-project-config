@@ -27,7 +27,7 @@
     state: directory
 
 - name: Build base containers
-  include_tasks: build_container.yaml
+  include: build_container.yaml
   with_items:
     - base
     - analytics/base
