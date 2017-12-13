@@ -34,6 +34,7 @@
       - Juniper/contrail-controller
       - Juniper/contrail-generateDS
       - Juniper/contrail-heat
+      - Juniper/contrail-provisioning
       - Juniper/contrail-neutron-plugin
       - Juniper/contrail-nova-extensions
       - Juniper/contrail-nova-vif-driver

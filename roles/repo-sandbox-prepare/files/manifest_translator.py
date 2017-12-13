@@ -56,14 +56,17 @@ for project in manifest.xpath('//project'):
     project.attrib['revision'] = head[:-1]
 
 # XXX(kklimonda): Remove after contrail-packaging has been added to contrail-vnc
-if not manifest.find('//project[@name="contrail-packaging"]'):
-    project = get_project(zuul_var, "contrail-packaging")
-    contrail_packaging = etree.Element("project", name=project['short_name'], remote=project['canonical_hostname'], path='tools/packaging')
-    contrail_packaging.tail = '\n'
+for repo_name, repo_path in [
+    ("contrail-packaging", "tools/packaging"),
+    ("contrail-provisioning", "tools/provisioning")]:
+    if not manifest.find('//project[@name="%s"]' % (repo_name,)):
+        project = get_project(zuul_var, repo_name)
+        repo_node = etree.Element("project", name=project['short_name'], remote=project['canonical_hostname'], path=repo_path)
+        repo_node.tail = '\n'
 
-    head = subprocess.check_output(['git', 'symbolic-ref', 'HEAD'], cwd=zuul_var['executor']['work_root'] + '/' + project['src_dir'])
-    contrail_packaging.attrib['revision'] = head[:-1]
-    manifest.getroot().append(contrail_packaging)
+        head = subprocess.check_output(['git', 'symbolic-ref', 'HEAD'], cwd=zuul_var['executor']['work_root'] + '/' + project['src_dir'])
+        repo_node.attrib['revision'] = head[:-1]
+        manifest.getroot().append(repo_node)
 
 with open(manifest_path, 'w') as manifest_file:
     manifest_file.write(dump_xml(manifest))
