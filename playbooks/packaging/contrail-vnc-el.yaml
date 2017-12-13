@@ -22,3 +22,7 @@
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
   roles:
     - packaging-publish-el
+
+- hosts: all
+  roles:
+    - contrail-build-dockers
