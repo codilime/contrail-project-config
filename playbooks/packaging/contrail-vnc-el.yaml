@@ -23,6 +23,6 @@
   roles:
     - packaging-publish-el
 
-- hosts: all
+- hosts: builder
   roles:
     - contrail-build-dockers
