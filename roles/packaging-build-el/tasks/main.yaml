@@ -83,6 +83,14 @@
     - contrail-web-core
     - contrail-web-controller
 
+- name: Collect all packages from workspace
+  synchronize:
+    src: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/RPMS/"
+    dest: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
+    rsync_opts:
+      - --no-motd
+      - --quiet
+
 - name: Get a list of packages
   shell: ls -lR {{ansible_env.HOME }}/rpmbuild/RPMS/ {{ansible_env.HOME }}/rpmbuild/SRPMS/ || /bin/true
 
