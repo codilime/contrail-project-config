@@ -46,7 +46,7 @@
       --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
       --define "_srcVer {{ packaging.version.upstream }}" \
       --define "_skuTag mitaka" \
-      --define "_builddir {{ ansible_env.home }}/{{ packaging.target_dir }}/controller" \
+      --define "_builddir {{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller" \
       -bb {{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/common/rpm/contrail-setup.spec
   args:
     chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller"
