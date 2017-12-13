@@ -7,7 +7,7 @@
 - hosts: all
   vars:
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
-    worker_package_dir: "{{ ansible_env.HOME }}/rpmbuild"
+    worker_package_dir: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
   roles:
     - packaging-upload-el
 
