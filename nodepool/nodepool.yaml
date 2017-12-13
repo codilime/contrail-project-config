@@ -37,6 +37,7 @@ providers:
     cloud: jnpr-contrail-ci
     api-timeout: 60
     boot-timeout: 120
+    clean-floating-ips: true
     rate: 1.0
     ipv6-preferred: false
     image-type: 'qcow2'
