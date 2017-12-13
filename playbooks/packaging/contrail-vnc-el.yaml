@@ -4,7 +4,7 @@
     - packaging-prepare-contrail-el
     - packaging-build-el
 
-- host: all
+- hosts: all
   vars:
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
     worker_package_dir: "{{ ansible_env.HOME }}/rpmbuild"
