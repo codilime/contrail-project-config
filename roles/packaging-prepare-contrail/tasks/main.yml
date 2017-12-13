@@ -38,6 +38,7 @@
     - { src: 'contrail-nova-extensions/', dest: 'openstack/nova_extensions' }
     - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
     - { src: 'contrail-common', dest: 'src' }
+    - { src: 'contrail-analytics', dest: 'src' }
     - { src: 'contrail-build/SConstruct', dest: '' }
   delegate_to: "{{ inventory_hostname }}"
 

@@ -30,6 +30,7 @@
     required-projects:
       - Juniper/contrail-api-client
       - Juniper/contrail-build
+      - Juniper/contrail-analytics
       - Juniper/contrail-common
       - Juniper/contrail-controller
       - Juniper/contrail-generateDS
@@ -134,6 +135,7 @@
       - Juniper/contrail-vrouter
       - Juniper/contrail-nova-vif-driver
       - Juniper/contrail-common
+      - Juniper/contrail-analytics
     irrelevant-files:
       - specs/.*
     run: playbooks/unittest/contrail
