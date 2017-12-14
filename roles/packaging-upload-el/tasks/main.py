@@ -1,11 +1,11 @@
 - name: create package dir on the executor
   file:
-    path: "{{ executor_package_dir }}"
+    path: "{{ zuul.executor.work_root }}/packages"
     state: directory
   delegate_to: localhost
 
 - name: send packages to the executor
   synchronize:
-    src: "{{ worker_package_dir }}/*.rpm"
-    dest: "{{ executor_package_dir }}"
+    src: "{{ ansible_env.HOME }}/rpmbuild/RPMS/*.rpm"
+    dest: "{{ zuul.executor.work_root }}/packages"
     mode: pull
