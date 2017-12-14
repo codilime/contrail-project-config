@@ -26,6 +26,12 @@
     path: "{{ ansible_env.HOME }}/docker-logs"
     state: directory
 
+- name: Install build dependencies
+  package:
+    name: docker iproute
+    state: latest
+  become: true
+
 - name: Build base containers
   include: build_container.yaml
   with_items:
