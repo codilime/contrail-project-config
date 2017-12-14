@@ -33,6 +33,7 @@
       - Juniper/contrail-analytics
       - Juniper/contrail-common
       - Juniper/contrail-controller
+      - Juniper/contrail-fabric-utils
       - Juniper/contrail-generateDS
       - Juniper/contrail-heat
       - Juniper/contrail-provisioning
@@ -43,6 +44,8 @@
       - Juniper/contrail-packaging
       - Juniper/contrail-sandesh
       - Juniper/contrail-third-party
+      - Juniper/contrail-test
+      - Juniper/contrail-test-ci
       - Juniper/contrail-vrouter
       - Juniper/contrail-webui-third-party
       - Juniper/contrail-web-controller
