@@ -4,10 +4,17 @@
     state: directory
   delegate_to: localhost
 
+- name: Get a list of package files
+  find:
+    paths: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
+    recurse: yes
+    patterns:
+      - '*.rpm'
+  register: package_list
+
 - name: send packages to the executor
   synchronize:
-    src: "{{ item.src }}"
+    src: "{{ item.path }}"
     dest: "{{ zuul.executor.work_root }}/packages/"
     mode: pull
-  with_filetree: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
-  when: item.state == 'file'
+  with_items: "{{ package_list.files }}"
