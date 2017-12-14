@@ -7,7 +7,7 @@
   command: pulp-admin rpm repo delete --repo-id {{ reponame }}
 
 - name: create repo
-  command: pulp-admin rpm repo create --repo-id {{ reponame }}
+  command: pulp-admin rpm repo create --repo-id {{ reponame }} --serve-http true
 
 - name: add packages to pulp
   command: pulp-admin rpm repo uploads rpm --repo-id {{ reponame }} --dir /root/{{ reponame }}/packages
