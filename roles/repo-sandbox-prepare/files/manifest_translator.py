@@ -56,8 +56,7 @@ for project in manifest.xpath('//project'):
     project.attrib['revision'] = head[:-1]
 
 # XXX(kklimonda): Remove after contrail-packaging has been added to contrail-vnc
-for repo_name, repo_path in [
-    ("contrail-test-ci", "tools/contrail-test-ci")]:
+for repo_name, repo_path in []:
     if not manifest.find('//project[@name="%s"]' % (repo_name,)):
         project = get_project(zuul_var, repo_name)
         repo_node = etree.Element("project", name=project['short_name'], remote=project['canonical_hostname'], path=repo_path)
