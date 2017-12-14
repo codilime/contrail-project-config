@@ -6,6 +6,8 @@
 
 - name: send packages to the executor
   synchronize:
-    src: "{{ ansible_env.HOME }}/rpmbuild/RPMS/*.rpm"
+    src: "{{ item }}"
     dest: "{{ zuul.executor.work_root }}/packages"
     mode: pull
+  with_fileglob:
+    - "{{ ansible_env.HOME }}/rpmbuild/RPMS/*/*.rpm"
