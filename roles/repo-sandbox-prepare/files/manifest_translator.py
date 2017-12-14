@@ -57,8 +57,11 @@ for project in manifest.xpath('//project'):
 
 # XXX(kklimonda): Remove after contrail-packaging has been added to contrail-vnc
 for repo_name, repo_path in [
-    ("contrail-analytics", "src/contrail-analytics"),
-    ("contrail-packaging", "tools/packaging"),
+    ("contrail-analytics",    "src/contrail-analytics"),
+    ("contrail-test",         "third_party/contrail-test"),
+    ("contrail-fabric-utils", "third_party/fabric-utils"),
+    ("contrail-packaging",    "tools/packaging"),
+    ("contrail-test-ci",      "tools/contrail-test-ci"),
     ("contrail-provisioning", "tools/provisioning")]:
     if not manifest.find('//project[@name="%s"]' % (repo_name,)):
         project = get_project(zuul_var, repo_name)

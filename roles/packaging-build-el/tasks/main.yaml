@@ -61,6 +61,8 @@
     - { name: 'contrail-openstack-vrouter',   workdir: 'controller' }
     - { name: 'contrail-openstack-webui',   workdir: 'controller' }
     - { name: 'contrail-vrouter-init' }
+#    - { name: 'contrail-test' }
+    - { name: 'fabric-utils' }
     - { name: 'neutron-plugin-contrail' }
  
 - name: Install nodejs 0.10.35
