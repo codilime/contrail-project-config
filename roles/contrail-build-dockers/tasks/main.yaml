@@ -8,7 +8,7 @@
 
 - name: Clone contrail-container-builder repository
   git:
-    repo: 'https://github.com/Juniper/contrail-container-builder'
+    repo: 'https://github.com/Diabelko/contrail-container-builder'
     force: yes
     dest: "{{ docker_build_dir }}"
 
