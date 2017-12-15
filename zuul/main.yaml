@@ -11,9 +11,9 @@
           - codilime/contrail-zuul-jobs
           - Juniper/contrail-api-client
           - Juniper/contrail-nova-extensions
-          - Juniper/contrail-analytics
       gerrit:
         untrusted-projects:
+          - Juniper/contrail-analytics
           - Juniper/contrail-build
           - Juniper/contrail-common
           - Juniper/contrail-controller

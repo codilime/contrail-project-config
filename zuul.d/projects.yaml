@@ -21,6 +21,12 @@
         - contrail-vnc-build-unittest-ubuntu-trusty
 
 - project:
+    name: Juniper/contrail-analytics
+    check:
+      jobs:
+        - contrail-vnc-build-unittest-ubuntu-trusty
+
+- project:
     name: Juniper/contrail-sandesh
     check:
       jobs:
