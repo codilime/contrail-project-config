@@ -17,7 +17,7 @@
     content: |
       CONTRAIL_VERSION={{ zuul.buildset }}-{{ zuul.patchset }}
       CONTRAIL_REGISTRY={{ site_pulp.fqdn }}
-      CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}:{{ site_pulp.registry_port }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
+      CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       OPENSTACK_VERSION=newton
     dest: "{{ docker_build_dir }}/common.env"
 
