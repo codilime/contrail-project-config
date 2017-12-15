@@ -2,6 +2,13 @@
   contrail_packaging:
     zuul: "{{ zuul }}"
 
+- name: Ensure that docker daemon is running
+  service:
+    name: docker
+    state: started
+  become: true
+  become_user: root
+
 - name: Set container build dir
   set_fact:
     docker_build_dir: "{{ ansible_env.HOME }}/contrail-container-builder"
