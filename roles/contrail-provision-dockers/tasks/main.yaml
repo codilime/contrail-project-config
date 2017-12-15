@@ -45,12 +45,16 @@
 - name: Provision Contrail with deploy.yml playbook
   command: >
     ansible-playbook -i inventory/ playbooks/deploy.yml -v
-  become: yes
   args:
     chdir: "{{ docker_provision_dir }}"
   environment:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
     ANSIBLE_STDOUT_CALLBACK: debug
+  become: True
+  become_user: root
+
+- name: Show the list of running containers
+  command: docker ps -a
   become: True
   become_user: root
     
