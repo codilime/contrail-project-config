@@ -50,6 +50,7 @@
     chdir: "{{ docker_provision_dir }}"
   environment:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
+    ANSIBLE_STDOUT_CALLBACK: debug
   become: True
   become_user: root
     
