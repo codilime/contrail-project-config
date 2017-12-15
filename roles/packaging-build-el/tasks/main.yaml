@@ -14,19 +14,19 @@
   command: rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}" kernel-devel
   register: kver
 
-#- name: Build binary & source packages for contrail-vnc
-#  shell: |
-#    rpmbuild \
-#      --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
-#      --define "_opt production" \
-#      --define "_kVers {{ kver.stdout }}" \
-#      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
-#      --define "_srcVer {{ packaging.version.upstream }}" \
-#      -ba tools/packages/rpm/contrail/contrail.spec
-#  args:
-#    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
-#  environment:
-#    SCONSFLAGS: "-j {{ ansible_processor_vcpus }} --opt=production"
+- name: Build binary & source packages for contrail-vnc
+  shell: |
+    rpmbuild \
+      --define '_sbtop {{ ansible_env.HOME }}/{{ packaging.target_dir }}' \
+      --define "_opt production" \
+      --define "_kVers {{ kver.stdout }}" \
+      --define "_buildTag {{ zuul.change }}.{{ zuul.patchset }}" \
+      --define "_srcVer {{ packaging.version.upstream }}" \
+      -ba tools/packages/rpm/contrail/contrail.spec
+  args:
+    chdir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}"
+  environment:
+    SCONSFLAGS: "-j {{ ansible_processor_vcpus }} --opt=production"
 
 - name: Build binary & source packages for contrail-nodemgr
   shell: |
