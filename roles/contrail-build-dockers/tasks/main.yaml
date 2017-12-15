@@ -42,6 +42,8 @@
         "insecure-registries": ["10.84.56.38:5000"]
       }
     dest: /etc/docker/daemon.json
+  become: true
+  become_user: root
 
 - name: Ensure that docker daemon is running
   service:
