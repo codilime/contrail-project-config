@@ -27,7 +27,7 @@
 
 - name: Provision Contrail with deploy.yml playbook
   command: >
-    ansible-playbook -i inventory/hosts playbook/deploy.yml -v
+    ansible-playbook -i inventory/hosts playbooks/deploy.yml -v
   become: yes
   args:
     chdir: "{{ docker_provision_dir }}"
