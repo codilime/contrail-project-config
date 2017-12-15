@@ -16,7 +16,7 @@
   copy:
     content: |
       CONTRAIL_VERSION={{ zuul.buildset }}-{{ zuul.patchset }}
-      CONTRAIL_REGISTRY=10.84.56.38
+      CONTRAIL_REGISTRY=10.84.56.38:5000
       CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       OPENSTACK_VERSION=newton
     dest: "{{ docker_build_dir }}/common.env"
@@ -34,6 +34,14 @@
   with_items:
     - docker
     - iproute
+
+- name: Configure docker insecure registries
+  copy:
+    content: |
+      {
+        "insecure-registries": ["10.84.56.38:5000"]
+      }
+    dest: /etc/docker/daemon.json
 
 - name: Ensure that docker daemon is running
   service:
