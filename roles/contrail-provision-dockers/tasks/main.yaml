@@ -26,18 +26,18 @@
     - container_hosts.yaml
 
 - name: ensure SSH key is generated
-  command: ssh-keygen -t rsa -f /root/.ssh/id_rsa.ansible -N ''
+  command: ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ''
   args:
-    creates: /root/.ssh/id_rsa.ansible
+    creates: /root/.ssh/id_rsa
   become: True
   become_user: root
 
 - name: add key to authorized keys
   shell: |
-    cp /root/.ssh/id_rsa.ansible.pub /root/.ssh/authorized_keys
+    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
     chmod 600 /root/.ssh/authorized_keys
-    chmod 600 /root/.ssh/id_rsa.ansible
-    chmod 600 /root/.ssh/id_rsa.ansible.pub
+    chmod 600 /root/.ssh/id_rsa
+    chmod 600 /root/.ssh/id_rsa.pub
     chmod 700 /root/.ssh
   become: True
   become_user: root
