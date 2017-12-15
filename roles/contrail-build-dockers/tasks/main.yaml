@@ -15,7 +15,7 @@
 - name: Prepare container build configuration
   copy:
     content: |
-      CONTRAIL_VERSION={{ zuul.buildset }}-{{ zuul.patchset }}
+      CONTRAIL_VERSION={{ zuul.change }}-{{ zuul.patchset }}
       CONTRAIL_REGISTRY=10.84.56.38:5000
       CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/38333-2
       OPENSTACK_VERSION=newton
