@@ -2,5 +2,5 @@
   roles:
     - role: contrail-provision-dockers
       docker_provision_dir: '/tmp/contrail-container-deployer'
-      contrail_version: '4.1.0.0-8'
+      contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
 
