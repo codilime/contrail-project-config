@@ -1,0 +1,16 @@
+---
+BUILD_VMS: false
+CONFIGURE_VMS: true
+CREATE_CONTAINERS: true
+CONTAINER_VM_CONFIG:
+  root_pwd: contrail123
+  vcpu: 4
+  vram: 16384
+  vdisk: 100G
+  network:
+    subnet_prefix: 192.168.1.0
+    subnet_netmask: 255.255.255.0
+    gatway: 192.168.1.1
+    nameserver: 10.84.5.100
+    ntpserver: 192.168.1.1
+    domainsuffix: local

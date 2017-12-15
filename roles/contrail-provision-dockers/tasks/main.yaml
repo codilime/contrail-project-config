@@ -1,0 +1,33 @@
+- name: Install build dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: true
+  with_items:
+    - ansible
+
+- name: Clone contrail-ansible-deployer repository
+  git:
+    repo: 'https://github.com/Juniper/contrail-ansible-deployer'
+    version: 'a32639c61f4c5c20fddb99ccb25f75944cf2ca0a'
+    dest: "{{ docker_provision_dir }}"
+
+- name: Copy hosts template
+  template:
+    src: inventory/hosts.j2
+    dest: "{{ docker_provision_dir }}/inventory/hosts"
+
+- name: Copy vars template
+  template:
+    src: "inventory/group_vars/{{ item }}.j2"
+    dest: "{{ docker_provision_dir }}/inventory/{{ item }}"
+    with_item:
+      - all.yaml
+      - container_hosts.yaml
+
+- name: Provision Contrail with deploy.yml playbook
+  command: >
+    ansible-playbook -i inventory/hosts playbook/deploy.yml -v
+  become: yes
+  args:
+    chdir: "{{ docker_provision_dir }}"

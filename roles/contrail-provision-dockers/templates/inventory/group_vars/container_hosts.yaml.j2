@@ -1,0 +1,15 @@
+CONTAINER_REGISTRY: "{{ deployer_registry.fqdn }}:{{ deployer_registry.port }}"
+contrail_configuration:
+  CONTRAIL_VERSION: "{{ contrail_version }}"
+  CONTROLLER_NODES: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+  CLOUD_ORCHESTRATOR: kubernetes
+roles:
+  "{{ hostvars[inventory_hostname]['ansible_host'] }}":
+    configdb:
+    config:
+    control:
+    webui:
+    analytics:
+    analyticsdb:
+    k8s_master:
+    vrouter:
