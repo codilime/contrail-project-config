@@ -20,10 +20,10 @@
 - name: Copy vars template
   template:
     src: "inventory/group_vars/{{ item }}.j2"
-    dest: "{{ docker_provision_dir }}/inventory/{{ item }}"
+    dest: "{{ docker_provision_dir }}/inventory/group_vars/{{ item }}"
   with_items:
-    - all.yaml
-    - container_hosts.yaml
+    - all.yml
+    - container_hosts.yml
 
 - name: ensure SSH key is generated
   command: ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ''
@@ -44,7 +44,7 @@
 
 - name: Provision Contrail with deploy.yml playbook
   command: >
-    ansible-playbook -i inventory -e @inventory/container_hosts.yaml playbooks/deploy.yml -v
+    ansible-playbook -i inventory/ playbooks/deploy.yml -v
   become: yes
   args:
     chdir: "{{ docker_provision_dir }}"
