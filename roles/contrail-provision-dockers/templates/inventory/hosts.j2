@@ -1,4 +1,5 @@
 container_hosts: 
   hosts:
     "{{ hostvars[inventory_hostname]['ansible_host'] }}":
-      ansible_ssh_pass: contrail123
+      #ansible_ssh_pass: contrail123
+      ansible_ssh_user: root
