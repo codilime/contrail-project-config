@@ -31,3 +31,6 @@
   become: yes
   args:
     chdir: "{{ docker_provision_dir }}"
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: 'False'
+    
