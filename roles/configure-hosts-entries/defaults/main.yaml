@@ -2,4 +2,4 @@ hosts_entries:
   - fqdn: mirror.regionone.jnpr-contrail-ci.opencontrail.org
     address: 10.84.56.27
   - fqdn: repo01-jnpr.opencontrail.org
-    address: 10.84.56.4
+    address: 107.170.203.108
