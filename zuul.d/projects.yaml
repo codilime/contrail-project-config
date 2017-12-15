@@ -15,7 +15,7 @@
               - contrail-vnc-build-containers-centos74
     experimental-provision:
       jobs:
-        - contrail-systest-centos74-kubernetes
+        - contrail-systest-centos74-kolla-ocata
 
 - project:
     name: Juniper/contrail-vrouter

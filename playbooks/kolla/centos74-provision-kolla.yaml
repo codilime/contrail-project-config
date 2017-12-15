@@ -1,0 +1,8 @@
+- hosts: all
+  roles:
+    - role: kolla-provision-dockers
+      kolla_provision_dir: '/tmp/contrail-kolla-ansible'
+      kolla_config_dir: "{{ kolla_provision_dir }}/etc/kolla"
+      contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
+      openstack_version: ocata
+
