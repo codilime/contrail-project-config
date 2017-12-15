@@ -39,6 +39,7 @@
     - { src: 'contrail-nova-vif-driver/', dest: 'openstack/nova_contrail_vif' }
     - { src: 'contrail-common', dest: 'src' }
     - { src: 'contrail-build/SConstruct', dest: '' }
+    - { src: 'contrail-analytics', dest: 'src' }
   delegate_to: "{{ inventory_hostname }}"
 
 - name: Hard-link github repositories into expected structure
@@ -48,8 +49,7 @@
     rsync_opts:
       - --no-motd
       - --quiet
-  with_items:
-    - { src: 'contrail-analytics', dest: 'src' }
+  with_items: []
   delegate_to: "{{ inventory_hostname }}"
 
 - name: Copy debian/ to enable package building

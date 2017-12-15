@@ -9,7 +9,6 @@
 - name: Clone contrail-ansible-deployer repository
   git:
     repo: 'https://github.com/Juniper/contrail-ansible-deployer'
-    version: 'a32639c61f4c5c20fddb99ccb25f75944cf2ca0a'
     dest: "{{ docker_provision_dir }}"
 
 - name: Copy hosts template
