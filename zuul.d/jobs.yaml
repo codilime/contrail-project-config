@@ -152,6 +152,7 @@
     name: contrail-systest-centos74-kubernetes
     voting: False
     run: playbooks/docker/centos74-provision-systest
+    parent: contrail-vnc-base
     nodeset:
       nodes:
         - name: contrail-aio
