@@ -21,9 +21,9 @@
   template:
     src: "inventory/group_vars/{{ item }}.j2"
     dest: "{{ docker_provision_dir }}/inventory/{{ item }}"
-    with_item:
-      - all.yaml
-      - container_hosts.yaml
+  with_items:
+    - all.yaml
+    - container_hosts.yaml
 
 - name: Provision Contrail with deploy.yml playbook
   command: >
