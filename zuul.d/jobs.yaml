@@ -166,6 +166,7 @@
         - name: builder
           label: centos-7.4-builder
     secrets:
+      - site_pulp
       - docker_registry
 
 - job:
