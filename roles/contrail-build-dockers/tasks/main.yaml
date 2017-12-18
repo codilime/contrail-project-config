@@ -1,7 +1,3 @@
-- name: Prepare packaging variables
-  contrail_packaging:
-    zuul: "{{ zuul }}"
-
 - name: Set container build dir
   set_fact:
     docker_build_dir: "{{ ansible_env.HOME }}/contrail-container-builder"
