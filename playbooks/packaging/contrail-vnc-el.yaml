@@ -16,7 +16,7 @@
     - contrail-common-libs
     - packaging-prepare-contrail-el
     - packaging-build-el
-    - packaging-upload-el
+    - packaging-fetch-el
 
 - hosts: localhost
   roles:
