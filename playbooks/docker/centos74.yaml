@@ -1,4 +1,6 @@
 - hosts: all
+  vars:
+    openstack_version: newton
   pre_tasks:
     - name: check for already built containers
       uri:

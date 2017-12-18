@@ -14,7 +14,7 @@
       CONTRAIL_VERSION={{ zuul.change }}-{{ zuul.patchset }}
       CONTRAIL_REGISTRY={{ docker_registry.fqdn }}:{{ docker_registry.port }}
       CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
-      OPENSTACK_VERSION=newton
+      OPENSTACK_VERSION={{ openstack_version }}
     dest: "{{ docker_build_dir }}/common.env"
 
 - name: Create log dir
@@ -90,4 +90,4 @@
     - nodemgr
     - openstack/compute-contrail-backend
     - openstack/neutron-contrail-backend
-    - test/newton
+    - test/{{ openstack_version }}
