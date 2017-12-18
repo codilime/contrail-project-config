@@ -18,7 +18,6 @@
     basedir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.path }}"
     strip: 1
   with_items:
-    - { patch: 'vrouter.patch', path: 'vrouter/' }
     - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
 
 # Needed while centos74 is not supported correctly 
