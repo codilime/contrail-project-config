@@ -1,18 +1,18 @@
-commit 5e9f992664c0e81c2b8d087ff0253a666771ce2c
-Author: Wojciech Urbański <wojciech.urbanski@codilime.com>
-Date:   Mon Dec 4 10:32:40 2017 +0100
+From fb02f9c5629378b09acdb773514e490fe3dcbce3 Mon Sep 17 00:00:00 2001
+From: Wojciech Urbański <wojciech.urbanski@codilime.com>
+Date: Mon, 04 Dec 2017 10:32:40 +0100
+Subject: [PATCH] Fixed spec file for rpmbuilds.
 
-    Fixed spec file for rpmbuilds.
-    
-    - Moved BuildRequirements above %description to make it work.
-    - Added missing BuildRequirements (contains custom rpm packages)
-    - Fixed paths in certain build files.
-    
-    Change-Id: If5fffb52a6bfe6e40792f8f1c4751d407b6a893f
-    Closes-Bug: 1736103
+- Moved BuildRequirements above %description to make it work.
+- Added missing BuildRequirements (contains custom rpm packages)
+- Fixed paths in certain build files.
+
+Change-Id: If5fffb52a6bfe6e40792f8f1c4751d407b6a893f
+Closes-Bug: 1736103
+---
 
 diff --git a/rpm/contrail/contrail.spec b/rpm/contrail/contrail.spec
-index adc7e8b..0f45db4 100644
+index 5b3b297..60c69ea 100644
 --- a/rpm/contrail/contrail.spec
 +++ b/rpm/contrail/contrail.spec
 @@ -25,6 +25,11 @@
@@ -27,7 +27,7 @@ index adc7e8b..0f45db4 100644
  
  %{echo: "Building release %{_relstr}\n"}
  
-@@ -38,45 +43,55 @@ License:            ASL 2.0
+@@ -38,47 +43,55 @@
  URL:                www.opencontrail.org
  Vendor:             OpenContrail Project.
  
@@ -74,7 +74,7 @@ index adc7e8b..0f45db4 100644
  %description
  Contrail package describes all sub packages that are required to
  run open contrail.
- 
+-
 -BuildRequires:  make
 -BuildRequires:  gcc
 -BuildRequires:  systemd-units
@@ -104,7 +104,9 @@ index adc7e8b..0f45db4 100644
 -BuildRequires:  libzookeeper-devel
 -BuildRequires:  librdkafka-devel >= 0.9.0
 -BuildRequires:  grok-devel
+-BuildRequires:  systemd-units
 -
+ 
  %prep
  
  %install
@@ -114,7 +116,7 @@ index adc7e8b..0f45db4 100644
  for kver in %{_kvers}; do
      echo "Kver = ${kver}"
      set +e
-@@ -84,7 +99,7 @@ for kver in %{_kvers}; do
+@@ -86,7 +99,7 @@
      exit_code=$?
      set -e
      if [ $exit_code == 0 ]; then
@@ -123,7 +125,7 @@ index adc7e8b..0f45db4 100644
      else
          echo "WARNING: kernel-devel-$kver is not installed, Skipping building vrouter for $kver"
      fi
-@@ -104,7 +119,7 @@ rm -rf %{buildroot}/_centos
+@@ -106,7 +119,7 @@
  popd
  #Build nova-contrail-vif
  pushd %{_sbtop}
@@ -132,7 +134,7 @@ index adc7e8b..0f45db4 100644
  popd
  pushd %{_sbtop}/build/noarch/nova_contrail_vif
  python setup.py install --root=%{buildroot}
-@@ -128,19 +143,19 @@ done
+@@ -130,19 +143,19 @@
  python %{_sbtop}/tools/packages/utils/generate_doc_index.py %{buildroot}/usr/share/doc/contrail-docs/html/messages
  # contrail-cli
  install -d -m 0755 %{buildroot}/etc/bash_completion.d
@@ -162,7 +164,7 @@ index adc7e8b..0f45db4 100644
  popd
  
  #Needed for agent container env
-@@ -349,7 +364,7 @@ in the OpenContrail API server.
+@@ -374,7 +387,7 @@
  %{python_sitelib}/cfgm_common*
  %{python_sitelib}/libpartition*
  %{python_sitelib}/pysandesh*
