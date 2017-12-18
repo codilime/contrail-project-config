@@ -1,4 +1,4 @@
-CONTAINER_REGISTRY: "{{ deployer_registry.fqdn }}:{{ deployer_registry.port }}"
+CONTAINER_REGISTRY: "{{ docker_registry.fqdn }}:{{ docker_registry.port }}"
 contrail_configuration:
   CONTRAIL_VERSION: "{{ contrail_version }}"
   CONTROLLER_NODES: "{{ hostvars[inventory_hostname]['ansible_host'] }}"

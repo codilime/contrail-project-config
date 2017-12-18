@@ -10,4 +10,3 @@
     - start-zuul-console
     - configure-hosts-entries
     - validate-host
-    - repo-sandbox-prepare

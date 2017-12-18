@@ -23,8 +23,23 @@
       - site_logs
 
 - job:
-    name: contrail-vnc-base
+    name: contrail-base
     parent: null
+    description: |
+      A base job that prepares the builder
+    pre-run: playbooks/contrail/pre
+    post-run:
+      - playbooks/base/post-ssh
+      - playbooks/base/post-logs
+    roles:
+      - zuul: codilime/zuul-jobs
+    timeout: 28800
+    secrets:
+      - site_logs
+
+- job:
+    name: contrail-vnc-base
+    parent: contrail-base
     description: |
       A base job that prepares Contrail VNC sandbox using Android repo
     required-projects:
@@ -54,15 +69,7 @@
       - Juniper/contrail-web-storage
     irrelevant-files:
       - specs/.*
-    pre-run: playbooks/contrail/pre
-    post-run:
-      - playbooks/base/post-ssh
-      - playbooks/base/post-logs
-    roles:
-      - zuul: codilime/zuul-jobs
-    timeout: 28800
-    secrets:
-      - site_logs
+    pre-run: playbooks/contrail/vnc-pre
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
@@ -93,6 +100,7 @@
 
 - job:
     name: contrail-vnc-build-package-centos74
+    voting: False
     parent: contrail-vnc-build-package-el-base
     nodeset:
       nodes:
@@ -149,13 +157,25 @@
           label: ubuntu-trusty-builder
 
 - job:
+    name: contrail-vnc-build-containers-centos74
+    parent: contrail-base
+    voting: False
+    run: playbooks/docker/centos74
+    nodeset:
+      nodes:
+        - name: builder
+          label: centos-7.4-builder
+    secrets:
+      - docker_registry
+
+- job:
     name: contrail-systest-centos74-kubernetes
     voting: False
     run: playbooks/docker/centos74-provision-systest
-    parent: contrail-vnc-base
+    parent: contrail-base
     nodeset:
       nodes:
         - name: contrail-aio
           label: centos-7.4-builder
     secrets:
-      - deployer_registry
+      - docker_registry

@@ -7,9 +7,12 @@
     experimental:
       jobs:
         - contrail-vnc-build-package-centos74
-        - contrail-systest-centos74-kubernetes:
+        - contrail-vnc-build-containers-centos74
             dependencies:
               - contrail-vnc-build-package-centos74
+        - contrail-systest-centos74-kubernetes:
+            dependencies:
+              - contrail-vnc-build-containers-centos74
     experimental-provision:
       jobs:
         - contrail-systest-centos74-kubernetes
