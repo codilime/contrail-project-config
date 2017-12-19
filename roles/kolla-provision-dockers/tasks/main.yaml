@@ -13,8 +13,9 @@
     version: "contrail/{{ openstack_version }}"
 
 - name: Copy Kolla config files
-  src: "{{ kolla_config_dir }}/{{ item }}.original"
-  dest: "{{ kolla_config_dir }}/{{ item }}"
+  copy:
+    src: "{{ kolla_config_dir }}/{{ item }}.original"
+    dest: "{{ kolla_config_dir }}/{{ item }}"
   with_items:
     - passwords.yml
     - globals.yml
