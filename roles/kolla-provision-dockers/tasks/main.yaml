@@ -14,13 +14,14 @@
 
 - name: Copy Kolla config files
   copy:
-    src: "{{ kolla_config_dir }}/{{ item }}.original"
-    dest: "{{ kolla_config_dir }}/{{ item }}"
+    src: "{{ item }}.original"
+    dest: "{{ item }}"
+  when: item|is_file
   with_items:
-    - passwords.yml
-    - globals.yml
+    - "{{ kolla_config_dir }}/passwords.yml"
+    - "{{ kolla_config_dir }}/globals.yml"
 
-- name:  provisioning parameters to Kolla globals.yml
+- name: Provisioning parameters to Kolla globals.yml
   template:
     src: "{{ item }}.j2"
     dest: "{{ kolla_config_dir }}/{{ item }}"
