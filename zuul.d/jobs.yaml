@@ -183,7 +183,7 @@
 
 - job:
     name: contrail-systest-centos74-kolla-ocata
-    parent: contrail-vnc-base
+    parent: contrail-base
     voting: False
     run: playbooks/kolla/centos74-provision-kolla
     nodeset:
