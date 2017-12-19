@@ -8,7 +8,7 @@
 
 - name: Clone contrail-ansible-deployer repository
   git:
-    repo: 'https://github.com/Juniper/contrail-ansible-deployer'
+    repo: 'https://github.com/jluk-codi/contrail-ansible-deployer'
     dest: "{{ docker_provision_dir }}"
 
 - name: Copy hosts template
@@ -56,4 +56,3 @@
   command: docker ps -a
   become: True
   become_user: root
-    
