@@ -1,0 +1,70 @@
+- name: Install build dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  become: true
+  with_items:
+    - ansible
+
+- name: Clone contrail-kolla-ansible repository
+  git:
+    repo: 'https://github.com/Juniper/contrail-kolla-ansible'
+    dest: "{{ kolla_provision_dir }}"
+    version: "contrail/{{ openstack_version }}"
+
+- name: Copy Kolla config files
+  src: "{{ kolla_config_dir }}/{{ item }}.original"
+  dest: "{{ kolla_config_dir }}/{{ item }}"
+  with_items:
+    - passwords.yml
+    - globals.yml
+
+- name:  provisioning parameters to Kolla globals.yml
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ kolla_config_dir }}/{{ item }}"
+  with_items:
+    - globals.yml
+
+- name: Prepare all-in-one inventory for Kolla deployment
+  replace:
+    path: "{{ kolla_provision_dir }}/ansible/inventory/all-in-one"
+    regexp: '^localhost\s+ansible_connection=local\s+$'
+    replace: "{{ hostvars[inventory_hostname]['ansible_host'] }}       ansible_ssh_pass=contrail123"
+
+- name: Ensure SSH key is generated
+  command: ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ''
+  args:
+    creates: /root/.ssh/id_rsa
+  become: true
+  become_user: root
+
+- name: Add key to authorized keys
+  shell: |
+    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+    chmod 600 /root/.ssh/authorized_keys
+    chmod 600 /root/.ssh/id_rsa
+    chmod 600 /root/.ssh/id_rsa.pub
+    chmod 700 /root/.ssh
+  become: true
+  become_user: root
+
+- name: Provision Contrail with deploy.yml playbook
+  command: >
+    ansible-playbook -i inventory/all-in-one \
+                     -e@../etc/kolla/globals.yml \
+                     -e@../etc/kolla/passwords.yml \
+                     all.yml -v
+  become: true
+  become_user: root
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: 'false'
+    ANSIBLE_STDOUT_CALLBACK: debug
+  args:
+    chdir: "{{ kolla_provision_dir }}/ansible"
+
+- name: Show the list of running containers
+  command: docker ps -a
+  become: true
+  become_user: root
+
