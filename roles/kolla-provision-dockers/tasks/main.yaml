@@ -22,11 +22,11 @@
     - "{{ kolla_config_dir }}/globals.yml"
 
 - name: Provisioning parameters to Kolla globals.yml
-  template:
-    src: "{{ item }}.j2"
-    dest: "{{ kolla_config_dir }}/{{ item }}"
-  with_items:
-    - globals.yml
+  lineinfile:
+    dest: "{{ kolla_config_dir }}/globals.yml"
+    regexp: "^{{ item.key }}:"
+    line: "{{ item.key }}: {{ item.value }}"
+  with_dict: "{{ kolla_globals_config }}"
 
 - name: Prepare all-in-one inventory for Kolla deployment
   replace:
