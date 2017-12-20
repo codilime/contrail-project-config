@@ -5,3 +5,4 @@
       contrail_version: "38333-2"
       openstack_version: newton
       deploy_kubernetes: False
+    - contrail-sanitytests
