@@ -11,15 +11,6 @@
   become: True
   become_user: root
 
-# waiting for merge (38098, 38099)
-- name: Apply temporary patches for CentOS7.4
-  patch:
-    src: "{{ item.patch }}"
-    basedir: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/{{ item.path }}"
-    strip: 1
-  with_items:
-    - { patch: 'contrail_spec.patch', path: 'tools/packages/' }
-
 # Needed while centos74 is not supported correctly 
 - name: Create missing directory
   file:
