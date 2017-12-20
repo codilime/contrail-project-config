@@ -1,8 +1,8 @@
 kolla_globals_config:
   kolla_base_distro: "{{ kolla_docker_distro }}"
   kolla_install_type: 'binary'
-  openstack_release: "{{ contrail_version }}"
-  docker_registry: '10.84.22.43:4000'
+  openstack_release: "{{ kolla_version }}"
+  docker_registry: "{{ docker_registry.fqdn }}:{{ docker_registry.port }}"
   enable_keystone_v3: "no"
   keystone_admin_user: 'admin'
   contrail_api_interface_address: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
