@@ -70,6 +70,7 @@
     irrelevant-files:
       - specs/.*
     pre-run: playbooks/contrail/vnc-pre
+    post-run: playbooks/contrail/vnc-post
 
 - job:
     name: contrail-vnc-build-package-ubuntu-base
