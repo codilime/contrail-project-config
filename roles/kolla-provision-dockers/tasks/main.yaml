@@ -4,10 +4,9 @@
     state: latest
   become: true
   with_items:
-    - "epel-release"
-    - "centos-release-openstack-ocata"
-    - "python2-pip"
+    - "centos-release-openstack-{{ openstack_version }}"
     - "ansible"
+    - "python2-jinja2"
 
 - name: Clone contrail-kolla-ansible repository
   git:
