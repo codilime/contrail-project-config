@@ -3,6 +3,7 @@
     - role: kolla-provision-dockers
       kolla_provision_dir: '/tmp/contrail-kolla-ansible'
       kolla_config_dir: "{{ kolla_provision_dir }}/etc/kolla"
+      kolla_docker_distro: "ubuntu"
       contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
-      openstack_version: ocata
+      openstack_version: 'contrail_4_1_8'
 
