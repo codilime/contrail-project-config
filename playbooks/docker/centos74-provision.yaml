@@ -1,7 +1,7 @@
 - hosts: all
   roles:
-    - role: contrail-provision-dockers
+    - role: contrail-ansible-deployer
       docker_provision_dir: '/tmp/contrail-container-deployer'
-      contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
+      contrail_version: "38333-2"
       openstack_version: newton
-
+      deploy_kubernetes: False

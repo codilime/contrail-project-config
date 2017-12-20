@@ -172,7 +172,7 @@
 - job:
     name: contrail-systest-centos74-kubernetes
     voting: False
-    run: playbooks/docker/centos74-provision-systest
+    run: playbooks/docker/centos74-systest-kubernetes
     parent: contrail-base
     nodeset:
       nodes:
@@ -189,6 +189,18 @@
     nodeset:
       nodes:
         - name: kolla-aio
+          label: centos-7.4-builder
+    secrets:
+      - docker_registry
+
+- job:
+    name: contrail-provision-centos74
+    voting: False
+    run: playbooks/docker/centos74-provision
+    parent: contrail-base
+    nodeset:
+      nodes:
+        - name: contrail-aio
           label: centos-7.4-builder
     secrets:
       - docker_registry
