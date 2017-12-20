@@ -5,5 +5,6 @@
       kolla_config_dir: "{{ kolla_provision_dir }}/etc/kolla"
       kolla_docker_distro: "ubuntu"
       contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
-      openstack_version: 'contrail_4_1_8'
+      openstack_version: 'ocata'
+      contrail_version: 'contrail_4_1_8'
 

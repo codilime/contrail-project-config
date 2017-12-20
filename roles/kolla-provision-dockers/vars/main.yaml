@@ -1,7 +1,7 @@
 kolla_globals_config:
   kolla_base_distro: "{{ kolla_docker_distro }}"
   kolla_install_type: 'binary'
-  openstack_release: "{{ openstack_version }}"
+  openstack_release: "{{ contrail_version }}"
   docker_registry: '10.84.22.43:4000'
   enable_keystone_v3: "no"
   keystone_admin_user: 'admin'
