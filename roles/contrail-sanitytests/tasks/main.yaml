@@ -1,6 +1,8 @@
 - name: template the testbed.py
-  debug:
-    msg: testbed.py
+  template:
+    src: testbed.py.j2
+    dest: "{{ ansible_env.HOME}}/testbed.py"
+
 - name: run the testrunner container
   docker_container:
     image: 10.84.56.38:5000/contrail-test:static-newton
