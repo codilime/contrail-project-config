@@ -3,7 +3,10 @@
     src: testbed.py.j2
     dest: "{{ ansible_env.HOME}}/testbed.py"
 
-- name: run the testrunner container
-  docker_container:
-    image: 10.84.56.38:5000/contrail-test:static-newton
-    command: date
+- name: Clone contrail-test-ci repository
+  git:
+    repo: 'https://github.com/Juniper/contrail-test-ci'
+    dest: "{{ ansible_env.HOME }}"
+
+- name: Run the sanity test
+  command: "{{ ansible_env.HOME }}/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py"
