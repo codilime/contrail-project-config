@@ -23,6 +23,11 @@
     repo: 'https://github.com/Juniper/contrail-test-ci'
     dest: "{{ ansible_env.HOME }}/mount/contrail-test"
 
+- name: Copy empty config
+  copy:
+    content: ""
+    dest: "{{ ansible_env.HOME }}/testbed1.py"
+
 - name: Run the sanity test
   command: "{{ ansible_env.HOME }}/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed1.py -m {{ ansible_env.HOME }}/mount '10.84.56.38:5000/contrail-test:static-newton'"
   become: yes
