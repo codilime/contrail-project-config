@@ -5,7 +5,7 @@
       kolla_config_dir: "{{ kolla_provision_dir }}/etc/kolla"
       kolla_docker_distro: "ubuntu"
       openstack_version: "ocata"
-      kolla_version: "{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}"
+      kolla_version: "contrail_4_1_8"
     - role: contrail-ansible-deployer
       docker_provision_dir: '/tmp/contrail-container-deployer'
       contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
