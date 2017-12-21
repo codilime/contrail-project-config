@@ -48,12 +48,6 @@
   become: true
   become_user: root
 
-- name: webui-redis container
-  shell: |
-    docker pull 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-8
-    docker tag 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-8 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
-    docker push 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
-
 - name: Build base containers
   include: build_container.yaml
   with_items:
