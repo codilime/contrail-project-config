@@ -22,32 +22,6 @@
     path: "{{ ansible_env.HOME }}/docker-logs"
     state: directory
 
-- name: Install build dependencies
-  package:
-    name: "{{ item }}"
-    state: latest
-  become: true
-  with_items:
-    - docker
-    - iproute
-
-- name: Configure docker insecure registries
-  copy:
-    content: |
-      {
-              "insecure-registries": ["{{ docker_registry.fqdn }}:{{ docker_registry.port }}"]
-      }
-    dest: /etc/docker/daemon.json
-  become: true
-  become_user: root
-
-- name: Ensure that docker daemon is running
-  service:
-    name: docker
-    state: started
-  become: true
-  become_user: root
-
 - name: Build base containers
   include: build_container.yaml
   with_items:

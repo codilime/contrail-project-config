@@ -2,6 +2,31 @@
   vars:
     openstack_version: newton
   pre_tasks:
+		- name: Install build dependencies
+			package:
+				name: "{{ item }}"
+				state: latest
+			become: true
+			with_items:
+				- docker
+				- iproute
+
+		- name: Configure docker insecure registries
+			copy:
+				content: |
+					{
+									"insecure-registries": ["{{ docker_registry.fqdn }}:{{ docker_registry.port }}"]
+					}
+				dest: /etc/docker/daemon.json
+			become: true
+			become_user: root
+
+		- name: Ensure that docker daemon is running
+			service:
+				name: docker
+				state: started
+			become: true
+			become_user: root
     - name: pull and push webui-redis container
       shell: |
         docker pull 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-7
