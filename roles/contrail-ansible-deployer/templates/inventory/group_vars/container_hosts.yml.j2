@@ -1,4 +1,6 @@
 CONTAINER_REGISTRY: "{{ docker_registry.fqdn }}:{{ docker_registry.port }}"
+REGISTRY_PRIVATE_SECURE: false
+REGISTRY_PRIVATE_INSECURE: true
 contrail_configuration:
   CONTRAIL_VERSION: "{{ contrail_version }}"
   OPENSTACK_VERSION: "{{ openstack_version }}"
