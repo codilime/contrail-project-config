@@ -32,6 +32,7 @@
         docker pull 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-7
         docker tag 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-7 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
         docker push 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
+      become: true
     - name: check for already built containers
       uri:
         url: http://{{ docker_registry.fqdn }}:{{ docker_registry.port }}/v2/contrail-base/manifests/{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
