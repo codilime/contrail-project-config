@@ -21,6 +21,11 @@
 - name: Run the sanity test
   command: "{{ ansible_env.HOME }}/mount/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount '10.84.56.38:5000/contrail-test:static-newton'"
   become: yes
+  ignore_errors: yes
+
+- name: debug
+  pause:
+    minutes: 45
 
 - name: create the log directory on executor
   file:
