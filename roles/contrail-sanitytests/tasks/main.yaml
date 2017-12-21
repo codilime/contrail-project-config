@@ -20,7 +20,7 @@
 
 - name: Clone contrail-test repository
   git:
-    repo: 'https://github.com/Juniper/contrail-test-ci'
+    repo: 'https://github.com/Juniper/contrail-test'
     dest: "{{ ansible_env.HOME }}/mount/contrail-test"
 
 - name: Copy empty config
