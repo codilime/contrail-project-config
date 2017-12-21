@@ -13,6 +13,9 @@
         - contrail-systest-centos74-kubernetes:
             dependencies:
               - contrail-vnc-build-containers-centos74
+        - contrail-systest-centos74-kolla-ocata
+            dependencies:
+              - contrail-vnc-build-containers-centos74
     experimental-provision:
       jobs:
         - contrail-systest-centos74-kolla-ocata
