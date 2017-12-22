@@ -4,11 +4,11 @@
 
 - name: Clone contrail-container-builder repository
   git:
-    repo: 'https://github.com/Diabelko/contrail-container-builder'
+    repo: 'https://github.com/Juniper/contrail-container-builder/'
     force: yes
     dest: "{{ docker_build_dir }}"
 
-- name: Prepare container build configuration
+- name: Prepare build configuration - common.env
   copy:
     content: |
       CONTRAIL_VERSION={{ zuul.change }}-{{ zuul.patchset }}
@@ -16,6 +16,28 @@
       CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       OPENSTACK_VERSION={{ openstack_version }}
     dest: "{{ docker_build_dir }}/common.env"
+
+- name: Prepare third party cache repo file
+  copy:
+    content: |
+      [thirdpartycache]
+      name=Contrail Third Party Cache
+      baseurl=http://ci-repo.englab.juniper.net/pulp/repos/opencontrail-tpc/
+      enabled=1
+      gpgcheck=0
+      priority=20
+    dest: "{{ docker_build_dir }}/containers/base/tpc.repo"
+
+- name: Prepare contrail repo file
+  copy:
+    content: |
+      [contrail-{{ zuul.change }}-{{ zuul.patchset }}]
+      name=Contrail {{ zuul.change }}-{{ zuul.patchset }}
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
+      enabled=1
+      gpgcheck=0
+      priority=10
+    dest: "{{ docker_build_dir }}/containers/base/contrail.repo"
 
 - name: Create log dir
   file:
