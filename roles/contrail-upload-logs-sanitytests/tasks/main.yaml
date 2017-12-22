@@ -1,0 +1,18 @@
+- name: Create the log directory on executor
+  file:
+    path: "{{ zuul.executor.log_root }}/sanity-logs"
+    state: directory
+  delegate_to: localhost
+
+- stat:
+    path: "{{ ansible_env.HOME }}/contrail-test-runs"
+  register: logdir
+
+- name: Fetch the logs
+  synchronize:
+    src: "{{ ansible_env.HOME }}/contrail-test-runs"
+    dest: "{{ zuul.executor.log_root }}/sanity-logs"
+    mode: pull
+    recursive: yes
+  when: logdir.stat.isdir is defined and logdir.stat.isdir
+
