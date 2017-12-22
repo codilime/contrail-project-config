@@ -25,7 +25,6 @@
       baseurl=http://ci-repo.englab.juniper.net/pulp/repos/opencontrail-tpc/
       enabled=1
       gpgcheck=0
-      priority=20
     dest: "{{ docker_build_dir }}/containers/base/tpc.repo"
 
 - name: Prepare contrail repo file
@@ -36,7 +35,6 @@
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       enabled=1
       gpgcheck=0
-      priority=10
     dest: "{{ docker_build_dir }}/containers/base/contrail.repo"
 
 - name: Create log dir
