@@ -1,4 +1,5 @@
 {% set contrail_host_ip = hostvars[inventory_hostname]['ansible_host'] -%}
+{% set contrail_username = 'root' -%}
 
 from fabric.api import env
 import subprocess
@@ -8,17 +9,17 @@ host_build = 'root@{{ contrail_host_ip }}'
 ext_routers = []
 
 env.roledefs = {
-    'all': ['{{ contrail_host_ip }}'],
-    'openstack': ['{{ contrail_host_ip }}'],
-    'cfgm': ['{{ contrail_host_ip }}'],
-    'control': ['{{ contrail_host_ip }}'],
-    'collector': ['{{ contrail_host_ip }}'],
-    'webui': ['{{ contrail_host_ip }}'],
-    'database': ['{{ contrail_host_ip }}'],
-    'compute': ['{{ contrail_host_ip }}'],
+    'all': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'openstack': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'cfgm': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'control': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'collector': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'webui': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'database': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'compute': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
     'build': [host_build],
-    'storage-master': ['{{ contrail_host_ip }}'],
-    'storage-compute': ['{{ contrail_host_ip }}']
+    'storage-master': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
+    'storage-compute': ['{{ contrail_username }}@{{ contrail_host_ip }}']
 }
 
 env.ntp_server = '10.84.5.100'
@@ -43,7 +44,6 @@ env.http_proxy = ""
 env.test = {
     'webserver_host': '{{ contrail_host_ip }}',
     'webserver_user': 'zuul',
-    'webserver_password': 'c0ntrail!23',
     'webserver_log_path': '{{ ansible_env.HOME }}/logs',
     'webserver_report_path': '{{ ansible_env.HOME }}/sanity',
     'webroot': '{{ ansible_env.HOME }}/logs',
