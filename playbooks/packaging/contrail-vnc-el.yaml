@@ -1,17 +1,4 @@
 - hosts: builder
-  pre_tasks:
-    - name: check for package repo existence
-      uri:
-        url: http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}/
-      ignore_errors: yes
-      register: package_repo
-    - name: Playbook exiting with SUCCESS because the packages are already built
-      debug:
-        msg: '0'
-      when: package_repo.status == 200
-    - name: exit if repo exists
-      meta: end_play
-      when: package_repo.status == 200
   roles:
     - contrail-common-libs
     - packaging-prepare-contrail-el
@@ -28,5 +15,4 @@
     reponame: "{{ zuul.change }}-{{ zuul.patchset }}"
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
   roles:
-    - role: packaging-publish-el
-      when: "hostvars['builder']['package_repo']['status'] != 200"
+    - packaging-publish-el
