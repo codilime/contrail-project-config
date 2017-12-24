@@ -10,7 +10,6 @@
       with_items:
         - docker
         - iproute
-
     - name: Configure docker insecure registries
       copy:
         content: |
@@ -29,9 +28,9 @@
       become_user: root
     - name: pull and push webui-redis container
       shell: |
-        docker pull 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-8
-        docker tag 10.84.56.38:5000/contrail-controller-webui-redis:4.1.0.0-8 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
-        docker push 10.84.56.38:5000/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
+        docker pull {{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-controller-webui-redis:4.1.0.0-8
+        docker tag {{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-controller-webui-redis:4.1.0.0-8 {{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
+        docker push {{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-controller-webui-redis:{{ zuul.change }}-{{ zuul.patchset }}-{{ openstack_version }}
       become: true
   roles:
     - contrail-build-dockers
