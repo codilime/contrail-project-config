@@ -10,25 +10,15 @@
 
 - name: Clone contrail-test-ci repository
   git:
-    repo: 'https://github.com/jluk-codi/contrail-test-ci'
+    repo: 'https://github.com/Juniper/contrail-test-ci'
     dest: "{{ ansible_env.HOME }}/mount/contrail-test-ci"
-
-- name: Clone contrail-test-ci repository2
-  git:
-    repo: 'https://github.com/jluk-codi/contrail-test-ci'
-    dest: "{{ ansible_env.HOME }}/contrail-test-ci"
 
 - name: Clone contrail-test repository
   git:
     repo: 'https://github.com/Juniper/contrail-test'
     dest: "{{ ansible_env.HOME }}/mount/contrail-test"
 
-- name: Copy empty config
-  copy:
-    content: ""
-    dest: "{{ ansible_env.HOME }}/testbed1.py"
-
 - name: Run the sanity test
-  command: "{{ ansible_env.HOME }}/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata'"
+  command: "{{ ansible_env.HOME }}/mount/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata'"
   become: yes
 
