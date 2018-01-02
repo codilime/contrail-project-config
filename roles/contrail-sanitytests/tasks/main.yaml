@@ -29,6 +29,6 @@
     dest: "{{ ansible_env.HOME }}/testbed1.py"
 
 - name: Run the sanity test
-  command: "{{ ansible_env.HOME }}/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-newton'"
+  command: "{{ ansible_env.HOME }}/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata'"
   become: yes
 
