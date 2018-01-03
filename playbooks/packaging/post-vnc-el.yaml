@@ -2,7 +2,7 @@
   pre_tasks:
     - stat:
         path: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
-        register: rpmdir
+      register: rpmdir
   roles:
     - { role: packaging-fetch-el, when: rpmdir.stat.isdir is defined and rmpdir.stat.isdir }
 
