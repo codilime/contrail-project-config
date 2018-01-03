@@ -42,46 +42,12 @@
     path: "{{ ansible_env.HOME }}/docker-logs"
     state: directory
 
-- name: Build base containers
-  include: build_container.yaml
-  with_items:
-    - base
-    - analytics/base
-    - controller/config/base
-    - controller/control/base
-    - controller/webui/base
-    - test/base
+- name: Prepare container list
+  shell: ./build.sh | grep -v INFO
+  register: docker_list
+  args:
+    chdir: "{{ docker_build_dir }}/containers"
 
 - name: Build microservices
   include: build_container.yaml
-  with_items:
-    - agent/vrouter
-    - agent/vrouter-init-kernel
-    - analytics/alarm-gen
-    - analytics/api
-    - analytics/collector
-    - analytics/query-engine
-    - analytics/snmp-collector
-    - analytics/topology
-    - controller/config/api
-    - controller/config/devicemgr
-    - controller/config/schema
-    - controller/config/svcmonitor
-    - controller/control/control
-    - controller/control/dns
-    - controller/control/named
-    - controller/webui/job
-    - controller/webui/web
-    - external/cassandra
-    - external/cassandra-init
-    - external/kafka
-    - external/rabbitmq
-    - external/rabbitmq-init
-    - external/zookeeper
-    - external/zookeeper-init
-    - kubernetes/kube-manager
-    - kubernetes/vrouter-init
-    - nodemgr
-    - openstack/compute-contrail-backend
-    - openstack/neutron-contrail-backend
-    - test/{{ openstack_version }}
+  with_items: {{ docker_list.stdout_lines }}
