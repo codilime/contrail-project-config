@@ -1,24 +1,31 @@
-- name: template the testbed.py
+- name: Set variables
+  set_fact:
+    testrunner_image: "{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata"
+
+- name: Template the testbed.py
   template:
     src: testbed.py.j2
     dest: "{{ ansible_env.HOME}}/testbed.py"
 
-- name: create the directory with repos
+- name: Create the directory with repos
   file:
     path: "{{ ansible_env.HOME}}/mount"
     state: directory
 
-- name: Clone contrail-test-ci repository
+# TODO Change this to zuul-merger prepared checkouts
+# TODO Use packaged contrail-test when test container will be built in previous steps
+- name: Clone test repositories
   git:
-    repo: 'https://github.com/Juniper/contrail-test-ci'
-    dest: "{{ ansible_env.HOME }}/mount/contrail-test-ci"
+    repo: "https://github.com/Juniper/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/mount/{{ item }}"
+  with_items:
+    - contrail-test-ci
+    - contrail-test
 
-- name: Clone contrail-test repository
-  git:
-    repo: 'https://github.com/Juniper/contrail-test'
-    dest: "{{ ansible_env.HOME }}/mount/contrail-test"
+- name: Pull the testrunner image
+  docker_image:
+    name: "{{ testrunner_image }}"
 
 - name: Run the sanity test
-  command: "{{ ansible_env.HOME }}/mount/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata'"
+  command: "{{ ansible_env.HOME }}/mount/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ testrunner_image }}'"
   become: yes
-
