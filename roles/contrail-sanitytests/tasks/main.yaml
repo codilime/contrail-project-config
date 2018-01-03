@@ -25,6 +25,7 @@
 - name: Pull the testrunner image
   docker_image:
     name: "{{ testrunner_image }}"
+  become: yes
 
 - name: Run the sanity test
   command: "{{ ansible_env.HOME }}/mount/contrail-test-ci/testrunner.sh run -t {{ ansible_env.HOME }}/testbed.py -m {{ ansible_env.HOME }}/mount -k /root/.ssh/id_rsa -f ci_sanity '{{ testrunner_image }}'"
