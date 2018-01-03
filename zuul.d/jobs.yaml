@@ -95,6 +95,7 @@
       Linux based distributions (CentOS, RHEL). Release-based variants of this
       job are then added to the Juniper/contrail-packages project.
     run: playbooks/packaging/contrail-vnc-el
+    post-run: playbooks/packaging/post-vnc-el
     irrelevant-files:
       - specs/.*
     secrets:
