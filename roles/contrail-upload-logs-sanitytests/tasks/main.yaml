@@ -5,14 +5,15 @@
   delegate_to: localhost
 
 - stat:
-    path: "{{ ansible_env.HOME }}/contrail-test-runs"
+    path: "/root/contrail-test-runs"
   register: logdir
+  become: true
 
 - name: Fetch the logs
   synchronize:
-    src: "{{ ansible_env.HOME }}/contrail-test-runs"
+    src: "/root/contrail-test-runs"
     dest: "{{ zuul.executor.log_root }}/sanity-logs"
     mode: pull
     recursive: yes
   when: logdir.stat.isdir is defined and logdir.stat.isdir
-
+  become: true
