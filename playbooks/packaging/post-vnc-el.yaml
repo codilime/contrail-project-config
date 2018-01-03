@@ -4,7 +4,7 @@
         path: "{{ ansible_env.HOME }}/rpmbuild/RPMS"
       register: rpmdir
   roles:
-    - { role: packaging-fetch-el, when: rpmdir.stat.isdir is defined and rmpdir.stat.isdir }
+    - { role: packaging-fetch-el, when: rpmdir.stat.isdir is defined and rpmdir.stat.isdir }
 
 - hosts: localhost
   roles:
