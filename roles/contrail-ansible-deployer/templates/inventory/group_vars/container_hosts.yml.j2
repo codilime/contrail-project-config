@@ -4,10 +4,10 @@ REGISTRY_PRIVATE_INSECURE: true
 contrail_configuration:
   CONTRAIL_VERSION: "{{ contrail_version }}"
   OPENSTACK_VERSION: "{{ openstack_version }}"
-  CONTROLLER_NODES: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+  CONTROLLER_NODES: "{{ ansible_all_ipv4_addresses[0] }}"
   CLOUD_ORCHESTRATOR: kubernetes
 roles:
-  "{{ hostvars[inventory_hostname]['ansible_host'] }}":
+  "{{ ansible_all_ipv4_addresses[0] }}":
     configdb:
     config:
     control:

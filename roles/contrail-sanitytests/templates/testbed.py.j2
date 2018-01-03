@@ -4,22 +4,21 @@
 from fabric.api import env
 import subprocess
 
-host1 = "root@{{ contrail_host_ip }}"
-host_build = 'root@{{ contrail_host_ip }}'
+host1 = "{{ contrail_username }}@{{ contrail_host_ip }}"
 ext_routers = []
 
 env.roledefs = {
-    'all': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'openstack': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'cfgm': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'control': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'collector': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'webui': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'database': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'compute': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'build': [host_build],
-    'storage-master': ['{{ contrail_username }}@{{ contrail_host_ip }}'],
-    'storage-compute': ['{{ contrail_username }}@{{ contrail_host_ip }}']
+    'all': [host1],
+    'openstack': [host1],
+    'cfgm': [host1],
+    'control': [host1],
+    'collector': [host1],
+    'webui': [host1],
+    'database': [host1],
+    'compute': [host1],
+    'build': [host1],
+    'storage-master': [host1],
+    'storage-compute': [host1]
 }
 
 env.ntp_server = '10.84.5.100'
@@ -27,7 +26,7 @@ env.openstack_admin_password = 'c0ntrail123'
 
 env.hostnames = { 'all': ['{{ contrail_host_ip }}']}
 env.password = 'c0ntrail123'
-env.passwords = { host1: 'c0ntrail123', host_build: 'c0ntrail123'}
+env.passwords = { host1: 'c0ntrail123' }
 env.ostypes = { host1: 'centos'}
 
 env.webui = 'firefox'
