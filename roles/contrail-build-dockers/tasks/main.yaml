@@ -43,7 +43,7 @@
     state: directory
 
 - name: Prepare container list
-  shell: ./build.sh | grep -v INFO
+  shell: sudo ./build.sh list | grep -v INFO
   register: docker_list
   args:
     chdir: "{{ docker_build_dir }}/containers"
