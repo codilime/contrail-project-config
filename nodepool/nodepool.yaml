@@ -22,12 +22,12 @@ labels:
       - name: juniper-contrail-ci
   - name: ubuntu-trusty-builder
     image: ubuntu-trusty
-    min-ready: 2
+    min-ready: 1
     provides:
       - name: juniper-contrail-ci
   - name: centos-7.4-builder
     image: centos-7.4
-    min-ready: 0
+    min-ready: 1
     provides:
       - name: juniper-contrail-ci
 
