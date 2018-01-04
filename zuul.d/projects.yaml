@@ -32,6 +32,7 @@
     check:
       jobs:
         - contrail-vnc-build-unittest-ubuntu-trusty
+        - contrail-vnc-specs-linter
 
 - project:
     name: Juniper/contrail-sandesh
