@@ -3,16 +3,4 @@
     - contrail-common-libs
     - packaging-prepare-contrail-el
     - packaging-build-el
-    - packaging-fetch-el
 
-- hosts: localhost
-  roles:
-    - role: add-fileserver
-      fileserver: "{{ site_pulp }}"
-
-- hosts: "{{ site_pulp.fqdn }}"
-  vars:
-    reponame: "{{ zuul.change }}-{{ zuul.patchset }}"
-    executor_package_dir: "{{ zuul.executor.work_root }}/packages"
-  roles:
-    - packaging-publish-el
