@@ -17,6 +17,17 @@
       OPENSTACK_VERSION={{ openstack_version }}
     dest: "{{ docker_build_dir }}/common.env"
 
+- name: Prepare local mirror repo file
+  copy:
+    content: |
+      [englab-mirror]
+      name=OpenContrail Englab CentOS mirror
+      baseurl=http://ci-repo.englab.juniper.net/pulp/repos/centos74/
+      enabled=1
+      gpgcheck=0
+      priority=1
+    dest: "{{ docker_build_dir }}/containers/base/englab-mirror.repo"
+
 - name: Prepare third party cache repo file
   copy:
     content: |
