@@ -16,4 +16,4 @@
     reponame: "{{ zuul.change }}-{{ zuul.patchset }}"
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
   roles:
-    - { role: packaging-publish-el, when: package_list is defined }
+    - { role: packaging-publish-el, when: hostvars['builder']['package_list'] is defined }
