@@ -53,7 +53,7 @@
   become: true
   become_user: root
 
-- name: Provision Contrail with deploy.yml playbook
+- name: Provision OpenStack cluster with kolla
   command: >
     ansible-playbook -i inventory/all-in-one \
                      -e@../etc/kolla/globals.yml \
