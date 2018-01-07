@@ -20,33 +20,32 @@
 - name: Prepare local mirror repo file
   copy:
     content: |
-      [englab-mirror]
-      name=OpenContrail Englab CentOS mirror
-      baseurl=http://ci-repo.englab.juniper.net/pulp/repos/centos74/
+      [base-mirror]
+      name=CentOS base mirror
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74/
       enabled=1
       gpgcheck=0
-      priority=1
-    dest: "{{ docker_build_dir }}/containers/base/englab-mirror.repo"
+      [updates-mirror]
+      name=CentOS updates mirror
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-updates/
+      enabled=1
+      gpgcheck=0
+      [extras-mirror]
+      name=CentOS extras mirror
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-extras/
+      enabled=1
+      gpgcheck=0
+    dest: "{{ docker_build_dir }}/containers/base/CentOS-Base.repo"
 
 - name: Prepare third party cache repo file
   copy:
     content: |
       [thirdpartycache]
       name=Contrail Third Party Cache
-      baseurl=http://ci-repo.englab.juniper.net/pulp/repos/opencontrail-tpc/
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/opencontrail-tpc/
       enabled=1
       gpgcheck=0
     dest: "{{ docker_build_dir }}/containers/base/tpc.repo"
-
-- name: Prepare contrail repo file
-  copy:
-    content: |
-      [contrail-{{ zuul.change }}-{{ zuul.patchset }}]
-      name=Contrail {{ zuul.change }}-{{ zuul.patchset }}
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
-      enabled=1
-      gpgcheck=0
-    dest: "{{ docker_build_dir }}/containers/base/contrail.repo"
 
 - name: Create log dir
   file:
