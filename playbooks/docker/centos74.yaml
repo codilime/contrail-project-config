@@ -1,6 +1,7 @@
 - hosts: all
   vars:
     openstack_version: ocata
+    openstack_subversion: 3
   pre_tasks:
     - name: Install build dependencies
       package:
