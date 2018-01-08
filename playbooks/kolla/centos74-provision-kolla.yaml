@@ -10,5 +10,5 @@
       docker_provision_dir: '/tmp/contrail-container-deployer'
       contrail_version: "{{ zuul.change }}-{{ zuul.patchset }}"
       openstack_version: ocata
-      deploy_kubernetes: False
+      cloud_orchestrator: openstack
     - contrail-sanitytests
