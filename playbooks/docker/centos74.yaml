@@ -1,6 +1,6 @@
 - hosts: all
   vars:
-    openstack_version: newton
+    openstack_version: ocata
   pre_tasks:
     - name: Install build dependencies
       package:
