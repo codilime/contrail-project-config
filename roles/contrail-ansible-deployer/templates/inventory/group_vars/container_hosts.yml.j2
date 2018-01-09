@@ -11,7 +11,7 @@ contrail_configuration:
   KEYSTONE_AUTH_ADMIN_PASSWORD: c0ntrail123
   KEYSTONE_AUTH_HOST: "{{ ansible_all_ipv4_addresses[0] }}"
   #RABBITMQ_PORT: 5673
-{% endif -%}
+{%- endif %}
 roles:
   "{{ ansible_all_ipv4_addresses[0] }}":
     configdb:
