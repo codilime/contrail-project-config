@@ -8,6 +8,14 @@
     force: yes
     dest: "{{ docker_build_dir }}"
 
+- name: Apply temporary patches
+  patch:
+    src: "{{ item.patch }}"
+    basedir: "{{ item.path }}"
+    strip: 1
+  with_items:
+    - { patch: 'cfg_api_amqp.patch', path: "{{ docker_build_dir }}" }
+
 - name: Prepare build configuration - common.env
   copy:
     content: |
