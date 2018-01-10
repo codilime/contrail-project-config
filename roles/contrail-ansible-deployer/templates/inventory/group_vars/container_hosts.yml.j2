@@ -6,12 +6,12 @@ contrail_configuration:
   OPENSTACK_VERSION: "{{ openstack_version }}"
   CONTROLLER_NODES: "{{ ansible_all_ipv4_addresses[0] }}"
   CLOUD_ORCHESTRATOR: "{{ cloud_orchestrator }}"
-{%- if cloud_orchestrator == 'openstack' %}
+{% if cloud_orchestrator == 'openstack' %}
   AUTH_MODE: keystone
   KEYSTONE_AUTH_ADMIN_PASSWORD: c0ntrail123
   KEYSTONE_AUTH_HOST: "{{ ansible_all_ipv4_addresses[0] }}"
   #RABBITMQ_PORT: 5673
-{%- endif %}
+{% endif %}
 roles:
   "{{ ansible_all_ipv4_addresses[0] }}":
     configdb:
