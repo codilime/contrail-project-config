@@ -20,7 +20,7 @@ roles:
     webui:
     analytics:
     analyticsdb:
-{% if cloud_orchestrator == 'kubernetes' -%}
+{% if cloud_orchestrator == 'kubernetes' %}
     k8s_master:
-{% endif -%}
+{% endif %}
     vrouter:
