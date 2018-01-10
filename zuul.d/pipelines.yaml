@@ -58,7 +58,7 @@
           branch:
             - ^master$
             - ^contrail/.*$
-    success:
-      gerrit: {}
-    failure:
-      gerrit: {}
+    #success:
+    #  gerrit: {}
+    #failure:
+    #  gerrit: {}
