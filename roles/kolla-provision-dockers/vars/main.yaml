@@ -22,3 +22,4 @@ kolla_globals_config:
   rabbitmq_management_port: "15673"
   rabbitmq_cluster_port: "25673"
   rabbitmq_epmd_port: "4370"
+  openstack_service_workers: 1
