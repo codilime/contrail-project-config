@@ -44,12 +44,17 @@
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-extras/
       enabled=1
       gpgcheck=0
+    dest: "{{ docker_build_dir }}/containers/base/CentOS-Base.repo"
+
+- name: Prepare epel mirror repo file
+  copy:
+    content: |
       [epel-mirror]
       name=CentOS epel mirror
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-epel/
       enabled=1
       gpgcheck=0
-    dest: "{{ docker_build_dir }}/containers/base/CentOS-Base.repo"
+    dest: "{{ docker_build_dir }}/containers/base/epel.repo"
 
 - name: Prepare third party cache repo file
   copy:
