@@ -80,7 +80,16 @@
     delay: 60
     state: started
 
+- name: Restart agent after vrouter startup
+  command: docker restart contrailvrouter_vrouter-agent_1
+  become: True
+  become_user: root
+
 - name: Show the list of running containers
   command: docker ps -a
   become: True
   become_user: root
+
+- name: Agent cooldown
+  wait_for:
+    timeout: 120
