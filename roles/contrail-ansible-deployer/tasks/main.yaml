@@ -59,4 +59,7 @@
 
 - name: wait for the vrouter initialization
   wait_for:
-    timeout: 60
+    host: github.com
+    port: 443
+    timeout: 3000
+    state: started
