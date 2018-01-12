@@ -1,6 +1,7 @@
-- name: Set container build dir
+- name: Set paths
   set_fact:
     docker_build_dir: "{{ ansible_env.HOME }}/contrail-container-builder"
+    rpm_repo_config_dir: /tmp/rpmrepos
 
 - name: Clone contrail-container-builder repository
   git:
@@ -16,6 +17,11 @@
   with_items:
     - { patch: 'cfg_api_amqp.patch', path: "{{ docker_build_dir }}" }
 
+- name: create dir
+  file:
+    path: "{{ rpm_repo_config_dir }}"
+    state: directory
+
 - name: Prepare build configuration - common.env
   copy:
     content: |
@@ -24,7 +30,7 @@
       CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       OPENSTACK_VERSION={{ openstack_version }}
       OPENSTACK_SUBVERSION={{ openstack_subversion }}
-    dest: "{{ docker_build_dir }}/common.env"
+    dest: "{{ rpm_repo_config_dir }}/common.env"
 
 - name: Prepare local mirror repo file
   copy:
@@ -44,7 +50,7 @@
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-extras/
       enabled=1
       gpgcheck=0
-    dest: "{{ docker_build_dir }}/containers/base/CentOS-Base.repo"
+    dest: "{{ rpm_repo_config_dir }}/CentOS-Base.repo"
 
 - name: Prepare epel mirror repo file
   copy:
@@ -54,7 +60,7 @@
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-epel/
       enabled=1
       gpgcheck=0
-    dest: "{{ docker_build_dir }}/containers/base/epel.repo"
+    dest: "{{ rpm_repo_config_dir }}/epel.repo"
 
 - name: Prepare third party cache repo file
   copy:
@@ -64,7 +70,16 @@
       baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/opencontrail-tpc/
       enabled=1
       gpgcheck=0
-    dest: "{{ docker_build_dir }}/containers/base/tpc.repo"
+    dest: "{{ rpm_repo_config_dir }}/tpc.repo"
+
+- name: copy the repo files to containers build context
+  synchronize:
+    src: "{{ rpm_repo_config_dir }}/"
+    dest: "{{ docker_build_dir }}/containers/{{ item }}"
+  delegate_to: "{{ inventory_hostname }}"
+  with_items:
+    - base
+    - test/test
 
 - name: Create log dir
   file:
