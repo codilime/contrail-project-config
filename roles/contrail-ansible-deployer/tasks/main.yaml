@@ -56,3 +56,7 @@
   command: docker ps -a
   become: True
   become_user: root
+
+- name: wait for the vrouter initialization
+  wait_for:
+    timeout: 60
