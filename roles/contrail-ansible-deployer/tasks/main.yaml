@@ -57,19 +57,28 @@
   become: True
   become_user: root
 
-- name: wait for the vrouter initialization
-  wait_for:
-    host: github.com
-    port: 443
-    timeout: 3000
-    delay: 120
-    state: started
-
 - name: Show processes
   command: ps aux --sort rss
 
 - name: Show memory usage
   command: free -m
+
+- name: cooldown
+  wait_for:
+    timeout: 120
+
+- name: Drop caches to give the vrouter contiguous memory to allocate
+  shell: "sync; echo 2 > /proc/sys/vm/drop_caches"
+  become: True
+  become_user: root
+
+- name: wait for the vrouter initialization
+  wait_for:
+    host: github.com
+    port: 443
+    timeout: 3000
+    delay: 60
+    state: started
 
 - name: Show the list of running containers
   command: docker ps -a
