@@ -64,3 +64,14 @@
     timeout: 3000
     delay: 120
     state: started
+
+- name: Show processes
+  command: ps aux --sort rss
+
+- name: Show memory usage
+  command: free -m
+
+- name: Show the list of running containers
+  command: docker ps -a
+  become: True
+  become_user: root

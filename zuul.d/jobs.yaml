@@ -199,7 +199,7 @@
     nodeset:
       nodes:
         - name: kolla-aio
-          label: centos-7.4-builder
+          label: centos-7.4-builder-xxlarge
     irrelevant-files:
       - specs/.*
     secrets:

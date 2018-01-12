@@ -80,7 +80,7 @@ providers:
             console-log: True
             key-name: ci-infra-shared-key
           - name: centos-7.4-builder-xxlarge
-            flavor-name: m1.ci-subslave
+            flavor-name: m1.ci-systest
             diskimage: centos-7.4
             console-log: True
             key-name: ci-infra-shared-key
