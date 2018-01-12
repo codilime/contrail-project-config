@@ -62,4 +62,5 @@
     host: github.com
     port: 443
     timeout: 3000
+    delay: 120
     state: started
