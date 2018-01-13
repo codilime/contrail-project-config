@@ -6,14 +6,28 @@
 
 - stat:
     path: "/root/contrail-test-runs"
-  register: logdir
+  register: testrunner_logdir
   become: true
 
-- name: Fetch the logs
+- name: Fetch testrunner logs
   synchronize:
     src: "/root/contrail-test-runs"
     dest: "{{ zuul.executor.log_root }}/sanity-logs"
     mode: pull
     recursive: yes
-  when: logdir.stat.isdir is defined and logdir.stat.isdir
+  when: testrunner_logdir.stat.isdir is defined and testrunner_logdir.stat.isdir
+  become: true
+
+- stat:
+    path: "/var/log/contrail"
+  register: contrail_logdir
+  become: true
+
+- name: Fetch contrail logs
+  synchronize:
+    src: "/var/log/contrail"
+    dest: "{{ zuul.executor.log_root }}/sanity-logs"
+    mode: pull
+    recursive: yes
+  when: contrail_logdir.stat.isdir is defined and contrail_logdir.stat.isdir
   become: true
