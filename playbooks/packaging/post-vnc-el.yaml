@@ -18,4 +18,4 @@
     executor_package_dir: "{{ zuul.executor.work_root }}/packages"
   roles:
     - role: packaging-publish-el
-      when: hostvars['builder']['package_list'] is defined
+      when: hostvars['builder']['package_list'].matched|int > 0
