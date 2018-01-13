@@ -1,6 +1,7 @@
 - name: Set variables
   set_fact:
     testrunner_image: "{{ docker_registry.fqdn }}:{{ docker_registry.port }}/contrail-test:static-ocata"
+    repos_dir: "{{ ansible_env.HOME }}/mount"
 
 - name: Template the testbed.py
   template:
@@ -9,7 +10,7 @@
 
 - name: Create the directory with repos
   file:
-    path: "{{ ansible_env.HOME}}/mount"
+    path: "{{ repos_dir }}"
     state: directory
 
 # TODO Change this to zuul-merger prepared checkouts
@@ -17,10 +18,20 @@
 - name: Clone test repositories
   git:
     repo: "https://github.com/Juniper/{{ item }}"
-    dest: "{{ ansible_env.HOME }}/mount/{{ item }}"
+    dest: "{{ repos_dir }}/{{ item }}"
   with_items:
     - contrail-test-ci
     - contrail-test
+
+- name: create the directory for VM images
+  file:
+    path: "{{ repos_dir }}/contrail-test-ci/images"
+    state: directory
+
+- name: download the cirros image
+  get_url:
+    url: "http://{{ docker_registry.fqdn }}/static/cirros-0.3.0-x86_64-disk.vmdk"
+    dest: "{{ repos_dir }}/contrail-test-ci/images"
 
 - name: Pull the testrunner image
   docker_image:
