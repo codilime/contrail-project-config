@@ -68,7 +68,7 @@
     timeout: 120
 
 - name: Drop caches to give the vrouter contiguous memory to allocate
-  shell: "sync; echo 2 > /proc/sys/vm/drop_caches"
+  shell: "sync; echo 1 > /proc/sys/vm/drop_caches"
   become: True
   become_user: root
 
