@@ -29,6 +29,7 @@
       A base job that prepares the builder
     pre-run: playbooks/contrail/pre
     post-run:
+      - playbooks/contrail/post
       - playbooks/base/post-ssh
       - playbooks/base/post-logs
     roles:

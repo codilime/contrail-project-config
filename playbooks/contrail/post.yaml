@@ -1,0 +1,4 @@
+- name: send dmesg contents to the executor
+  hosts: all
+  roles:
+    - contrail-upload-dmesg

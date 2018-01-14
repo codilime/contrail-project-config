@@ -10,3 +10,9 @@
     - start-zuul-console
     - configure-hosts-entries
     - validate-host
+- hosts: all
+  roles:
+    - role: configure-hosts-entries
+      hosts_entries:
+        - fqdn: "{{ ansible_fqdn }}"
+          address: "{{ ansible_all_ipv4_addresses[0] }}"
