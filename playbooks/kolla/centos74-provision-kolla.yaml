@@ -4,14 +4,14 @@
       package:
         name: "{{ item }}"
         state: latest
-        become: true
+      become: true
       with_items:
         - centos-release-openstack-ocata
     - name: Install build dependencies
       package:
         name: "{{ item }}"
         state: latest
-        become: true
+      become: true
       with_items:
         - python2-requests
   roles:
