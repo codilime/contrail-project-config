@@ -1,13 +1,14 @@
 - hosts: all
-  # Hack intended to prevent dependency conflict between packages installed by ansible-deployer and kolla pre-flight config
   pre_tasks:
-    - name: Install build dependencies                                                                                                                                                                                                                                                                                              package:
+    - name: Install build dependencies
+      package:
         name: "{{ item }}"
         state: latest
         become: true
       with_items:
         - centos-release-openstack-ocata
-    - name: Install build dependencies                                                                                                                                                                                                                                                                                              package:
+    - name: Install build dependencies
+      package:
         name: "{{ item }}"
         state: latest
         become: true
