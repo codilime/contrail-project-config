@@ -111,7 +111,7 @@
     nodeset:
       nodes:
         - name: builder
-          label: centos-7.4-builder
+          label: centos-7-4-builder
 
 - job:
     name: contrail-vnc-build-package-ubuntu-trusty
@@ -170,7 +170,7 @@
     nodeset:
       nodes:
         - name: builder
-          label: centos-7.4-builder
+          label: centos-7-4-builder
     irrelevant-files:
       - specs/.*
     secrets:
@@ -187,7 +187,7 @@
     nodeset:
       nodes:
         - name: contrail-aio
-          label: centos-7.4-builder
+          label: centos-7-4-builder
     secrets:
       - docker_registry
 
@@ -200,7 +200,7 @@
     nodeset:
       nodes:
         - name: kolla-aio
-          label: centos-7.4-builder-xxlarge
+          label: centos-7-4-builder-xxlarge
     irrelevant-files:
       - specs/.*
     secrets:
@@ -214,6 +214,6 @@
     nodeset:
       nodes:
         - name: contrail-aio
-          label: centos-7.4-builder
+          label: centos-7-4-builder
     secrets:
       - docker_registry
