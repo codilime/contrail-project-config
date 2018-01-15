@@ -25,16 +25,6 @@ labels:
     min-ready: 1
     provides:
       - name: juniper-contrail-ci
-  - name: centos-7.4-builder
-    image: centos-7.4
-    min-ready: 1
-    provides:
-      - name: juniper-contrail-ci
-  - name: centos-7.4-builder-xxlarge
-    min-ready: 0
-    provides:
-      - name: juniper-contrail-ci
-
   - name: centos-7-4-builder
     image: centos-7-4
     min-ready: 0
@@ -60,7 +50,6 @@ providers:
     diskimages:
       - name: ubuntu-xenial
       - name: ubuntu-trusty
-      - name: centos-7.4
       - name: centos-7-4
     pools:
       - name: ci-zuulv3
@@ -85,47 +74,18 @@ providers:
             diskimage: ubuntu-trusty
             console-log: True
             key-name: ci-infra-shared-key
-          - name: centos-7.4-builder
-            flavor-name: m1.16g_40g_8vcpu
-            diskimage: centos-7.4
-            console-log: True
-            key-name: ci-infra-shared-key
-          - name: centos-7.4-builder-xxlarge
-            flavor-name: m1.ci-systest
-            diskimage: centos-7.4
-            console-log: True
-            key-name: ci-infra-shared-key
-
           - name: centos-7-4-builder
             flavor-name: m1.16g_40g_8vcpu
-            diskimage: centos-7.4
+            diskimage: centos-7-4
             console-log: True
             key-name: ci-infra-shared-key
           - name: centos-7-4-builder-xxlarge
             flavor-name: m1.ci-systest
-            diskimage: centos-7.4
+            diskimage: centos-7-4
             console-log: True
             key-name: ci-infra-shared-key
 
 diskimages:
-  - name: centos-7.4
-    elements:
-      - centos-minimal
-      - vm
-      - growroot
-      - epel
-      - cloud-init
-      - openssh-server
-      - nodepool-base
-      - contrail-builder
-    env-vars:
-      TMPDIR: /opt/dib_tmp
-      DIB_CHECKSUM: '1'
-      DIB_IMAGE_CACHE: /opt/dib_cache
-      DIB_GRUB_TIMEOUT: '0'
-      DIB_EPEL_DISABLED: '0'
-      DIB_YUM_MINIMAL_CREATE_INTERFACES: '0'
-      DIB_INSTALLTYPE_pip_and_virtualenv: package
   - name: centos-7-4
     elements:
       - centos-minimal
