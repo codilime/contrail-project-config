@@ -1,19 +1,20 @@
 - hosts: all
   pre_tasks:
+    - name: Remove conflicting requests package
+      package:
+        name: python-requests
+        state: absent
+      become: true
     - name: Install build dependencies
       package:
-        name: "{{ item }}"
+        name: centos-release-openstack-ocata
         state: latest
       become: true
-      with_items:
-        - centos-release-openstack-ocata
     - name: Install build dependencies
       package:
-        name: "{{ item }}"
+        name: python2-requests
         state: latest
       become: true
-      with_items:
-        - python2-requests
   roles:
     - role: contrail-ansible-deployer
       docker_provision_dir: '/tmp/contrail-container-deployer'
