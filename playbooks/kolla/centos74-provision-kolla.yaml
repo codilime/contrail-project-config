@@ -5,6 +5,9 @@
         name: python-requests
         state: absent
       become: true
+    - name: purge requests
+      shell: rm -rf /usr/lib/python2.7/site-packages/requests*
+      become: true
     - name: Install build dependencies
       package:
         name: centos-release-openstack-ocata
