@@ -6,7 +6,7 @@
   yum_repository:
     name: contrail-tpc
     description: Contrail third-party dependencies
-    baseurl: http://ci-repo.englab.juniper.net/pulp/repos/opencontrail-tpc/
+    baseurl: "http://{{ site_pulp.fqdn }}/pulp/repos/opencontrail-tpc/"
     gpgcheck: no
   become: True
   become_user: root
