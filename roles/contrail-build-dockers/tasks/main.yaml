@@ -67,7 +67,7 @@
     content: |
       [thirdpartycache]
       name=Contrail Third Party Cache
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/opencontrail-tpc/
+      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/repo1/
       enabled=1
       gpgcheck=0
     dest: "{{ rpm_repo_config_dir }}/tpc.repo"
