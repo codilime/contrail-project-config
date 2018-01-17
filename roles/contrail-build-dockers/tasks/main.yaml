@@ -1,7 +1,7 @@
 - name: Set paths
   set_fact:
     docker_build_dir: "{{ ansible_env.HOME }}/contrail-container-builder"
-    rpm_repo_config_dir: /tmp/rpmrepos
+    rpm_repo_config_dir: /etc/yum.repos.d
 
 - name: Clone contrail-container-builder repository
   git:
@@ -17,11 +17,6 @@
   with_items:
     - { patch: 'cfg_api_amqp.patch', path: "{{ docker_build_dir }}" }
 
-- name: create dir
-  file:
-    path: "{{ rpm_repo_config_dir }}"
-    state: directory
-
 - name: Prepare build configuration - common.env
   copy:
     content: |
@@ -31,46 +26,6 @@
       OPENSTACK_VERSION={{ openstack_version }}
       OPENSTACK_SUBVERSION={{ openstack_subversion }}
     dest: "{{ docker_build_dir }}/common.env"
-
-- name: Prepare local mirror repo file
-  copy:
-    content: |
-      [base-mirror]
-      name=CentOS base mirror
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74/
-      enabled=1
-      gpgcheck=0
-      [updates-mirror]
-      name=CentOS updates mirror
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-updates/
-      enabled=1
-      gpgcheck=0
-      [extras-mirror]
-      name=CentOS extras mirror
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-extras/
-      enabled=1
-      gpgcheck=0
-    dest: "{{ rpm_repo_config_dir }}/CentOS-Base.repo"
-
-- name: Prepare epel mirror repo file
-  copy:
-    content: |
-      [epel-mirror]
-      name=CentOS epel mirror
-      baseurl=http://{{ site_pulp.fqdn }}/pulp/repos/centos74-epel/
-      enabled=1
-      gpgcheck=0
-    dest: "{{ rpm_repo_config_dir }}/epel.repo"
-
-- name: Prepare third party cache repo file
-  copy:
-    content: |
-      [thirdpartycache]
-      name=Contrail Third Party Cache
-      baseurl=http://{{ site_pulp.fqdn }}/tpc/
-      enabled=1
-      gpgcheck=0
-    dest: "{{ rpm_repo_config_dir }}/tpc.repo"
 
 - name: copy the repo files to containers build context
   synchronize:
@@ -96,3 +51,4 @@
 - name: Build microservices
   include: build_container.yaml
   with_items: "{{ docker_list.stdout_lines }}"
+

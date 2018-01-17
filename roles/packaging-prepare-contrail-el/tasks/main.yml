@@ -2,16 +2,7 @@
   contrail_packaging:
     zuul: "{{ zuul }}"
 
-- name: Add a repository with Contrail dependencies
-  yum_repository:
-    name: contrail-tpc
-    description: Contrail third-party dependencies
-    baseurl: "http://{{ site_pulp.fqdn }}/tpc"
-    gpgcheck: no
-  become: True
-  become_user: root
-
-# Needed while centos74 is not supported correctly 
+# Needed while centos74 is not supported correctly
 - name: Create missing directory
   file:
     state: directory
