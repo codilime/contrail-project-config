@@ -1,0 +1,2 @@
+contrail_repo: "{{ contrail_repository | default(site_pulp.fqdn) }}"
+

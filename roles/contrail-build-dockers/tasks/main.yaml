@@ -22,7 +22,7 @@
     content: |
       CONTRAIL_VERSION={{ zuul.change }}-{{ zuul.patchset }}
       CONTRAIL_REGISTRY={{ docker_registry.fqdn }}:{{ docker_registry.port }}
-      CONTRAIL_REPOSITORY=http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
+      CONTRAIL_REPOSITORY={{ contrail_repo }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
       OPENSTACK_VERSION={{ openstack_version }}
       OPENSTACK_SUBVERSION={{ openstack_subversion }}
     dest: "{{ docker_build_dir }}/common.env"
