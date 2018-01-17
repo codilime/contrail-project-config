@@ -10,6 +10,7 @@
   git:
     repo: 'https://github.com/Juniper/contrail-ansible-deployer'
     dest: "{{ docker_provision_dir }}"
+    force: true
 
 - name: Copy hosts template
   template:
