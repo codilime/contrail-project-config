@@ -64,7 +64,7 @@
 #    - { name: 'contrail-test' }
     - { name: 'fabric-utils' }
     - { name: 'neutron-plugin-contrail' }
- 
+
 - name: Install nodejs 0.10.35
   yum:
     name: nodejs-0.10.35-1contrail.el7
