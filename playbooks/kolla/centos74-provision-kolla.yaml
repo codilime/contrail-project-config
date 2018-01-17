@@ -15,9 +15,12 @@
       become: true
     - name: Install build dependencies
       package:
-        name: python2-requests
+        name: "{{ item }}"
         state: latest
       become: true
+      with_items:
+        - python2-requests
+        - python-docker-py
   roles:
     - role: contrail-ansible-deployer
       docker_provision_dir: '/tmp/contrail-container-deployer'
