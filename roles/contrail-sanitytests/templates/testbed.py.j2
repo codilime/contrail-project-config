@@ -1,4 +1,4 @@
-{% set contrail_host_ip = hostvars[inventory_hostname]['ansible_host'] -%}
+{% set contrail_host_ip = hostvars[inventory_hostname].get('ansible_host', inventory_hostname) -%}
 {% set contrail_username = 'root' -%}
 
 from fabric.api import env
