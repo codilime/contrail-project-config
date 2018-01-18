@@ -1,7 +1,7 @@
 kolla_globals_config:
   kolla_base_distro: "{{ kolla_base_distro | default('ubuntu') }}"
   kolla_install_type: "binary"
-  openstack_release: "{{ openstack_version }}"
+  openstack_release: "{{ kolla_version }}"
   docker_registry: "{{ kolla_docker_registry }}"
   docker_namespace: "{{ kolla_docker_namespace | default('kolla') }}"
   enable_keystone_v3: "no"
