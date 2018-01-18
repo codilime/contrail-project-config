@@ -13,6 +13,7 @@
     repo: 'https://github.com/Juniper/contrail-kolla-ansible'
     dest: "{{ kolla_provision_dir }}"
     version: "contrail/{{ openstack_version }}"
+    force: true
 
 - name: Copy Kolla config files
   copy:
@@ -71,4 +72,3 @@
   command: docker ps -a
   become: true
   become_user: root
-
