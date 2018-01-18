@@ -1,2 +1,1 @@
-contrail_repo: "{{ contrail_repository | default(site_pulp.fqdn) }}"
-
+contrail_package_repository: http://{{ site_pulp.fqdn }}/pulp/repos/{{ zuul.change }}-{{ zuul.patchset }}
