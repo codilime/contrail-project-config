@@ -14,8 +14,8 @@
     src: "{{ item.source }}"
     state: link
   with_items:
-    - path: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux741708"
-      source: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux71"
+    - path: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux741708/mitaka"
+      source: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs/centoslinux741708/ocata"
     - path: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/controller/build/package_configs"
       source: "{{ ansible_env.HOME }}/{{ packaging.target_dir }}/tools/packaging/build/package_configs"
 
